@@ -65,9 +65,7 @@ int	set_token_type(t_data *data)
 	data->token_list = head;
 	clean_null_tokens(&data->token_list);
 	fix_tokens(&data->token_list);
-	if (syntax_errors(data->token_list, data))
-		return (1);
-	if (lexic_with_parenth(data))
+	if (syntax_errors(data->token_list, data) || lexic_with_parenth(data))
 		return (1);
 	clean_space_tokens(&data->token_list);
 	return (0);

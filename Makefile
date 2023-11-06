@@ -29,7 +29,7 @@ LEAKS	  = leaks --atExit --
 
 # Libraries
 LIBFT				=	libft.a
-LIBFT_DIR			=	lib/libft
+LIBFT_DIR			=	libft
 LIBFT_FILE			=	$(LIBFT_DIR)/$(LIBFT)
 CFLAGS				+=	-Wall \
 						-Werror \

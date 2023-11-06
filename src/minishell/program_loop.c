@@ -28,7 +28,7 @@ void	start_loop(t_data *data)
 		data->input_line = trim_input(line);
 		ft_strdel(&line);
 		check_exit(data->input_line);
-		if ((odd_quote(data->input_line, data))
+		if ((odd_quote(data->input_line))
 			|| (special_chars(data->input_line))
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;

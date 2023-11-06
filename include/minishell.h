@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/06 21:37:22 by vkozlova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -17,7 +29,7 @@
 # include <stdint.h>
 # include <limits.h>
 # include <errno.h>
-# include "../lib/libft/include/libft.h"
+# include "../libft/include/libft.h"
 
 # define MAX_ENV_VARS 100
 # define MAX_DOLLAR_VALUE_LEN 100
@@ -70,8 +82,8 @@ typedef struct	s_data {
 	struct s_token	*token_list;
 	t_envir			*env_list;
 	t_list			*sorted_env_list;
-	int				single_quote;
-	int				double_quote;
+//	int				single_quote;
+//	int				double_quote;
 	long int		exit_status;
 	int				cmd_nbrs;
 	int				pid;
@@ -186,11 +198,9 @@ t_envir		*ft_envnew(char *var_name, char *var_value);
 int			ft_envsize(t_envir *lst);
 
 /* quotes.c */
-int			odd_quote(char *str, t_data *data);
+int			odd_quote(char *str);
 char		first_quote(char *str);
 int			special_chars(char *str);
-int			closed_singlequotes(char *str);
-int			closed_doublequotes(char *str);
 int			is_escaped(char *s, int pos);
 int			in_quotes(char *s, int pos);
 int			last_pipe(char *str, int pos);//Comented for the moment to avoid warning
