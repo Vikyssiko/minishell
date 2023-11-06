@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/06 21:37:22 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/07 00:11:57 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int	odd_quote(char *str)
 	double_quotes = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' && double_quotes % 2 != 1)
+		if (str[i] == '\'' && double_quotes % 2 == 0)
 			single_quotes++;
-		if (str[i] == '\'' && single_quotes % 2 != 1)
+		if (str[i] == '\"' && single_quotes % 2 == 0)
 			double_quotes++;
 		i++;
 	}
+	printf("Single quote = %d\n", single_quotes);
+	printf("Double quote = %d\n", double_quotes);
 	if (double_quotes % 2 != 0 || single_quotes % 2 != 0)
 	{
 		write(2, "We should not handle unclosed quotes\n", 37);
