@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:32:51 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/06 19:21:50 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/06 22:45:30 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	reset_data(t_data *data)
 {
-	data->single_quote = 0;
-	data->double_quote = 0;
 	data->forked = 0;
 	if (data->curr_dir)
 		ft_strdel(&data->curr_dir);

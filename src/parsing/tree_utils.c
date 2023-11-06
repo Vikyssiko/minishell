@@ -80,39 +80,6 @@ void print_right_tree(t_tree *tree)
 	printf("Completed printing the RIGHT tree\n\n");
 }
 
-void print_left_tree(t_tree *tree)
-{
-	int i;
-
-	i = 0;
-	if (tree == NULL)
-		return ;
-	while (tree)
-	{
-		printf("HEAD tree->type: %d\n", tree->type);
-		printf("HEAD tree->value: %s\n", tree->value);
-		if (tree->args_array)
-		{
-			while (tree->args_array[i])
-			{
-				printf("HEAD tree->args_array[%d]: %s\n", i, tree->args_array[i]);
-				i++;
-			}
-		}
-		i = 0;
-		if (tree->right)
-		{
-			while (tree->right->args_array[i])
-			{
-				printf("RIGHT tree->args_array[%d]: %s\n", i, tree->right->args_array[i]);
-				i++;
-			}
-		}
-		i = 0;
-		tree = tree->left;
-	}
-	printf("Completed printing the left tree\n\n");
-}
 // void print_tree_helper(t_tree *tree, int pos) {
 //     int i;
 
