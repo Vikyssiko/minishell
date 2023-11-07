@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_errors.c                                     :+:      :+:    :+:   */
+/*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 19:25:43 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 19:29:03 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:05:13 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	syntax_errors(t_token *token, t_data *data)
 {
@@ -44,11 +44,7 @@ char	*check_first_half(char *str, int *i)
 		return (*i += 1, "|");
 	if (*str == '<' && *(str + 1) == '>')
 		return (*i += 2, "<>");
-	if (*str == '<' && *(str + 1) == '<' && *(str + 2) == '<'
-		&& *(str + 3) != '>')
-		return (*i += 3, "<<<");
-	if (*str == '>' && *(str + 1) == '>' && *(str + 2) == '>')
-		return (*i += 3, ">>>");
+	// "<<" ???
 	if (*str == '>' && *(str + 1) == '>')
 		return (*i += 2, ">>");
 	return (NULL);
@@ -62,6 +58,7 @@ char	*check_second_half(char *str, int *i)
 		return (*i += 2, "<<");
 	if (*str == '<')
 		return (*i += 1, "<");
+	// ????
 	if (*str == '&' && *(str + 1) == '&')
 		return (*i += 2, "&&");
 	if (*str == '&')

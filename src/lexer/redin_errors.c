@@ -14,12 +14,12 @@
 
 int	check_red(t_token *token, char *str)
 {
-	if (!ft_strcmp(str, ">>>"))
-		if (check_threeout(token))
-			return (1);
-	if (!ft_strcmp(str, "<<<"))
-		if (check_threein(token))
-			return (1);
+//	if (!ft_strcmp(str, ">>>"))
+//		if (check_threeout(token))
+//			return (1);
+//	if (!ft_strcmp(str, "<<<"))
+//		if (check_threein(token))
+//			return (1);
 	if (!ft_strcmp(str, "<<"))
 		if (check_delim(token))
 			return (1);
@@ -84,12 +84,10 @@ int	check_redin_second_half(t_token *token)
 int	check_redin_last_part(t_token *token)
 {
 	if (token->next->type == T_AMPER && token->next->next->type == T_SPACE
-		&& token->next->next->next->type == T_WORD
-		&& !ft_has_only_digit(token->next->next->next->word))
+		&& token->next->next->next->type == T_WORD)
 		return (printf("minishell: %s: ambiguous redirect\n", \
 		token->next->next->next->word), 1);
-	if (token->next->type == T_AMPER && token->next->next->type == T_WORD
-		&& !ft_has_only_digit(token->next->next->word))
+	if (token->next->type == T_AMPER && token->next->next->type == T_WORD)
 		return (printf("minishell: %s: ambiguous redirect\n", \
 		token->next->next->word), 1);
 	if (token->next->type == T_AMPER && token->next->next->type == T_SPACE)

@@ -5,25 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 19:13:24 by eseferi           #+#    #+#             */
+/*   Created: 2023/11/04 19:13:24 by alappas           #+#    #+#             */
 /*   Updated: 2023/11/06 19:24:30 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	lexical_analysis(t_data *data, char *input)
 {
-	t_token	*tmp;
-
-	tmp = NULL;
+//	t_token	*tmp;
+//
+//	tmp = NULL;
 	if (!input || !input[0])
 		return (1);
 	tokenise(data, input);
 	if (set_token_type(data))
 		return (1);
 	// print_tokens(data);
-	tmp = data->token_list;
+//	tmp = data->token_list;
 	return (0);
 }
 

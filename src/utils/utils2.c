@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:45:36 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:46:03 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 13:59:25 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-// ingores all whitespaces before the first character
-char	*ignore_spaces(char *input)
-{
-	while (*input == ' ' || (*input >= 9 && *input <= 13))
-		input++;
-	return (input);
-}
-
-// checks if the string contains only ascii characters
-int	is_only_ascii(char *str)
-{
-	while (*str)
-		if (!ft_isascii(*str++))
-			return (0);
-	return (1);
-}
+#include "../../include/minishell.h"
 
 // duplicates a 2d array
 char	**dup_2darray(char **array)

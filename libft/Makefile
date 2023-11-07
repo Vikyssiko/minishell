@@ -1,19 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/08 16:46:23 by eseferi           #+#    #+#              #
-#    Updated: 2023/10/26 09:49:59 by eseferi          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-# Variables
 NAME			=	libft.a
+
 CC				=	gcc
+
 CFLAGS			=	-Wall -Wextra -Werror -Isrc -Iinclude
+
 RM				=	rm -rf
 
 # Paths and Files

@@ -36,10 +36,10 @@
 # define MAX_PATH_LEN 100
 # define MAX_CMD_LEN 100
 
-#define NEW_LINE_ERR	"syntax error near unexpected token `newline'"
-#define SINGLE_PIPE_ERR		"syntax error near unexpected token `|'"
-#define DOUBLE_PIPE_ERR		"syntax error near unexpected token `||'"
-#define DEL_ERR			"syntax error near unexpected token `<<'"
+# define NEW_LINE_ERR	"syntax error near unexpected token `newline'"
+# define SINGLE_PIPE_ERR		"syntax error near unexpected token `|'"
+# define DOUBLE_PIPE_ERR		"syntax error near unexpected token `||'"
+# define DEL_ERR			"syntax error near unexpected token `<<'"
 
 typedef enum e_token_type {
 	T_WORD = 1,
@@ -59,7 +59,7 @@ typedef enum e_token_type {
 	T_AND,
 	T_DELIM,
 	T_PARENTHESES,
-} t_token_type;
+}	t_token_type;
 
 typedef struct s_envir {
 	char		**var_name;
@@ -67,17 +67,17 @@ typedef struct s_envir {
 	int			count;
 }				t_envir;
 
-typedef struct	s_tree {
+typedef struct s_tree {
 	t_token_type	type;
 	char			*value;
 	char			**args_array;
-	struct	s_tree	*last_input;
-	struct	s_tree	*last_output;
-	struct	s_tree	*left;
-	struct	s_tree	*right;
+	struct s_tree	*last_input;
+	struct s_tree	*last_output;
+	struct s_tree	*left;
+	struct s_tree	*right;
 }				t_tree;
 
-typedef struct	s_data {
+typedef struct s_data {
 	struct s_tree	*tree;
 	struct s_token	*token_list;
 	t_envir			*env_list;
@@ -87,23 +87,23 @@ typedef struct	s_data {
 	long int		exit_status;
 	int				cmd_nbrs;
 	int				pid;
-	int 			count;
+	int				count;
 	int				arg_nums;
-	int 			parenthesis_scope;
+	int				parenthesis_scope;
 	int				forked;
 	char			*input_minishell;
 	char			*input_line;
 	char			*curr_dir;
 	char			*exit_str;
-	char 			**env_array;
-	char 			**cmd_array;
-	char 			**path;
+	char			**env_array;
+	char			**cmd_array;
+	char			**path;
 }				t_data;
 
 typedef struct s_token
 {
-	t_token_type 		type;
-	char 				*word;
+	t_token_type		type;
+	char				*word;
 	struct s_token		*next;
 	struct s_token		*prev;
 }					t_token;
@@ -178,11 +178,10 @@ void		incr_shell_lvl(t_data *data);
 void		export(t_envir **env_list, char *var_name, char *var_value);
 
 /* utils.c */
-char		*ignore_spaces(char *input);
 char		**dup_2darray(char **array);
-int			is_only_ascii(char *str);
+//int			is_only_ascii(char *str);
 int			len_2darray(char **array);
-int			ft_has_only_digit(char *str);
+//int			ft_has_only_digit(char *str);
 int			only_spaces_parenth(char *str);
 char		*trim_input(char *input);
 void		process_input(char *input, char *str, int *i, int *j);
@@ -199,7 +198,6 @@ int			ft_envsize(t_envir *lst);
 
 /* quotes.c */
 int			odd_quote(char *str);
-char		first_quote(char *str);
 int			special_chars(char *str);
 int			is_escaped(char *s, int pos);
 int			in_quotes(char *s, int pos);
@@ -229,8 +227,6 @@ void		print_tokens(t_data *data);
 void		fix_tokens(t_token **head);
 void		find_ortokens(t_token **head);
 void		find_andtokens(t_token **head);
-void		find_threein(t_token **head);
-void		find_threeout(t_token **head);
 void		find_append(t_token *current);
 void		find_delim(t_token *current);
 void		find_inout(t_token **head);
@@ -241,8 +237,8 @@ void		clean_space_tokens(t_token **head);
 char		*find_executable_path(char **paths, char *cmd);
 
 /* error check */
-int			check_threeout(t_token *token);
-int			check_threein(t_token *token);
+//int			check_threeout(t_token *token);
+//int			check_threein(t_token *token);
 int			check_delim(t_token *token);
 int			check_first_half_delim(t_token *token);
 int			check_second_half_delim(t_token *token);

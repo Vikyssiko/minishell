@@ -29,8 +29,8 @@ int	odd_quote(char *str)
 			double_quotes++;
 		i++;
 	}
-	printf("Single quote = %d\n", single_quotes);
-	printf("Double quote = %d\n", double_quotes);
+//	printf("Single quote = %d\n", single_quotes);
+//	printf("Double quote = %d\n", double_quotes);
 	if (double_quotes % 2 != 0 || single_quotes % 2 != 0)
 	{
 		write(2, "We should not handle unclosed quotes\n", 37);
@@ -61,6 +61,37 @@ int	in_quotes(char *s, int pos)
 	}
 	if (double_quotes % 2 != 0 || single_quotes % 2 != 0)
 		return (1);
+	return (0);
+}
+
+// ???
+int	is_escaped(char *s, int pos)
+{
+	int	n;
+
+	n = 0;
+	while (pos >= 0 && s[pos] == '\\')
+	{
+		n++;
+		pos--;
+	}
+	return (n % 2);
+}
+
+int	special_chars(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\\' || str[i] == ';') && !in_quotes(str, i))
+		{
+			printf("minishell: we should not handle `%c'\n", str[i]);
+			return (1);
+		}
+		i++;
+	}
 	return (0);
 }
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:44:35 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:46:42 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 13:59:52 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	only_spaces_parenth(char *str)
 {

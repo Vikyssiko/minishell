@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fix_tokens2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 19:09:22 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:25:59 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:03:05 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	fix_tokens(t_token **head)
 {
 	find_ortokens(head);
 	find_andtokens(head);
 	find_inout(head);
-	find_threeout(head);
-	find_threein(head);
 }
 
 void	find_append(t_token *current)

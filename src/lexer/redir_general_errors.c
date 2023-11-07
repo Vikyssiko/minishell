@@ -86,12 +86,10 @@ int	check_inout(t_token *token)
 int	check_numbers(t_token *tmp)
 {
 	if (tmp->next->type == T_SPACE && tmp->next->next->type == T_WORD
-		&& ft_has_only_digit(tmp->next->next->word)
 		&& tmp->next->next->next->type != T_WORD)
 		return (printf("minishell: syntax error near unexpected token `%s'\n", \
 		tmp->next->next->word), 1);
-	if (tmp->next->type == T_WORD && ft_has_only_digit(tmp->next->word)
-		&& tmp->next->next->type != T_WORD)
+	if (tmp->next->type == T_WORD && tmp->next->next->type != T_WORD)
 		return (printf("minishell: syntax error near unexpected token `%s'\n", \
 		tmp->next->word), 1);
 	return (0);

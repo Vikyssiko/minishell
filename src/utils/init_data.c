@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:33:01 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:49:31 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 13:58:39 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

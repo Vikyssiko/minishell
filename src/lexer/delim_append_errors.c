@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   delim_append_errors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:10:34 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:11:32 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:06:46 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	check_first_half_delim(t_token *token)
 {

@@ -30,10 +30,8 @@ char	*trim_input(char *input)
 	while ((input[i] == ' ' || input[i] == '\t') && input[i])
 		i++;
 	process_input(input, str, &i, &j);
-	i = ft_strlen(str) - 1;
-	while (str[i] == ' ' || str[i] == '\t')
-		str[i--] = '\0';
-	str[j] = '\0';
+	if (str[j] == ' ' || str[j] == '\t')
+		str[j] = '\0';
 	return (str);
 }
 
@@ -44,7 +42,7 @@ void	process_input(char *input, char *str, int *i, int *j)
 		while ((input[*i] == ' ' || input[*i] == '\t')
 			&& (input[*i + 1] == ' ' || input[*i + 1] == '\t'))
 			(*i)++;
-		while (in_quotes(input, *i) && input[*i])
+		while (input[*i] && in_quotes(input, *i))
 			str[(*j)++] = input[(*i)++];
 		str[(*j)++] = input[(*i)++];
 	}
@@ -64,6 +62,8 @@ int	ft_is_in_stri(char c, char *str)
 	return (-1);
 }
 
+
+//  if 'str' contains 'c' returns 1, 0 if not
 int	is_chr_str(char c, char *str)
 {
 	if (ft_is_in_stri(c, str) >= 0)
@@ -71,13 +71,13 @@ int	is_chr_str(char c, char *str)
 	return (0);
 }
 
-int	ft_has_only_digit(char *str)
-{
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
-}
+//int	ft_has_only_digit(char *str)
+//{
+//	while (*str)
+//	{
+//		if (!ft_isdigit(*str))
+//			return (0);
+//		str++;
+//	}
+//	return (1);
+//}

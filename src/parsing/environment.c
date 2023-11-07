@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:58:54 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 21:01:10 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:04:15 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	save_envir(t_data *data, char **env_str)
 {

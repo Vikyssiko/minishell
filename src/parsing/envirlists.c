@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envirlists.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:58:22 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:58:43 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:03:59 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 // void	ft_envadd_back(t_envir **lst, t_envir *new)
 // {

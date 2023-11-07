@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:48:33 by eseferi           #+#    #+#             */
+/*   Created: 2023/11/04 20:48:33 by alappas           #+#    #+#             */
 /*   Updated: 2023/11/06 19:19:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	free_data(t_data *data)
 {

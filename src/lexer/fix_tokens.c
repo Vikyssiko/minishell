@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fix_tokens_utils.c                                 :+:      :+:    :+:   */
+/*   fix_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 19:07:47 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 19:11:11 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:02:52 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	find_ortokens(t_token **head)
 {
@@ -62,33 +62,6 @@ void	find_andtokens(t_token **head)
 	}
 }
 
-void	find_threein(t_token **head)
-{
-	t_token	*current;
-	t_token	*tmp;
-	t_token	*tmp2;
-
-	current = *head;
-	while (current != NULL)
-	{
-		tmp = current;
-		if (tmp->type == T_RED_INP && tmp->next->type == T_RED_INP)
-			find_delim(tmp);
-		if (tmp->type == T_DELIM && tmp->next->type == T_RED_INP)
-		{
-			tmp->type = T_THREE_IN;
-			ft_strdel(&tmp->word);
-			tmp->word = ft_strdup("<<<");
-			ft_strdel(&tmp->next->word);
-			tmp2 = tmp->next;
-			tmp->next = tmp->next->next;
-			tmp->next->prev = tmp;
-			free(tmp2);
-		}
-		current = current->next;
-	}
-}
-
 void	find_delim(t_token *current)
 {
 	t_token	*tmp;
@@ -105,32 +78,5 @@ void	find_delim(t_token *current)
 		tmp->next->prev = tmp;
 		ft_strdel(&tmp2->word);
 		free(tmp2);
-	}
-}
-
-void	find_threeout(t_token **head)
-{
-	t_token	*current;
-	t_token	*tmp;
-	t_token	*tmp2;
-
-	current = *head;
-	while (current != NULL)
-	{
-		tmp = current;
-		if (tmp->type == T_RED_OUT && tmp->next->type == T_RED_OUT)
-			find_append(tmp);
-		if (tmp->type == T_APPEND && tmp->next->type == T_RED_OUT)
-		{
-			tmp->type = T_THREE_OUT;
-			ft_strdel(&tmp->word);
-			tmp->word = ft_strdup(">>>");
-			tmp2 = tmp->next;
-			tmp->next = tmp->next->next;
-			tmp->next->prev = tmp;
-			ft_strdel(&tmp2->word);
-			free(tmp2);
-		}
-		current = current->next;
 	}
 }

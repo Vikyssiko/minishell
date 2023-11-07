@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:30:53 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:32:19 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 13:58:21 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	check_exit(char *input)
 {
-	if (!ft_strncmp("exit", ignore_spaces(input), ft_strlen("exit")))
+	if (!ft_strncmp("exit", input, ft_strlen("exit")))
 	{
 		free(input);
 		exit(0);

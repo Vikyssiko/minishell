@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 21:01:38 by eseferi           #+#    #+#             */
+/*   Created: 2023/11/04 21:01:38 by alappas           #+#    #+#             */
 /*   Updated: 2023/11/04 23:46:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	last_input(t_tree *tree)
 {

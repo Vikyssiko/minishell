@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:21:49 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:23:01 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/07 14:00:20 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	add_token(t_token **head, t_token *new)
 {
