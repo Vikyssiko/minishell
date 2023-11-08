@@ -14,21 +14,16 @@
 
 int	find_token(t_data *data, char *str, int *i, t_token **head)
 {
-	if (is_chr_str(str[*i], " \t*") && !in_quotes(str, *i)
-		&& !is_escaped(str, *i - 1))
+	if (is_chr_str(str[*i], " \t") && !in_quotes(str, *i))
 	{
 		add_token(head, create_token(data, *i));
-		if (str[*i] == '*')
-			add_token(head, create_arg_token(data, "*", T_STAR));
-		else if (str[*i] == ' ' || str[*i] == '\t')
-			add_token(head, create_arg_token(data, " ", T_SPACE));
 		(*i)++;
 		data->count = 0;
 		return (0);
 	}
-	else if (is_chr_str(str[*i], "|<>&") && !in_quotes(str, *i)
-		&& !is_escaped(str, *i - 1) && *i > 0
-		&& !is_chr_str(str[*i - 1], "|<>&"))
+	else if (is_chr_str(str[*i], "|<>") && !in_quotes(str, *i)
+//		if (is_chr_str(str[*i], "|<>") && !in_quotes(str, *i)
+		&& *i > 0 && !is_chr_str(str[*i - 1], "|<>"))
 		add_token(head, create_token(data, *i));
 	return (1);
 }
@@ -69,30 +64,4 @@ t_token	*create_arg_token(t_data *data, char *word, enum e_token_type type)
 	new->word = ft_strdup(word);
 	new->type = type;
 	return (new);
-}
-
-void	clean_space_tokens(t_token **head)
-{
-	t_token	*current;
-	t_token	*tmp;
-
-	current = *head;
-	while (current != NULL)
-	{
-		tmp = current;
-		if (tmp->type == T_SPACE)
-		{
-			if (tmp->prev != NULL)
-				tmp->prev->next = tmp->next;
-			else
-				*head = tmp->next;
-			if (tmp->next != NULL)
-				tmp->next->prev = tmp->prev;
-			current = tmp->next;
-			ft_strdel(&tmp->word);
-			free(tmp);
-		}
-		else
-			current = current->next;
-	}
 }

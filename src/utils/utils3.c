@@ -25,17 +25,3 @@ int	only_spaces_parenth(char *str)
 	}
 	return (1);
 }
-
-int	token_len(t_token *token)
-{
-	int	len;
-
-	len = 0;
-	while (token)
-	{
-		if (token->type != T_NEWLINE)
-			len++;
-		token = token->next;
-	}
-	return (len);
-}

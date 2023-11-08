@@ -29,8 +29,6 @@ int	odd_quote(char *str)
 			double_quotes++;
 		i++;
 	}
-//	printf("Single quote = %d\n", single_quotes);
-//	printf("Double quote = %d\n", double_quotes);
 	if (double_quotes % 2 != 0 || single_quotes % 2 != 0)
 	{
 		write(2, "We should not handle unclosed quotes\n", 37);
@@ -50,12 +48,9 @@ int	in_quotes(char *s, int pos)
 	i = 0;
 	while (i <= pos)
 	{
-		if (s[i] == '\"' && (i == 0 || !is_escaped(s, i - 1))
-			&& single_quotes % 2 == 0)
+		if (s[i] == '\"' && single_quotes % 2 == 0)
 			double_quotes++;
-		if (s[i] == '\'' && (i == 0 || single_quotes % 2 != 0
-				|| !is_escaped(s, i - 1))
-			&& double_quotes % 2 == 0)
+		if (s[i] == '\'' && double_quotes % 2 == 0)
 			single_quotes++;
 		i++;
 	}

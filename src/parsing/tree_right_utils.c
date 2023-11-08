@@ -1,54 +1,54 @@
 #include "minishell.h"
 
-t_tree	*build_right_tree(t_data *data, t_token *address)
-
-{
-	t_tree	*tree;
-	t_tree	*root;
-	t_token	*head;
-	int	delim;
-
-	tree = NULL;
-	head = data->token_list;
-	delim = 0;
-	data->token_list = address;
-	while (address)
-	{
-		if (address->type == T_PIPE || address->type == T_RED_INP || address->type == T_RED_OUT || address->type == T_THREE_IN
-			|| address->type == T_APPEND || address->type == T_DELIM || address->type == T_AND || address->type == T_OR)
-		{
-			if (tree == NULL)
-			{
-				tree = build_right_branch(&data->token_list, address, tree);
-				root = tree;
-				address = data->token_list;
-			}
-			else
-			{
-				tree->right = build_right_branch(&data->token_list, address, tree);
-				tree = tree->right;
-				address = data->token_list;
-			}
-			delim++;
-		}
-		if (address->type != T_PIPE && address->type != T_RED_INP && address->type != T_RED_OUT && address->type != T_THREE_IN
-		 	&& address->type != T_APPEND &&  address->type != T_DELIM && address->type != T_AND && address->type != T_OR)
-			address = address->next;
-	}
-	if (delim == 0)
-	{
-		address = data->token_list;
-		tree = build_tree_leaf_right(&data->token_list, tree);
-		root = tree;
-	}
-	else
-	{
-		tree->right = build_tree_leaf_right(&data->token_list, tree);
-		tree = tree->right;
-	}
-	data->token_list = head;
-	return (root);
-}
+//t_tree	*build_right_tree(t_data *data, t_token *address)
+//
+//{
+//	t_tree	*tree;
+//	t_tree	*root;
+//	t_token	*head;
+//	int	delim;
+//
+//	tree = NULL;
+//	head = data->token_list;
+//	delim = 0;
+//	data->token_list = address;
+//	while (address)
+//	{
+//		if (address->type == T_PIPE || address->type == T_RED_INP || address->type == T_RED_OUT || address->type == T_THREE_IN
+//			|| address->type == T_APPEND || address->type == T_DELIM || address->type == T_AND || address->type == T_OR)
+//		{
+//			if (tree == NULL)
+//			{
+//				tree = build_right_branch(&data->token_list, address, tree);
+//				root = tree;
+//				address = data->token_list;
+//			}
+//			else
+//			{
+//				tree->right = build_right_branch(&data->token_list, address, tree);
+//				tree = tree->right;
+//				address = data->token_list;
+//			}
+//			delim++;
+//		}
+//		if (address->type != T_PIPE && address->type != T_RED_INP && address->type != T_RED_OUT && address->type != T_THREE_IN
+//		 	&& address->type != T_APPEND &&  address->type != T_DELIM && address->type != T_AND && address->type != T_OR)
+//			address = address->next;
+//	}
+//	if (delim == 0)
+//	{
+//		address = data->token_list;
+//		tree = build_tree_leaf_right(&data->token_list, tree);
+//		root = tree;
+//	}
+//	else
+//	{
+//		tree->right = build_tree_leaf_right(&data->token_list, tree);
+//		tree = tree->right;
+//	}
+//	data->token_list = head;
+//	return (root);
+//}
 
 t_tree	*build_right_branch(t_token **token, t_token *address, t_tree *tree)
 {
