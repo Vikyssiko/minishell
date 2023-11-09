@@ -49,7 +49,6 @@ typedef enum e_token_type {
 	T_RED_OUT,
 	T_APPEND,
 	T_PIPE,
-	T_AND,
 	T_DELIM,
 }	t_token_type;
 
@@ -76,7 +75,6 @@ typedef struct s_data {
 	t_list			*sorted_env_list;
 	long int		exit_status;
 	int				pid;
-	int				count;
 	int				arg_nums;
 	int				parenthesis_scope;
 	int				forked;
@@ -167,9 +165,6 @@ void		incr_shell_lvl(t_data *data);
 void		export(t_envir **env_list, char *var_name, char *var_value);
 
 /* utils.c */
-char		**dup_2darray(char **array);
-int			len_2darray(char **array);
-int			only_spaces_parenth(char *str);
 char		*trim_input(char *input);
 void		process_input(char *input, char *str, int *i, int *j);
 
@@ -186,33 +181,23 @@ int			ft_envsize(t_envir *lst);
 /* quotes.c */
 int			odd_quote(char *str);
 int			special_chars(char *str);
-int			is_escaped(char *s, int pos);
 int			in_quotes(char *s, int pos);
-int			last_pipe(char *str, int pos);//Comented for the moment to avoid warning
 
 /* tokens */
+char		*ft_strstr(const char *haystack, const char *needle);
 int			ft_is_in_stri(char c, char *str);
 int			is_chr_str(char c, char *str);
 void		tokenise(t_data *data, char *str);
-int			find_token2(int i, char *str, char *splt);
-int			find_token(t_data *data, char *str, int *i, t_token **head);
 void		free_tokens(t_token **begin, void (*del)(void *));
-t_token		*create_token(t_data *data, int i);
+t_token		*create_token(t_data *data, int i, int len);
 t_token		*create_arg_token(t_data *data, char *word, enum e_token_type type);
 void		add_token(t_token **token, t_token *new);
-int			set_token_type(t_data *data);
-void		set_token_type2(t_token *token);
-void		clean_null_tokens(t_token **head);
-void		ft_listadd_back(t_token **lst, t_token *next);
-t_token		*split_tokens_to_list(char **split, t_data *data);
-void		token_to_cmd(t_data *data, t_token **tmp);
-int			evaluate_tokens(t_data *data);
+int			token_analysis(t_data *data);
+void		set_token_type(t_token *token);
 void		print_tokens(t_data *data);
 void		find_append(t_token *current);
 void		find_delim(t_token *current);
 void		find_redir(t_token **head);
-void		clean_space_tokens(t_token **head);
-// void		clear_token(t_token **token, void (*del)(void*));
 
 
 char		*find_executable_path(char **paths, char *cmd);
@@ -223,8 +208,6 @@ int			check_append(t_token *token);
 char		*check_first_token(char *str, int *i);
 char		*check_token(char *str, int *i);
 int			syntax_errors(t_token *token, t_data *data);
-int			check_prev_token(t_token **token);
-int			check_next_token(t_token **token);
 int			check_red(t_token *token);
 int			check_pipe(t_token *token);
 

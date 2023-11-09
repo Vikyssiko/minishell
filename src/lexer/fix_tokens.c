@@ -66,29 +66,3 @@ void	find_append(t_token *current)
 		free(tmp2);
 	}
 }
-
-void	clean_null_tokens(t_token **head)
-{
-	t_token	*current;
-	t_token	*tmp;
-
-	current = *head;
-	while (current != NULL)
-	{
-		tmp = current;
-		if (ft_strlen(tmp->word) == 0)
-		{
-			if (tmp->prev != NULL)
-				tmp->prev->next = tmp->next;
-			else
-				*head = tmp->next;
-			if (tmp->next != NULL)
-				tmp->next->prev = tmp->prev;
-			current = tmp->next;
-			ft_strdel(&tmp->word);
-			free(tmp);
-		}
-		else
-			current = current->next;
-	}
-}

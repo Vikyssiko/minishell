@@ -12,8 +12,6 @@
 
 #include "../../include/minishell.h"
 
-// takes the input and trims the spaces and tabs of every 
-// word outside the quotes
 char	*trim_input(char *input)
 {
 	char	*str;
@@ -62,8 +60,6 @@ int	ft_is_in_stri(char c, char *str)
 	return (-1);
 }
 
-
-//  if 'str' contains 'c' returns 1, 0 if not
 int	is_chr_str(char c, char *str)
 {
 	if (ft_is_in_stri(c, str) >= 0)
@@ -71,13 +67,24 @@ int	is_chr_str(char c, char *str)
 	return (0);
 }
 
-//int	ft_has_only_digit(char *str)
-//{
-//	while (*str)
-//	{
-//		if (!ft_isdigit(*str))
-//			return (0);
-//		str++;
-//	}
-//	return (1);
-//}
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	char	*haystack_copy;
+	char	*needle_copy;
+	size_t	needle_size;
+
+	haystack_copy = (char *)haystack;
+	needle_copy = (char *)needle;
+	needle_size = ft_strlen(needle_copy);
+	if (!*needle)
+		return ((char *)haystack);
+	while (*haystack_copy && needle_size)
+	{
+		if (ft_strncmp(haystack_copy, needle_copy, needle_size) == 0)
+			return (haystack_copy);
+		haystack_copy++;
+		needle_copy = (char *)needle;
+		needle_size--;
+	}
+	return (NULL);
+}

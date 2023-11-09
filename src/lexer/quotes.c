@@ -59,20 +59,6 @@ int	in_quotes(char *s, int pos)
 	return (0);
 }
 
-// ???
-int	is_escaped(char *s, int pos)
-{
-	int	n;
-
-	n = 0;
-	while (pos >= 0 && s[pos] == '\\')
-	{
-		n++;
-		pos--;
-	}
-	return (n % 2);
-}
-
 int	special_chars(char *str)
 {
 	int	i;
@@ -89,30 +75,3 @@ int	special_chars(char *str)
 	}
 	return (0);
 }
-
-// int	last_pipe(char *str, int pos)
-// {
-// 	while (pos > 0 && (str[pos] == ' ' || str[pos] == '\n'))
-// 		pos--;
-// 	if (pos > 0 && str[pos] == '|' && !special_chars(str))
-// 	{
-// 		pos = 0;
-// 		while (str[pos] && (str[pos] != ' ' || str[pos] == '\n'))
-// 			pos++;
-// 		if (str[pos] != '|')
-// 		{
-// 			while (str[pos] && (str[pos] != '|' || !special_chars(str) ||
-// 				inside_paired_quotes(str, pos)))
-// 				pos++;
-// 			if (!str[pos] && str[pos + 1])
-// 				return (1);
-// 			else
-// 				pos++;
-// 			while (str[pos] && (str[pos] == ' ' || str[pos] == '\n'))
-// 				pos++;
-// 			if (str[pos] != '|')
-// 				return (1);
-// 		}
-// 	}
-// 	return (0);
-// }
