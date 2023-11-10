@@ -1,91 +1,54 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tree_right_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/10 20:05:15 by vkozlova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//t_tree	*build_right_tree(t_data *data, t_token *address)
-//
-//{
-//	t_tree	*tree;
-//	t_tree	*root;
-//	t_token	*head;
-//	int	delim;
-//
-//	tree = NULL;
-//	head = data->token_list;
-//	delim = 0;
-//	data->token_list = address;
-//	while (address)
-//	{
-//		if (address->type == T_PIPE || address->type == T_RED_INP || address->type == T_RED_OUT || address->type == T_THREE_IN
-//			|| address->type == T_APPEND || address->type == T_DELIM || address->type == T_AND || address->type == T_OR)
-//		{
-//			if (tree == NULL)
-//			{
-//				tree = build_right_branch(&data->token_list, address, tree);
-//				root = tree;
-//				address = data->token_list;
-//			}
-//			else
-//			{
-//				tree->right = build_right_branch(&data->token_list, address, tree);
-//				tree = tree->right;
-//				address = data->token_list;
-//			}
-//			delim++;
-//		}
-//		if (address->type != T_PIPE && address->type != T_RED_INP && address->type != T_RED_OUT && address->type != T_THREE_IN
-//		 	&& address->type != T_APPEND &&  address->type != T_DELIM && address->type != T_AND && address->type != T_OR)
-//			address = address->next;
-//	}
-//	if (delim == 0)
-//	{
-//		address = data->token_list;
-//		tree = build_tree_leaf_right(&data->token_list, tree);
-//		root = tree;
-//	}
-//	else
-//	{
-//		tree->right = build_tree_leaf_right(&data->token_list, tree);
-//		tree = tree->right;
-//	}
-//	data->token_list = head;
-//	return (root);
-//}
+#include "../../include/minishell.h"
 
-t_tree	*build_right_branch(t_token **token, t_token *address, t_tree *tree)
+t_tree	*build_right_branch(t_token **start, t_token *current, t_tree *tree)
 {
-	int arg_nums;
-	int i;
+	int	arg_nums;
+	int	i;
 
 	tree = (t_tree *)malloc(sizeof(t_tree));
 	if (!tree)
 		return (NULL);
-	tree->type = (address)->type;
-	tree->value = address->word;
+	tree->type = current->type;
+	tree->value = current->word;
 	tree->args_array = NULL;
 	i = 0;
-	arg_nums =	arg_count_right(*token, address);
+	arg_nums = arg_count_right(*start, current);
 	tree->left = (t_tree *)malloc(sizeof(t_tree));
-	if (!tree)
+	if (!tree->left)
 	{
 		free(tree);
 		return (NULL);
 	}
 	tree->left->args_array = (char **)malloc(sizeof(char *) * (arg_nums + 1));
-	while (*token != address)
+	while (*start != current)
 	{
-		tree->left->args_array[i] = ft_strdup((*token)->word);
-		*token = (*token)->next;
+		tree->left->args_array[i] = ft_strdup((*start)->word);
+		*start = (*start)->next;
 		i++;
 	}
+	// ???
 	tree->left->args_array[i] = NULL;
-	*token = (*token)->next;
+	*start = (*start)->next;
 	tree->right = NULL;
 	return (tree);
 }
 
 t_tree	*build_tree_leaf_right(t_token **token, t_tree *tree)
 {
-	int arg_nums;
-	int i;
+	int	arg_nums;
+	int	i;
 
 	tree = (t_tree *)malloc(sizeof(t_tree));
 	if (!tree)
@@ -93,10 +56,10 @@ t_tree	*build_tree_leaf_right(t_token **token, t_tree *tree)
 	tree->type = (*token)->type;
 	tree->value = (*token)->word;
 	i = 0;
-	arg_nums =	arg_count_right(*token, NULL);
+	arg_nums = arg_count_right(*token, NULL);
 	if (arg_nums != 0)
-		tree->args_array = (char **)malloc(sizeof(char *) * (arg_nums + 1));
-	while (*token != NULL)
+		tree->args_array = (char **)malloc(sizeof(char *) * (arg_nums));
+	while ((*token)->type != T_NEWLINE)
 	{
 		tree->args_array[i] = ft_strdup((*token)->word);
 		*token = (*token)->next;
@@ -108,12 +71,12 @@ t_tree	*build_tree_leaf_right(t_token **token, t_tree *tree)
 	return (tree);
 }
 
-int		arg_count_right(t_token *token, t_token *address)
+int	arg_count_right(t_token *token, t_token *current)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while (token != address)
+	while (token != current)
 	{
 		count++;
 		token = token->next;

@@ -12,7 +12,6 @@
 
 #include "../../include/minishell.h"
 
-// ft_enviter((*data)->env, print_env_node);
 void	init_data(t_data **data, char **envp)
 {
 	*data = malloc(sizeof(t_data));

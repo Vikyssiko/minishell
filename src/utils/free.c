@@ -97,27 +97,3 @@ void	free_2darray(char **array)
 // 		data->tree = right;
 // 	}
 // }
-
-// void	free_commands(t_cmdexe **head, void (*del)(void *))
-// {
-// 	t_cmdexe *tmp;
-// 	t_cmdexe *tmp2;
-
-// 	if (!head || !del)
-// 		return ;
-// 	tmp = *head;
-// 	while (tmp)
-// 	{
-// 		printf("free_commands inside while \n");
-// 		if (tmp->cmd)
-// 			ft_strdel(&tmp->cmd);
-// 		if (tmp->path)
-// 			ft_strdel(&tmp->path);
-// 		if (tmp->args_array)
-// 			free_2darray(tmp->args_array);
-// 		tmp2 = tmp->next;
-// 		free(tmp);
-// 		tmp = tmp2;
-// 	}
-// 	*head = NULL;
-// }

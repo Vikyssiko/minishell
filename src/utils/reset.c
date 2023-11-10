@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	reset_data(t_data *data)
 {
@@ -20,6 +20,6 @@ void	reset_data(t_data *data)
 	if (data->input_line && ft_strlen(data->input_line) > 0)
 		ft_strdel(&data->input_line);
 	free_tokens(&data->token_list, free);
-	// free_tree(data);
+	free_tree(data);
 }
 

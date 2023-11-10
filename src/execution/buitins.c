@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   buitins.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 20:53:10 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:54:29 by eseferi          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/11/10 23:33:19 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 // int	ft_is_builtin(char *cmd)
 // {
@@ -165,12 +165,4 @@
 // 		return NULL;
 // 	}
 // 	return strdup(home_dir);
-// }
-
-// void	builtin_export(t_envir *env)
-// {
-
-// 	////NEED TO FINISH BECAUSE WE CANT USE EXPORT FUNTION 
-// LIKE THIS ITS PROHIBITED BY SUBJECT
-// 	export(env, env->var_name, env->var_value);
 // }

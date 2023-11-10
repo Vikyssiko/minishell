@@ -62,8 +62,6 @@ typedef struct s_tree {
 	t_token_type	type;
 	char			*value;
 	char			**args_array;
-	struct s_tree	*last_input;
-	struct s_tree	*last_output;
 	struct s_tree	*left;
 	struct s_tree	*right;
 }				t_tree;
@@ -76,7 +74,6 @@ typedef struct s_data {
 	long int		exit_status;
 	int				pid;
 	int				arg_nums;
-	int				parenthesis_scope;
 	int				forked;
 	char			*input_minishell;
 	char			*input_line;
@@ -94,14 +91,6 @@ typedef struct s_token
 	struct s_token		*next;
 	struct s_token		*prev;
 }					t_token;
-
-// typedef	struct s_parenth
-// {
-// 	t_token	*token;
-// 	int		valid;
-// 	int		depth;
-// 	struct s_parenth *address;
-// }	t_parenth;
 
 /* builtins.c */
 void		builtin_echo(char **args);
@@ -128,8 +117,6 @@ void		exit_shell(char *message, int exit_code, t_data *data);
 
 /* free.c */
 void		free_data(t_data *data);
-// void		free_flags(t_flags *flags);
-// void		free_delimiter(t_delim *delimiter);
 void		free_envir(t_envir *envir);
 void		free_2darray(char **array);
 
@@ -141,7 +128,6 @@ int			is_valid_env2(char *str);
 
 /* init_data.c */
 void		init_data(t_data **data, char **envp);
-// t_flags			*init_flags(void);
 
 /* parsing_commads.c */
 int			lexical_analysis(t_data *data, char *input);
@@ -151,8 +137,7 @@ void		child(t_data *data);
 // static char			*find_executable_path(char **paths, char *cmd);
 
 /* reset.c */
-void		reset_data(t_data *data);;
-// void		reset_flags(t_flags *flags);
+void		reset_data(t_data *data);
 
 /* signals.c */
 int			handle_d(t_data *data, char *line);
@@ -216,23 +201,11 @@ int			check_pipe(t_token *token);
 
 /*Binary Tree*/
 t_tree		*build_right_branch(t_token **token, t_token *address, t_tree *tree);
-t_tree		*build_right_tree(t_data *data, t_token *address);
-t_tree		*build_left_tree(t_data *data, t_token *address);
-t_tree		*build_left_branch(t_token **token, t_token *address, t_tree *tree);
 void		print_right_tree(t_tree *tree);
-void		print_left_tree(t_tree *tree);
 void		init_tree(t_data *data);
 int			arg_count_right(t_token *token, t_token *address);
-int			arg_count_left(t_token *token, t_token *address);
 t_tree		*build_tree_leaf_right(t_token **token, t_tree *tree);
-t_tree		*build_tree_leaf_left(t_token **token, t_tree *tree);
-void		free_tree(t_tree *tree);
-t_token		*find_tree_root(t_token *token);
-t_tree		*create_tree_root(t_token *token);
+void		free_tree(t_data *data);
 t_tree		*create_simple_tree(t_data *data, t_token *address);
-void		build_full_tree(t_data *data, t_token *address);
-t_tree		*init_parenth_tree(t_token *parenth_token);
 
-void		last_input(t_tree *tree);
-void		last_output(t_tree *tree);
 #endif

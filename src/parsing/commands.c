@@ -37,6 +37,7 @@
 // 		// free_2darray(paths);
 // 	return (0);
 // }
+
 char	*find_executable_path(char **paths, char *cmd)
 {
 	char	*tmp;
@@ -68,28 +69,7 @@ char	*find_envir_variable(t_data *data, char *var_name, int len)
 	}
 	return (NULL);
 }
-// void	handle_builtins(t_data *data)
-// {
-// 	// while (data->cmd_list->next != NULL)
-// 	// {
-// 	// 	printf("%s\n", data->cmd_list->cmd);
-// 	// 	data->cmd_list = data->cmd_list->next;
-// 	// }
-// 	// if (ft_strcmp(data->commands->(), "echo") == 0)
-// 	// 	builtin_echo(data->cmdexe->cmd_args);
-// 	// else if (ft_strcmp(data->cmdexe->cmd, "cd") == 0)
-// 	// 	builtin_cd(data, data->cmdexe->cmd_args[1]);
-// 	// else if (ft_strcmp(data->cmdexe->cmd, "pwd") == 0)
-// 	// // 	builtin_pwd();
-// 	// else if (ft_strcmp(data->cmdexe->cmd, "unset") == 0)
-// 	// 	builtin_unset(&data->env, data->cmdexe->cmd_args[1]);
-// 	// else if (ft_strcmp(data->cmdexe->cmd, "env") == 0)
-// 	// // 	builtin_env(data->env);
-// 	// else if (ft_strcmp(data->cmdexe->cmd, "exit") == 0)
-// 	// // 	builtin_exit(data);
-// 	// else if (ft_strcmp(data->cmdexe->cmd, "export") == 0)
-// 	// 	builtin_export(data->env, ); // continue
-// }
+
 // void	child(t_data *data)
 // {
 //     data->pid = fork();
