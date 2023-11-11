@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 23:06:21 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/11 23:43:54 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,8 @@ void		print_right_tree(t_tree *tree);
 void		init_tree(t_data *data);
 int			arg_count_right(t_token *token, t_token *address);
 t_tree		*build_tree_leaf_right(t_token **token, t_tree *tree);
-void		free_tree(t_data *data);
+// void		free_tree(t_data *data);
+void 		free_tree(t_tree **tree);
 t_tree		*create_simple_tree(t_data *data, t_token *address);
 t_tree		*build_first_tree_leaf_redir(t_token **token, t_tree *tree);
 t_tree		*init_tree_data();
