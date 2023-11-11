@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_right_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/10 20:05:15 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:47:00 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ t_tree	*build_right_branch(t_token **start, t_token *current, t_tree *tree)
 	int	arg_nums;
 	int	i;
 
-	tree = (t_tree *)malloc(sizeof(t_tree));
+	tree = init_tree_data();
 	if (!tree)
 		return (NULL);
 	tree->type = current->type;
 	tree->value = current->word;
-	tree->args_array = NULL;
 	i = 0;
 	arg_nums = arg_count_right(*start, current);
 	tree->left = (t_tree *)malloc(sizeof(t_tree));
@@ -41,7 +40,6 @@ t_tree	*build_right_branch(t_token **start, t_token *current, t_tree *tree)
 	// ???
 	tree->left->args_array[i] = NULL;
 	*start = (*start)->next;
-	tree->right = NULL;
 	return (tree);
 }
 
@@ -50,7 +48,7 @@ t_tree	*build_tree_leaf_right(t_token **token, t_tree *tree)
 	int	arg_nums;
 	int	i;
 
-	tree = (t_tree *)malloc(sizeof(t_tree));
+	tree = init_tree_data();
 	if (!tree)
 		return (NULL);
 	tree->type = (*token)->type;
@@ -66,8 +64,21 @@ t_tree	*build_tree_leaf_right(t_token **token, t_tree *tree)
 		i++;
 	}
 	tree->args_array[i] = NULL;
-	tree->left = NULL;
-	tree->right = NULL;
+	return (tree);
+}
+
+t_tree	*build_first_tree_leaf_redir(t_token **token, t_tree *tree)
+{
+	int	i;
+
+	tree = init_tree_data();
+	if (!tree)
+		return (NULL);
+	tree->type = (*token)->type;
+	tree->value = (*token)->word;
+	i = 0;
+	tree->delim = ft_strdup((*token)->next->word);
+	*token = (*token)->next->next;
 	return (tree);
 }
 
@@ -84,3 +95,15 @@ int	arg_count_right(t_token *token, t_token *current)
 	return (count);
 }
 
+t_tree	*init_tree_data()
+
+{
+	t_tree *tree;
+
+	tree = (t_tree *)malloc(sizeof(t_tree));
+	tree->args_array = NULL;
+	tree->left = NULL;
+	tree->right = NULL;
+	tree->delim = NULL;
+	return (tree);
+}

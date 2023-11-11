@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:24:48 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/08 19:34:59 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:23:55 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ t_tree	*create_simple_tree(t_data *data, t_token *token)
 	t_tree	*root;
 
 	tree = NULL;
+	if (token->type != T_WORD && token->type != T_PIPE)
+	{
+		tree = build_first_tree_leaf_redir(&data->token_list, tree);
+		root = tree;
+		token = token->next->next;
+	}
+	if (token->type == T_NEWLINE)
+		return (root);
 	while (token)
 	{
 		if (token->type == T_PIPE || token->type == T_RED_INP
@@ -36,8 +44,8 @@ t_tree	*create_simple_tree(t_data *data, t_token *token)
 		{
 			if (tree == NULL)
 			{
-				tree = build_right_branch(&data->token_list, token, tree);
-				root = tree;
+					tree = build_right_branch(&data->token_list, token, tree);
+					root = tree;
 			}
 			else
 			{
