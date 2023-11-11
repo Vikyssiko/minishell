@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:24:48 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 23:51:12 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/12 00:11:46 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,15 @@ As I mentioned before, the previous commit doesn't give this error and frees the
  		return ;
  	while ((*tree))
  	{
-		if ((*tree)->right)
- 			right = (*tree)->right;
+ 		right = (*tree)->right;
  		if ((*tree)->left)
  		{
  			if ((*tree)->left->args_array)
  				free_2darray((*tree)->left->args_array);
  			free((*tree)->left);
- 			(*tree)->left = NULL;
  		}
  		free_2darray((*tree)->args_array);
  		free((*tree));
-		tree = NULL;
  		(*tree) = right;
  	}
  }

@@ -6,13 +6,13 @@
 #    By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 16:46:30 by eseferi           #+#    #+#              #
-#    Updated: 2023/11/11 22:18:22 by alappas          ###   ########.fr        #
+#    Updated: 2023/11/12 00:09:17 by alappas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 CC					=	gcc
-CFLAGS				=	-Wall -Wextra -Iinclude -Isrc -O3 -g -fsanitize=address -fno-omit-frame-pointer
+CFLAGS				=	-Wall -Wextra -Iinclude -Isrc -O3 -g #-fsanitize=address -fno-omit-frame-pointer
 
 RM					=	rm -rf
 
