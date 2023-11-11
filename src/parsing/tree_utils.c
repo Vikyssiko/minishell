@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:24:48 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/10 18:33:55 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:50:39 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,32 @@ The problem is probably caused by a non-existing address data->tree->right, as d
 As I mentioned before, the previous commit doesn't give this error and frees the nodes accordingly, therefore something may be changed in the main code.
 */
 
- void	free_tree(t_data *data)
+//  void	free_tree(t_data *data)
 
- {
- 	int i;
- 	t_tree *right;
+//  {
+//  	int i;
+//  	t_tree *right;
 
- 	i = 0;
- 	if (!data->tree)
- 		return ;
- 	while (data->tree)
- 	{
- 		// You basically can delete this line and iterate to the right node within the last line.
- 		right = data->tree->right;
- 		if (data->tree->left)
- 		{
- 			if (data->tree->left->args_array)
- 				free_2darray(data->tree->left->args_array);
- 			free(data->tree->left);
- 			data->tree->left = NULL;
- 		}
- 		free_2darray(data->tree->args_array);
- 		free(data->tree);
- 		// You can write here: data->tree = data->tree-right;
- 		data->tree = right;
- 	}
- }
+//  	i = 0;
+//  	if (!data->tree)
+//  		return ;
+//  	while (data->tree)
+//  	{
+//  		// You basically can delete this line and iterate to the right node within the last line.
+//  		right = data->tree->right;
+//  		if (data->tree->left)
+//  		{
+//  			if (data->tree->left->args_array)
+//  				free_2darray(data->tree->left->args_array);
+//  			free(data->tree->left);
+//  			data->tree->left = NULL;
+//  		}
+//  		free_2darray(data->tree->args_array);
+//  		free(data->tree);
+//  		// You can write here: data->tree = data->tree-right;
+//  		data->tree = right;
+//  	}
+//  }
 
 //void free_tree(t_tree *tree)
 //{
@@ -69,6 +69,8 @@ void print_right_tree(t_tree *tree)
 	{
 		printf("HEAD tree->type: %d\n", tree->type);
 		printf("HEAD tree->value: %s\n", tree->value);
+		if (tree->delim)
+			printf("DELIM = %s\n", tree->delim);
 		if (tree->args_array)
 		{
 			while (tree->args_array[i])

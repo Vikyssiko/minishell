@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buitins.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/10 23:33:19 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:25:09 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ void	echo(t_tree *tree)
 	}
 	if (newline)
 		printf("\n");
+}
+void	env(t_data *data, t_tree *tree)
+
+{
+	int	i;
+
+	i = 0;
+	if (ft_strcmp(tree->value, "env") == 0)
+	{
+		while (data->env_array[i])
+		{
+			printf("%s\n", data->env_array[i]);
+			i++;
+		}
+	}
 }
 
 // int	ft_is_builtin(char *cmd)

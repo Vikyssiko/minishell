@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/06 21:37:22 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:06:21 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_envir {
 typedef struct s_tree {
 	t_token_type	type;
 	char			*value;
+	char			*delim;
 	char			**args_array;
 	struct s_tree	*left;
 	struct s_tree	*right;
@@ -207,8 +208,11 @@ int			arg_count_right(t_token *token, t_token *address);
 t_tree		*build_tree_leaf_right(t_token **token, t_tree *tree);
 void		free_tree(t_data *data);
 t_tree		*create_simple_tree(t_data *data, t_token *address);
+t_tree		*build_first_tree_leaf_redir(t_token **token, t_tree *tree);
+t_tree		*init_tree_data();
 
 /* builtins */
 void		echo(t_tree *tree);
+void		env(t_data *data, t_tree *tree);
 
 #endif

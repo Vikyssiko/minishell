@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:51:13 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/05 18:22:13 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/11 16:42:03 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	start_loop(t_data *data)
 			continue ;
 		init_tree(data);
 //		echo(data->tree);
+		env(data, data->tree);
 //		 print_tree(data->tree);
 	}
 }
