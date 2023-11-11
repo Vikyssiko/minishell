@@ -59,6 +59,28 @@ int	in_quotes(char *s, int pos)
 	return (0);
 }
 
+int	in_single_quotes(char *s, int pos)
+{
+	int	double_quotes;
+	int	single_quotes;
+	int	i;
+
+	double_quotes = 0;
+	single_quotes = 0;
+	i = 0;
+	while (i <= pos)
+	{
+		if (s[i] == '\"' && single_quotes % 2 == 0)
+			double_quotes++;
+		if (s[i] == '\'' && double_quotes % 2 == 0)
+			single_quotes++;
+		i++;
+	}
+	if (single_quotes % 2 != 0)
+		return (1);
+	return (0);
+}
+
 int	special_chars(char *str)
 {
 	int	i;

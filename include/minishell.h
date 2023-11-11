@@ -167,6 +167,7 @@ int			ft_envsize(t_envir *lst);
 int			odd_quote(char *str);
 int			special_chars(char *str);
 int			in_quotes(char *s, int pos);
+int			in_single_quotes(char *s, int pos); // ??
 
 /* tokens */
 char		*ft_strstr(const char *haystack, const char *needle);
@@ -210,5 +211,7 @@ t_tree		*create_simple_tree(t_data *data, t_token *address);
 
 /* builtins */
 void		echo(t_tree *tree);
+
+char		*replace_dollars(char *str);
 
 #endif

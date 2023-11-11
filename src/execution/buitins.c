@@ -12,16 +12,32 @@
 
 #include "../../include/minishell.h"
 
+void	print_without_quotes(char *str)
+{
+	int		i;
+	char	quote;
+
+	i = 0;
+	if (str[i] == '\'' || str[i] == '\"')
+		quote = str[i];
+	while (str[i])
+	{
+		if (str[i] != quote)
+//			write(1, &str[i], 1);
+			printf("%c", str[i]);
+		i++;
+	}
+}
+
 void	echo(t_tree *tree)
 {
 	int		i;
 	int		newline;
-	char	*str;
 
 	i = 1;
 	newline = 1;
-//	if (ft_strcmp(tree->value, "echo") != 0)
-//		return ;
+	if (ft_strcmp(tree->value, "echo") != 0)
+		return ;
 	if (tree->args_array[i] && ft_strcmp(tree->args_array[i], "-n") == 0)
 	{
 		newline = 0;
@@ -29,9 +45,7 @@ void	echo(t_tree *tree)
 	}
 	while (tree->args_array[i])
 	{
-		str = ft_strtrim(tree->args_array[i], "\"");
-		printf("%s", str);
-		free(str);
+		print_without_quotes(tree->args_array[i]);
 		i++;
 		if (tree->args_array[i])
 			printf(" ");
