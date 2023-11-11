@@ -12,6 +12,34 @@
 
 #include "../../include/minishell.h"
 
+void	echo(t_tree *tree)
+{
+	int		i;
+	int		newline;
+	char	*str;
+
+	i = 1;
+	newline = 1;
+//	if (ft_strcmp(tree->value, "echo") != 0)
+//		return ;
+	if (tree->args_array[i] && ft_strcmp(tree->args_array[i], "-n") == 0)
+	{
+		newline = 0;
+		i++;
+	}
+	while (tree->args_array[i])
+	{
+		str = ft_strtrim(tree->args_array[i], "\"");
+		printf("%s", str);
+		free(str);
+		i++;
+		if (tree->args_array[i])
+			printf(" ");
+	}
+	if (newline)
+		printf("\n");
+}
+
 // int	ft_is_builtin(char *cmd)
 // {
 // 	if (ft_strcmp(cmd, "echo") == 0)
@@ -29,31 +57,6 @@
 // 	else if (ft_strcmp(cmd, "exit") == 0)
 // 		return (1);
 // 	return (0);
-// }
-
-// void builtin_echo(char *args[])
-// {
-// 	int i;
-// 	int no_newline;
-
-// 	i = 1;
-// 	no_newline = 0;
-
-// 	if (args[i] != (void *)0 && ft_strncmp(args[i], "-n", 2) == 0)
-// 	{
-// 		no_newline = 1;
-// 		i++;
-// 	}
-
-// 	while (args[i] !=  (void *)0)
-// 	{
-// 		printf("%s", args[i]);
-// 		i++;
-// 		if (args[i] !=  (void *)0)
-// 			printf(" ");
-// 	}
-// 	if (!no_newline)
-// 		printf("\n");
 // }
 
 // void	builtin_pwd(void)

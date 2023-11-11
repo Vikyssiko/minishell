@@ -21,7 +21,7 @@ int	lexical_analysis(t_data *data, char *input)
 	printf("Finished printing first batch\n");
 	if (token_analysis(data))
 		return (1);
-	print_tokens(data);
+//	print_tokens(data);
 	return (0);
 }
 

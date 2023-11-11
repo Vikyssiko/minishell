@@ -33,7 +33,8 @@ void	start_loop(t_data *data)
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;
 		init_tree(data);
-		// print_tree(data->tree);
+//		echo(data->tree);
+//		 print_tree(data->tree);
 	}
 }
 // printf("token length: %d\n", token_len(data->token_list));

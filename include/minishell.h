@@ -208,4 +208,7 @@ t_tree		*build_tree_leaf_right(t_token **token, t_tree *tree);
 void		free_tree(t_data *data);
 t_tree		*create_simple_tree(t_data *data, t_token *address);
 
+/* builtins */
+void		echo(t_tree *tree);
+
 #endif
