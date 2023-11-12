@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 23:43:54 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/12 21:22:25 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,7 @@ t_tree		*init_tree_data();
 /* builtins */
 void		echo(t_tree *tree);
 void		env(t_data *data, t_tree *tree);
+void		unset(t_data *data, t_tree *tree);
+int			unset_helper(char *tree_arg);
 
 #endif

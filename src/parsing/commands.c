@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/06 21:09:36 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/12 19:50:28 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
