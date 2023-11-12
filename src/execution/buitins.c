@@ -67,14 +67,25 @@ void	env(t_data *data, t_tree *tree)
 	int	i;
 
 	i = 0;
-	if (ft_strcmp(tree->value, "env") == 0)
-	{
+	if (ft_strcmp(tree->value, "env") != 0)
+		return ;
+//	if (ft_strcmp(tree->value, "env") == 0)
+//	{
 		while (data->env_array[i])
 		{
 			printf("%s\n", data->env_array[i]);
 			i++;
 		}
-	}
+//	}
+}
+
+void	pwd(t_tree *tree)
+{
+	if (ft_strcmp(tree->value, "pwd") != 0)
+		return ;
+	// pwd: too many arguments
+	// pwd: bad option: -h
+	printf("%s\n", getenv("pwd"));
 }
 
 // int	ft_is_builtin(char *cmd)
