@@ -26,7 +26,7 @@ void	start_loop(t_data *data)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);
-		data->input_line = replace_dollars(data->input_line);
+		data->input_line = replace_dollars(data->input_line, data);
 //		printf("%s\n", data->input_line);
 		ft_strdel(&line);
 		check_exit(data->input_line);
@@ -36,6 +36,7 @@ void	start_loop(t_data *data)
 		init_tree(data);
 		echo(data->tree);
 		env(data, data->tree);
+		pwd(data->tree);
 //		 print_tree(data->tree);
 	}
 }

@@ -72,7 +72,7 @@ typedef struct s_data {
 	struct s_token	*token_list;
 	t_envir			*env_list;
 	t_list			*sorted_env_list;
-	long int		exit_status;
+	int				exit_status;
 	int				pid;
 	int				arg_nums;
 	int				forked;
@@ -126,7 +126,7 @@ void		check_exit(char *input);
 void		print_parsed_input(char *command);
 int			is_valid_env(char *str);
 int			is_valid_env2(char *str);
-char		*replace_dollars(char *str);
+char		*replace_dollars(char *str, t_data *data);
 
 /* init_data.c */
 void		init_data(t_data **data, char **envp);
@@ -217,5 +217,6 @@ t_tree		*init_tree_data();
 /* builtins */
 void		echo(t_tree *tree);
 void		env(t_data *data, t_tree *tree);
+void		pwd(t_tree *tree);
 
 #endif
