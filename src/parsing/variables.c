@@ -24,42 +24,65 @@
 //	return (tree);
 //}
 
-char	*replace_dollars(char *str)
+void	add_str_part(char *str, int i, int start, char **result)
+{
+	char	*new_str;
+
+	new_str = malloc(i - start + 1);
+	ft_strlcpy(new_str, &str[start], i - start + 1);
+	*result = ft_strjoin(*result, new_str);
+	free(new_str);
+}
+
+void	join_result_with_exit(int exit_status, char **result)
+{
+	char	*exit;
+
+	exit = ft_itoa(exit_status);
+	*result = ft_strjoin(*result, exit);
+	free(exit);
+}
+
+void	replace_variable(char *str, int *i, int *start, char **result)
+{
+	char	*new_str;
+
+	add_str_part(str, *i, *start, result);
+	*start = ++(*i);
+	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])))
+		(*i)++;
+	new_str = malloc(*i - *start + 1);
+	ft_strlcpy(new_str, &str[*start], *i - *start + 1);
+	*result = ft_strjoin(*result, getenv(new_str));
+	free(new_str);
+	*start = *i;
+}
+
+char	*replace_dollars(char *str, t_data *data)
 {
 	int		start;
-	char	*new_str;
 	char	*result;
 	int		i;
-	char	*var;
 
 	start = 0;
 	i = 0;
 	result = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && !in_single_quotes(str, i))
+		if (str[i] == '$' && str[i + 1] == '?' && !in_single_quotes(str, i))
 		{
-			new_str = malloc(i - start + 1);
-			ft_strlcpy(new_str, &str[start], i - start + 1);
-			result = ft_strjoin(result, new_str);
-			free(new_str);
-			start = ++i;
-			while (str[i] && (str[i] == '_' || ft_isalnum(str[i])))
-				i++;
-			var = malloc(i - start + 1);
-			ft_strlcpy(var, &str[start], i - start + 1);
-			result = ft_strjoin(result, getenv(var));
-			free(var);
+			add_str_part(str, i, start, &result);
+			i += 2;
+			join_result_with_exit(data->exit_status, &result);
 			start = i;
-			continue ;
 		}
-//		printf("%s\n", result);
-		i++;
+		else if (str[i] == '$' && str[i + 1] != ' '
+			&& !in_single_quotes(str, i))
+			replace_variable(str, &i, &start, &result);
+		else
+			i++;
 	}
-	new_str = malloc(i - start + 1);
-	ft_strlcpy(new_str, &str[start], i - start + 1);
-	result = ft_strjoin(result, new_str);
-	free(new_str);
-//	free(str);
+	add_str_part(str, i, start, &result);
+	free(str);
 	return (result);
 }

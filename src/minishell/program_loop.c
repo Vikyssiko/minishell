@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:51:13 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/12 19:51:15 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/12 21:40:02 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	start_loop(t_data *data)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);
-		data->input_line = replace_dollars(data->input_line);
+		data->input_line = replace_dollars(data->input_line, data);
 //		printf("%s\n", data->input_line);
 		ft_strdel(&line);
 		check_exit(data->input_line);
@@ -36,6 +36,7 @@ void	start_loop(t_data *data)
 		init_tree(data);
 		echo(data->tree);
 		env(data, data->tree);
+		pwd(data->tree);
 		unset(data, data->tree);
 //		 print_tree(data->tree);
 	}

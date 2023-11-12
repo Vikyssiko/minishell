@@ -81,11 +81,17 @@ void	env(t_data *data, t_tree *tree)
 
 void	pwd(t_tree *tree)
 {
+	char	*cwd;
+
+	cwd = NULL;
 	if (ft_strcmp(tree->value, "pwd") != 0)
 		return ;
 	// pwd: too many arguments
 	// pwd: bad option: -h
-	printf("%s\n", getenv("pwd"));
+	cwd = getcwd(cwd, 1);
+	printf("%s\n", cwd);
+	free(cwd);
+//	printf("%s\n", getenv("pwd"));
 }
 
 void	unset(t_data *data, t_tree *tree)

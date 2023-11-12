@@ -13,29 +13,24 @@
 #include "../../include/libft.h"
 #include "../../../include/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
-	size_t	s1_size;
-	size_t	s2_size;
 	int		index;
+	int		i;
 
 	index = 0;
-	s1_size = ft_strlen((char *)s1);
-	s2_size = ft_strlen((char *)s2);
-	result = malloc(s1_size + s2_size + 1);
+	i = 0;
+	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (result == NULL)
 		return (NULL);
-	while (s1 && *s1)
-	{
-		result[index++] = *s1;
-		s1++;
-	}
-	while (s2 && *s2)
-	{
-		result[index++] = *s2;
-		s2++;
-	}
+	while (s1 && s1[i])
+		result[index++] = s1[i++];
+	i = 0;
+	while (s2 && s2[i])
+		result[index++] = s2[i++];
+	if (s1)
+		free(s1);
 	result[index] = '\0';
 	return (result);
 }
