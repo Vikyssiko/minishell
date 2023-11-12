@@ -34,7 +34,7 @@ void	start_loop(t_data *data)
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;
 		init_tree(data);
-//		echo(data->tree);
+		echo(data->tree);
 		env(data, data->tree);
 //		 print_tree(data->tree);
 	}

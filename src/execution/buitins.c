@@ -16,16 +16,24 @@ void	print_without_quotes(char *str)
 {
 	int		i;
 	char	quote;
+	int		closed;
 
 	i = 0;
-	if (str[i] == '\'' || str[i] == '\"')
-		quote = str[i];
+	closed = 1;
 	while (str[i])
 	{
-		if (str[i] != quote)
-//			write(1, &str[i], 1);
-			printf("%c", str[i]);
-		i++;
+		if ((str[i] == '\'' || str[i] == '\"') && closed)
+		{
+			quote = str[i++];
+			closed = 0;
+		}
+		if (str[i] && str[i] != quote)
+			printf("%c", str[i++]);
+		if (str[i] == quote)
+		{
+			closed = 1;
+			i++;
+		}
 	}
 }
 
@@ -53,8 +61,8 @@ void	echo(t_tree *tree)
 	if (newline)
 		printf("\n");
 }
-void	env(t_data *data, t_tree *tree)
 
+void	env(t_data *data, t_tree *tree)
 {
 	int	i;
 

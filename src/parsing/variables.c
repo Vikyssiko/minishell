@@ -63,24 +63,3 @@ char	*replace_dollars(char *str)
 //	free(str);
 	return (result);
 }
-
-//void	replace_keys_with_values(t_tree *tree)
-//{
-//	t_tree	*token;
-//	t_tree	*command;
-//	int		i;
-//
-//	i = 0;
-//	token = tree;
-//	command = next_command(token);
-//	while (command && command->args_array)
-//	{
-//		while (command->args_array[i])
-//		{
-//
-//			i++;
-//		}
-//		token = token->left;
-//		command = next_command(token);
-//	}
-//}
