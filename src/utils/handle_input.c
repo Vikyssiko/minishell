@@ -12,14 +12,14 @@
 
 #include "../../include/minishell.h"
 
-void	check_exit(char *input)
-{
-	if (!ft_strncmp("exit", input, ft_strlen("exit")))
-	{
-		free(input);
-		exit(0);
-	}
-}
+//void	check_exit(char *input)
+//{
+//	if (!ft_strncmp("exit", input, ft_strlen("exit")))
+//	{
+//		free(input);
+//		exit(0);
+//	}
+//}
 
 void	print_parsed_input(char *command)
 {

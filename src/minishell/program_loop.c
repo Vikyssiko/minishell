@@ -29,15 +29,18 @@ void	start_loop(t_data *data)
 		data->input_line = replace_dollars(data->input_line, data);
 //		printf("%s\n", data->input_line);
 		ft_strdel(&line);
-		check_exit(data->input_line);
+//		check_exit(data->input_line);
 		if ((odd_quote(data->input_line)) || (special_chars(data->input_line))
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;
 		init_tree(data);
-		echo(data->tree);
-		env(data, data->tree);
-		pwd(data->tree);
-		unset(data, data->tree);
+		if (is_builtin(data->tree))
+			call_builtin_func(data, data->tree);
+//		echo(data->tree);
+//		env(data, data->tree);
+//		pwd();
+//		unset(data, data->tree);
+//		cd(data->tree);
 //		 print_tree(data->tree);
 	}
 }

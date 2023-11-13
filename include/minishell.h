@@ -94,17 +94,8 @@ typedef struct s_token
 }					t_token;
 
 /* builtins.c */
-void		builtin_echo(char **args);
-void		builtin_pwd(void);
 void		builtin_unset(t_list **head, char *var_name);
 void		builtin_env(t_list *head);
-void		builtin_cd(t_data *data, char *path);
-void		builtin_exit(t_data *data);
-char		*get_curr_dir(void);
-char		*get_home_dir(void);
-void		builtin_export(t_envir *env);
-void		handle_builtins(t_data *data);
-int			ft_is_builtin(char *cmd);
 
 /* environment.c */
 void		save_envir(t_data *data, char **env_str);
@@ -122,7 +113,7 @@ void		free_envir(t_envir *envir);
 void		free_2darray(char **array);
 
 /* handle_input.c */
-void		check_exit(char *input);
+//void		check_exit(char *input);
 void		print_parsed_input(char *command);
 int			is_valid_env(char *str);
 int			is_valid_env2(char *str);
@@ -199,9 +190,6 @@ int			syntax_errors(t_token *token, t_data *data);
 int			check_red(t_token *token);
 int			check_pipe(t_token *token);
 
-/* Command Parsing*/
-
-
 /*Binary Tree*/
 t_tree		*build_right_branch(t_token **token, t_token *address, t_tree *tree);
 void		print_right_tree(t_tree *tree);
@@ -209,16 +197,20 @@ void		init_tree(t_data *data);
 int			arg_count_right(t_token *token, t_token *address);
 t_tree		*build_tree_leaf_right(t_token **token, t_tree *tree);
 // void		free_tree(t_data *data);
-void 		free_tree(t_tree **tree);
+void		free_tree(t_tree **tree);
 t_tree		*create_simple_tree(t_data *data, t_token *address);
 t_tree		*build_first_tree_leaf_redir(t_token **token, t_tree *tree);
 t_tree		*init_tree_data();
 
 /* builtins */
+int			is_builtin(t_tree *tree);
+void		call_builtin_func(t_data *data, t_tree *tree);
 void		echo(t_tree *tree);
-void		env(t_data *data, t_tree *tree);
+void		env(t_data *data);
 void		unset(t_data *data, t_tree *tree);
 int			unset_helper(char *tree_arg);
-void		pwd(t_tree *tree);
+void		pwd(void);
+void		cd(t_tree *tree);
+void 		exit_builtin(t_data *data, t_tree *tree);
 
 #endif
