@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <errno.h>
 
 int	is_builtin(t_tree *tree)
 {
@@ -39,7 +40,7 @@ void	call_builtin_func(t_data *data, t_tree *tree)
 	if (ft_strcmp(tree->value, "echo") == 0)
 		echo(tree);
 	else if (ft_strcmp(tree->value, "cd") == 0)
-		cd(tree);
+		cd(data, tree);
 	else if (ft_strcmp(tree->value, "pwd") == 0)
 		pwd();
 //	else if (ft_strcmp(tree->value, "export") == 0)
@@ -80,14 +81,21 @@ void	pwd(void)
 
 // shouldn't change the directory if HOME variable is unset
 // need to check when unset is ready
-void	cd(t_tree *tree)
+//
+//If no directory operand is given and the HOME environment
+//variable is empty or undefined, the default behavior is
+//implementation-defined and no further steps shall be taken.
+void	cd(t_data *data, t_tree *tree)
 {
 //	if (ft_strcmp(tree->value, "cd") != 0)
 //		return ;
 	if (!(tree->args_array[1]))
 		chdir(getenv("HOME"));
 	else if (tree->args_array[1] && chdir(tree->args_array[1]) == -1)
+	{
 		printf("cd: no such file or directory: %s\n", tree->args_array[1]);
+		data->exit_status = errno;
+	}
 //		perror(ft_strjoin("cd: no such file or directory: ", tree->args_array[1]));
 }
 

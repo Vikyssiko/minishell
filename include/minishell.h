@@ -44,7 +44,7 @@
 typedef enum e_token_type {
 	T_WORD = 1,
 	T_NEWLINE,
-	T_DOLLAR,
+//	T_DOLLAR,
 	T_RED_INP,
 	T_RED_OUT,
 	T_APPEND,
@@ -210,7 +210,7 @@ void		env(t_data *data);
 void		unset(t_data *data, t_tree *tree);
 int			unset_helper(char *tree_arg);
 void		pwd(void);
-void		cd(t_tree *tree);
+void		cd(t_data *data, t_tree *tree);
 void 		exit_builtin(t_data *data, t_tree *tree);
 
 #endif
