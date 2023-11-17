@@ -58,6 +58,32 @@ typedef struct s_envir {
 	int			count;
 }				t_envir;
 
+
+
+typedef struct s_token
+{
+	t_token_type		type;
+	char				*word;
+	struct s_token		*next;
+	struct s_token		*prev;
+}					t_token;
+
+typedef struct s_redir {
+	t_token 		*redir_token;
+	t_token 		*redir_word;
+	struct s_redir	*next;
+}	t_redir;
+
+typedef struct s_cmd_list {
+//	t_token_type		type;
+	char				*value;
+//	char				*delim;
+	char				**args_array;
+	t_redir 			*redir_list;
+	struct s_cmd_list	*next;
+//	struct s_tree	*prev;
+}				t_cmd_list;
+
 typedef struct s_tree {
 	t_token_type	type;
 	char			*value;
@@ -83,15 +109,9 @@ typedef struct s_data {
 	char			**env_array;
 	char			**cmd_array;
 	char			**path;
-}				t_data;
 
-typedef struct s_token
-{
-	t_token_type		type;
-	char				*word;
-	struct s_token		*next;
-	struct s_token		*prev;
-}					t_token;
+	t_cmd_list		*list;
+}				t_data;
 
 /* builtins.c */
 void		builtin_unset(t_list **head, char *var_name);
@@ -171,6 +191,10 @@ void		free_tokens(t_token **begin, void (*del)(void *));
 t_token		*create_token(t_data *data, int i, int len);
 t_token		*create_arg_token(t_data *data, char *word, enum e_token_type type);
 void		add_token(t_token **token, t_token *new);
+
+void		add_redir_token(t_redir **head, t_redir *redir);
+t_redir		*create_redir_token(t_token *redir_token, t_token *word);
+
 int			token_analysis(t_data *data);
 void		set_token_type(t_token *token);
 void		print_tokens(t_data *data);

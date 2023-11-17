@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <errno.h>
 
 int	is_builtin(t_tree *tree)
 {

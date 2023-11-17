@@ -69,14 +69,11 @@ t_tree	*build_tree_leaf_right(t_token **token, t_tree *tree)
 
 t_tree	*build_first_tree_leaf_redir(t_token **token, t_tree *tree)
 {
-	int	i;
-
 	tree = init_tree_data();
 	if (!tree)
 		return (NULL);
 	tree->type = (*token)->type;
 	tree->value = (*token)->word;
-	i = 0;
 	tree->delim = ft_strdup((*token)->next->word);
 	*token = (*token)->next->next;
 	return (tree);
@@ -96,7 +93,6 @@ int	arg_count_right(t_token *token, t_token *current)
 }
 
 t_tree	*init_tree_data()
-
 {
 	t_tree *tree;
 

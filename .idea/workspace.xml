@@ -13,11 +13,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/buitins.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/buitins.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/builtins.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/builtins.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/token_lists.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/token_lists.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/handle_input.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/handle_input.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/tree_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/tree_right_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_right_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +134,27 @@
       <workItem from="1699813136795" duration="7742000" />
       <workItem from="1699875698998" duration="1142000" />
       <workItem from="1699877244998" duration="1713000" />
-      <workItem from="1699891497396" duration="4393000" />
+      <workItem from="1699891497396" duration="5129000" />
+      <workItem from="1699950446628" duration="575000" />
+      <workItem from="1699990788209" duration="2296000" />
+      <workItem from="1700053866885" duration="127000" />
+      <workItem from="1700062969995" duration="360000" />
+      <workItem from="1700075331199" duration="2093000" />
+      <workItem from="1700086763813" duration="771000" />
+      <workItem from="1700164663449" duration="1713000" />
+      <workItem from="1700232511669" duration="1042000" />
+      <workItem from="1700239203819" duration="10466000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

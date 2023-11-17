@@ -33,9 +33,11 @@ void	start_loop(t_data *data)
 		if ((odd_quote(data->input_line)) || (special_chars(data->input_line))
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;
+
 		init_tree(data);
-		if (is_builtin(data->tree))
-			call_builtin_func(data, data->tree);
+//		if (is_builtin(data->tree))
+//			call_builtin_func(data, data->tree);
+
 //		echo(data->tree);
 //		env(data, data->tree);
 //		pwd();

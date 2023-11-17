@@ -11,6 +11,56 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+/*
+void	redir_output(t_tree *tree, int write_fd)
+{
+	int	file;
+
+	file = open(tree->redir_word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
+		return (errno);
+//	close(file);
+}
+
+void	redir_input(t_tree *tree, int read_fd)
+{
+	int	file;
+
+	file = open(tree->redir_word, O_WRONLY | O_TRUNC, 0777);
+	if (file < 0)
+	{
+		printf("minishell: %s: No such file or directory\n", tree->redir_word);
+		return (errno);
+	}
+	if (dup2(file, STDIN_FILENO) < 0)
+		return (errno);
+	// bash: end: No such file or directory
+//	close(file);
+}
+
+void	append(t_tree *tree)
+{
+	int	file;
+
+	file = open(tree->redir_word, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
+		return (errno);
+//	int	pid;
+//	int	file;
+//
+//	pid = fork();
+//	if (pid < 0)
+//		return (errno);
+//	if (pid == 0)
+//	{
+//		// 0777 permission
+//		file = open(tree->redir_word, O_WRONLY | O_CREAT | O_APPEND);
+//		if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
+//			return (errno);
+//		close(file);
+//	}
+//	waitpid(pid, NULL, 0);
+}
 
 int	count_pipes(t_tree *tree)
 {
@@ -62,3 +112,4 @@ int	exec_pipe(t_data *data, t_tree *left, t_tree *right)
 	waitpid(pid_in, NULL, 0);
 	return (0);
 }
+ */
