@@ -58,20 +58,13 @@ void	add_redir_token(t_redir **head, t_redir *redir)
 	{
 		tmp = *head;
 		while (tmp->next)
-		{
-//			tmp->next->prev = tmp;
 			tmp = tmp->next;
-		}
 		tmp->next = redir;
-//		redir->prev = tmp;
 		redir->next = NULL;
 	}
 	else
 	{
 		*head = redir;
-//		redir->prev = NULL;
 		redir->next = NULL;
 	}
-//	redir_token->type = redir_token->type;
-//	redir_token->word = word->word;
 }

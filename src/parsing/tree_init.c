@@ -18,7 +18,6 @@ void	print_cmd_list(t_cmd_list *list)
 {
 	int	i;
 
-//	i = 0;
 	while (list)
 	{
 		i = 0;
@@ -30,12 +29,12 @@ void	print_cmd_list(t_cmd_list *list)
 				printf("args_array[%i]: %s\n", i, list->args_array[i]);
 			i++;
 		}
-//		while (list->redir_list)
-//		{
-//			printf("redir token: %s", list->redir_list->redir_token->word);
-//			printf("redir word: %s", list->redir_list->redir_word->word);
-//			list->redir_list = list->redir_list->next;
-//		}
+		while (list->redir_list)
+		{
+			printf("redir token: %s\n", list->redir_list->redir_token->word);
+			printf("redir word: %s\n", list->redir_list->redir_word->word);
+			list->redir_list = list->redir_list->next;
+		}
 		list = list->next;
 	}
 }
@@ -47,6 +46,8 @@ t_cmd_list 	*init_list()
 	list = (t_cmd_list *)malloc(sizeof(t_cmd_list));
 	list->args_array = NULL;
 	list->value = NULL;
+	list->next = NULL;
+	list->redir_list = NULL;
 	return (list);
 }
 
@@ -56,9 +57,8 @@ void	init_tree(t_data *data)
 
 	head = data->token_list;
 	data->list = create_list(data, data->token_list);
-//	print_cmd_list(data->list);
-//	if (data)
-		data->token_list = head;
+	print_cmd_list(data->list);
+	data->token_list = head;
 }
 
 int	count_args(t_token *start, t_token *current)
@@ -85,14 +85,17 @@ int	count_args(t_token *start, t_token *current)
 
 t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 {
-	int	arg_num;
-	int	i;
+	int		arg_num;
+	int		i;
+	t_token	*start_copy;
 
 	i = 0;
 	arg_num = count_args(*start, current);
-//	arg_num = 2;
 	list = init_list();
-	list->value = (*start)->word;
+	start_copy = (*start);
+	while (start_copy->type != T_WORD)
+		start_copy = start_copy->next->next;
+	list->value = start_copy->word;
 	list->args_array = (char **)malloc(sizeof(char *) * (arg_num + 1));
 //	if (!list->args_array)
 
@@ -101,9 +104,6 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 		if ((*start)->type == T_APPEND || (*start)->type == T_DELIM
 			|| (*start)->type == T_RED_INP || (*start)->type == T_RED_OUT)
 		{
-			printf("redir_token: %s\n", (*start)->word);
-			printf("redir_word: %s\n", (*start)->next->word);
-//			create_redir_token((*start), (*start)->next);
 			add_redir_token(&(list->redir_list), create_redir_token((*start), (*start)->next));
 			(*start) = (*start)->next->next;
 			continue ;
@@ -120,13 +120,17 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 
 t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
 {
-	int	arg_nums;
-	int	i;
+	int		arg_nums;
+	int		i;
+	t_token	*token_copy;
 
 	list = init_list();
 //	if (!list)
 //		return (NULL);
 //	list->type = (*token)->type;
+	token_copy = (*token);
+	while (token_copy->type != T_WORD)
+		token_copy = token_copy->next->next;
 	list->value = (*token)->word;
 	i = 0;
 	arg_nums = count_args(*token, NULL);
@@ -174,10 +178,6 @@ t_cmd_list	*create_list(t_data *data, t_token *token)
 	list->next = create_last_node(&data->token_list, list);
 	return (root);
 }
-
-
-
-
 
 
 

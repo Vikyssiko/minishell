@@ -37,7 +37,7 @@ void	print_without_quotes(char *str)
 	}
 }
 
-void	echo(t_tree *tree)
+void	echo(t_cmd_list *list)
 {
 	int		i;
 	int		newline;
@@ -46,16 +46,16 @@ void	echo(t_tree *tree)
 	newline = 1;
 //	if (ft_strcmp(tree->value, "echo") != 0)
 //		return ;
-	if (tree->args_array[i] && ft_strcmp(tree->args_array[i], "-n") == 0)
+	if (list->args_array[i] && ft_strcmp(list->args_array[i], "-n") == 0)
 	{
 		newline = 0;
 		i++;
 	}
-	while (tree->args_array[i])
+	while (list->args_array[i])
 	{
-		print_without_quotes(tree->args_array[i]);
+		print_without_quotes(list->args_array[i]);
 		i++;
-		if (tree->args_array[i])
+		if (list->args_array[i])
 			printf(" ");
 	}
 	if (newline)

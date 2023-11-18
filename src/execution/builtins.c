@@ -12,44 +12,44 @@
 
 #include "../../include/minishell.h"
 
-int	is_builtin(t_tree *tree)
+int	is_builtin(t_cmd_list *list)
 {
-	if (tree && tree->value)
+	if (list && list->value)
 	{
-		if (ft_strcmp(tree->value, "echo") == 0)
+		if (ft_strcmp(list->value, "echo") == 0)
 			return (1);
-		else if (ft_strcmp(tree->value, "cd") == 0)
+		else if (ft_strcmp(list->value, "cd") == 0)
 			return (1);
-		else if (ft_strcmp(tree->value, "pwd") == 0)
+		else if (ft_strcmp(list->value, "pwd") == 0)
 			return (1);
-		else if (ft_strcmp(tree->value, "export") == 0)
+		else if (ft_strcmp(list->value, "export") == 0)
 			return (1);
-		else if (ft_strcmp(tree->value, "unset") == 0)
+		else if (ft_strcmp(list->value, "unset") == 0)
 			return (1);
-		else if (ft_strcmp(tree->value, "env") == 0)
+		else if (ft_strcmp(list->value, "env") == 0)
 			return (1);
-		else if (ft_strcmp(tree->value, "exit") == 0)
+		else if (ft_strcmp(list->value, "exit") == 0)
 			return (1);
 	}
  	return (0);
 }
 
-void	call_builtin_func(t_data *data, t_tree *tree)
+void	call_builtin_func(t_data *data, t_cmd_list *list)
 {
-	if (ft_strcmp(tree->value, "echo") == 0)
-		echo(tree);
-	else if (ft_strcmp(tree->value, "cd") == 0)
-		cd(data, tree);
-	else if (ft_strcmp(tree->value, "pwd") == 0)
+	if (ft_strcmp(list->value, "echo") == 0)
+		echo(list);
+	else if (ft_strcmp(list->value, "cd") == 0)
+		cd(data, list);
+	else if (ft_strcmp(list->value, "pwd") == 0)
 		pwd();
-//	else if (ft_strcmp(tree->value, "export") == 0)
+//	else if (ft_strcmp(list->value, "export") == 0)
 //		return (1);
-	else if (ft_strcmp(tree->value, "unset") == 0)
-		unset(data, tree);
-	else if (ft_strcmp(tree->value, "env") == 0)
+//	else if (ft_strcmp(list->value, "unset") == 0)
+//		unset(data, tree);
+	else if (ft_strcmp(list->value, "env") == 0)
 		env(data);
-	else if (ft_strcmp(tree->value, "exit") == 0)
-		exit_builtin(data, tree);
+	else if (ft_strcmp(list->value, "exit") == 0)
+		exit_builtin(data, list);
 }
 
 void	env(t_data *data)
@@ -84,42 +84,42 @@ void	pwd(void)
 //If no directory operand is given and the HOME environment
 //variable is empty or undefined, the default behavior is
 //implementation-defined and no further steps shall be taken.
-void	cd(t_data *data, t_tree *tree)
+void	cd(t_data *data, t_cmd_list *list)
 {
 //	if (ft_strcmp(tree->value, "cd") != 0)
 //		return ;
-	if (!(tree->args_array[1]))
+	if (!(list->args_array[1]))
 		chdir(getenv("HOME"));
-	else if (tree->args_array[1] && chdir(tree->args_array[1]) == -1)
+	else if (list->args_array[1] && chdir(list->args_array[1]) == -1)
 	{
-		printf("cd: no such file or directory: %s\n", tree->args_array[1]);
+		printf("cd: no such file or directory: %s\n", list->args_array[1]);
 		data->exit_status = errno;
 	}
 //		perror(ft_strjoin("cd: no such file or directory: ", tree->args_array[1]));
 }
 
-void exit_builtin(t_data *data, t_tree *tree)
+void exit_builtin(t_data *data, t_cmd_list *list)
 {
 	int i;
 
 	i = 0;
-	if (tree->args_array[1])
+	if (list->args_array[1])
 	{
-		while (tree->args_array[1][i])
+		while (list->args_array[1][i])
 		{
-			if (!ft_isdigit(tree->args_array[1][i]))
+			if (!ft_isdigit(list->args_array[1][i]))
 			{
-				printf("bash: exit: %s: numeric argument required\n", tree->args_array[1]);
+				printf("bash: exit: %s: numeric argument required\n", list->args_array[1]);
 				exit_shell("exit", data->exit_status, data);
 			}
 			i++;
 		}
-		if (tree->args_array[2])
+		if (list->args_array[2])
 		{
 			printf("minishell: exit: too many arguments\n");
 			return ;
 		}
-		exit_shell("exit", ft_atoi(tree->args_array[1]), data);
+		exit_shell("exit", ft_atoi(list->args_array[1]), data);
 	}
 	exit_shell("exit", data->exit_status, data);
 	// free!!!

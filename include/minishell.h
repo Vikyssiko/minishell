@@ -227,14 +227,14 @@ t_tree		*build_first_tree_leaf_redir(t_token **token, t_tree *tree);
 t_tree		*init_tree_data();
 
 /* builtins */
-int			is_builtin(t_tree *tree);
-void		call_builtin_func(t_data *data, t_tree *tree);
-void		echo(t_tree *tree);
+int			is_builtin(t_cmd_list *list);
+void		call_builtin_func(t_data *data, t_cmd_list *list);
+void		echo(t_cmd_list *list);
 void		env(t_data *data);
 void		unset(t_data *data, t_tree *tree);
 int			unset_helper(char *tree_arg);
 void		pwd(void);
-void		cd(t_data *data, t_tree *tree);
-void 		exit_builtin(t_data *data, t_tree *tree);
+void		cd(t_data *data, t_cmd_list *list);
+void 		exit_builtin(t_data *data, t_cmd_list *list);
 
 #endif

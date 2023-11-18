@@ -35,8 +35,8 @@ void	start_loop(t_data *data)
 			continue ;
 
 		init_tree(data);
-//		if (is_builtin(data->tree))
-//			call_builtin_func(data, data->tree);
+		if (is_builtin(data->list))
+			call_builtin_func(data, data->list);
 
 //		echo(data->tree);
 //		env(data, data->tree);
