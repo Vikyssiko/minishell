@@ -94,91 +94,135 @@ void	manage_redir(t_cmd_list *list, t_data *data)
 //	close(STDOUT_FILENO);
 }
 
-int	count_pipes(t_tree *tree)
+int	count_pipes(t_cmd_list *list)
 {
 	int	pipes;
 
 	pipes = 0;
-	while (tree->type != T_WORD)
+	while (list)
 	{
-		tree = tree->right;
+		list = list->next;
 		pipes++;
 	}
 	return (pipes);
 }
 
-int	exec_pipe(t_data *data, t_cmd_list *list)
-{
-	int fd[2];
-	int	pid_out;
-//	int	pid_in;
-
-
-	if (pipe(fd) < 0)
-		return (1);
-	pid_out = fork();
-	if (pid_out < 0)
-		return (2);
-	if (pid_out == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		execve(find_executable_path(data->path, list->value),
-			   list->args_array, data->env_array);
-	}
-
-//	pid_in = fork();
-//	if (pid_in < 0)
-//		return (3);
-//	if (pid_in == 0)
+//int	exec_pipe(t_data *data, t_cmd_list *list)
+//{
+//	int fd[2];
+//	int	pid_out;
+////	int	pid_in;
+//
+//
+//	if (pipe(fd) < 0)
+//		return (1);
+//	pid_out = fork();
+//	if (pid_out < 0)
+//		return (2);
+//	if (pid_out == 0)
 //	{
-//		dup2(fd[0], STDIN_FILENO);
-//		close(fd[1]);
+//		dup2(fd[1], STDOUT_FILENO);
 //		close(fd[0]);
-//		execve(find_executable_path(data->path, right->value),
-//			   right->args_array, data->env_array);
+//		close(fd[1]);
+//		execve(find_executable_path(data->path, list->value),
+//			   list->args_array, data->env_array);
 //	}
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid_out, NULL, 0);
-//	waitpid(pid_in, NULL, 0);
-	return (0);
-}
+//
+////	pid_in = fork();
+////	if (pid_in < 0)
+////		return (3);
+////	if (pid_in == 0)
+////	{
+////		dup2(fd[0], STDIN_FILENO);
+////		close(fd[1]);
+////		close(fd[0]);
+////		execve(find_executable_path(data->path, right->value),
+////			   right->args_array, data->env_array);
+////	}
+//	close(fd[0]);
+//	close(fd[1]);
+//	waitpid(pid_out, NULL, 0);
+////	waitpid(pid_in, NULL, 0);
+//	return (0);
+//}
 
 int	exec_cmd(t_data *data, t_cmd_list *list)
 {
-	int	pid_out;
+//	int	pid_out;
+//	int stdin;
+//	int stdout;
+//
+//	stdin = dup(0);
+//	stdout = dup(1);
+//
+//	pid_out = fork();
+//	if (pid_out < 0)
+//		return (2);
+//	if (pid_out == 0)
+//	{
+//		printf("HERE\n");
+		manage_redir(list, data);
+		if (is_builtin(list))
+			call_builtin_func(data, list);
+		else
+			execve(find_executable_path(data->path, list->value),
+			   list->args_array, data->env_array);
+//	}
+//	waitpid(pid_out, NULL, 0);
+//	close(STDOUT_FILENO);
+//	close(STDIN_FILENO);
+//	dup2(stdin, 0);
+//	dup2(stdout, 1);
+	return (0);
+}
+
+int	exec_pipe(t_data *data, t_cmd_list *list)
+{
+	int	fd[2];
+	int	pid;
+
+	if (pipe(fd) < 0)
+		return (1);
+	pid = fork();
+	if (pid < 0)
+		return (2);
+	if (pid == 0)
+	{
+		close(fd[0]);
+		if (dup2(fd[1], 1) < 0)
+			return (3);
+		exec_cmd(data, list);
+	}
+	else
+	{
+		close(fd[1]);
+		if (dup2(fd[0], 0) < 0)
+			return (4);
+	}
+	return (0);
+}
+
+int	exec_pipes(t_data *data)
+{
+//	int			pipes;
+	t_cmd_list	*list;
 	int stdin;
 	int stdout;
 
+	list = data->list;
 	stdin = dup(0);
 	stdout = dup(1);
-
-
-	pid_out = fork();
-	if (pid_out < 0)
-		return (2);
-	if (pid_out == 0)
+//	pipes = count_pipes(list);
+//	printf("I am here");
+	while (list)
 	{
-//		printf("HERE\n");
-		manage_redir(list, data);
-		call_builtin_func(data, list);
-		execve(find_executable_path(data->path, list->value),
-			   list->args_array, data->env_array);
+//		printf("I am here: %s\n", list->redir_list->redir_word->word);
+		exec_cmd(data, list);
+		list = list->next;
 	}
-	waitpid(pid_out, NULL, 0);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
 	dup2(stdin, 0);
 	dup2(stdout, 1);
 	return (0);
-}
-
-void	exec_pipes(t_data *data, t_cmd_list *list)
-{
-	int	fd[2];
-
-	if (pipe(fd) < 0)
-
 }

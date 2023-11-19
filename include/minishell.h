@@ -240,5 +240,7 @@ void 		exit_builtin(t_data *data, t_cmd_list *list);
 void		manage_redir(t_cmd_list *list, t_data *data);
 
 int	exec_cmd(t_data *data, t_cmd_list *list);
+int	exec_pipe(t_data *data, t_cmd_list *list);
+int	exec_pipes(t_data *data);
 
 #endif
