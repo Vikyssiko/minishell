@@ -35,10 +35,10 @@ void	start_loop(t_data *data)
 			continue ;
 
 		init_tree(data);
-//		exec_cmd(data, data->list);
-		manage_redir(data->list, data);
-		if (is_builtin(data->list))
-			call_builtin_func(data, data->list);
+		exec_cmd(data, data->list);
+//		manage_redir(data->list, data);
+//		if (is_builtin(data->list))
+//			call_builtin_func(data, data->list);
 
 //		print_tree(data->tree);
 	}

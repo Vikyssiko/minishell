@@ -23,7 +23,6 @@ void	redir_output(char *name, t_data *data)
 //	printf("hello\n");
 //	close(STDIN_FILENO);
 //		return (errno);
-//	close(file);
 }
 
 void	redir_input(char *name, t_data *data)
@@ -75,13 +74,9 @@ void	append(char *name, t_data *data)
 void	manage_redir(t_cmd_list *list, t_data *data)
 {
 	t_redir	*redir_list;
-	int tmp_0;
-	int tmp_1;
 
-	tmp_0 = dup(0);
-	tmp_1 = dup(1);
 	redir_list = list->redir_list;
-	printf("I am in manage redir function\n");
+//	printf("I am in manage redir function\n");
 	while (redir_list)
 	{
 //		printf("I am in manage redir loop\n");
@@ -95,11 +90,8 @@ void	manage_redir(t_cmd_list *list, t_data *data)
 //			delim(redir_list->redir_word->word, data);
 		redir_list = redir_list->next;
 	}
-	call_builtin_func(data, data->list);
-	close(STDOUT_FILENO);
-	dup2(tmp_0, 0);
-	dup2(tmp_1, 1);
-//	close(STDIN_FILENO);
+//	call_builtin_func(data, data->list);
+//	close(STDOUT_FILENO);
 }
 
 int	count_pipes(t_tree *tree)
@@ -156,12 +148,14 @@ int	exec_pipe(t_data *data, t_cmd_list *list)
 
 int	exec_cmd(t_data *data, t_cmd_list *list)
 {
-//	int fd[2];
 	int	pid_out;
+	int stdin;
+	int stdout;
+
+	stdin = dup(0);
+	stdout = dup(1);
 
 
-//	if (pipe(fd) < 0)
-//		return (1);
 	pid_out = fork();
 	if (pid_out < 0)
 		return (2);
@@ -170,15 +164,21 @@ int	exec_cmd(t_data *data, t_cmd_list *list)
 //		printf("HERE\n");
 		manage_redir(list, data);
 		call_builtin_func(data, list);
-//		close(1);
-//		dup2(fd[1], STDOUT_FILENO);
-//		close(fd[0]);
-//		close(fd[1]);
-//		execve(find_executable_path(data->path, list->value),
-//			   list->args_array, data->env_array);
+		execve(find_executable_path(data->path, list->value),
+			   list->args_array, data->env_array);
 	}
-//	close(STDOUT_FILENO);
-//	close(STDIN_FILENO);
 	waitpid(pid_out, NULL, 0);
+	close(STDOUT_FILENO);
+	close(STDIN_FILENO);
+	dup2(stdin, 0);
+	dup2(stdout, 1);
 	return (0);
+}
+
+void	exec_pipes(t_data *data, t_cmd_list *list)
+{
+	int	fd[2];
+
+	if (pipe(fd) < 0)
+
 }
