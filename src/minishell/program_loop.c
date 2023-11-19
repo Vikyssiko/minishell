@@ -37,8 +37,8 @@ void	start_loop(t_data *data)
 		exec_pipes(data);
 //		exec_cmd(data, data->list);
 //		manage_redir(data->list, data);
-//		if (is_builtin(data->list))
-//			call_builtin_func(data, data->list);
+		if (is_builtin(data->list))
+			call_builtin_func(data, data->list);
 
 //		print_tree(data->tree);
 	}

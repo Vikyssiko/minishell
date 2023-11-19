@@ -144,7 +144,7 @@ void		init_data(t_data **data, char **envp);
 
 /* parsing_commads.c */
 int			lexical_analysis(t_data *data, char *input);
-// int			find_command_path(t_data *data, t_cmdexe *cmd);
+char *		find_command_path(t_data *data, t_cmd_list *list);
 int			parse_command(t_data *data);
 void		child(t_data *data);
 // static char			*cutable_path(char **paths, char *cmd);

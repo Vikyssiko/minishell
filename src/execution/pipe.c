@@ -165,8 +165,8 @@ int	exec_cmd(t_data *data, t_cmd_list *list)
 		if (is_builtin(list))
 			call_builtin_func(data, list);
 		else
-			execve(find_executable_path(data->path, list->value),
-			   list->args_array, data->env_array);
+			execve(find_command_path(data, list),
+			   list->args_array, data->path);
 //	}
 //	waitpid(pid_out, NULL, 0);
 //	close(STDOUT_FILENO);
@@ -220,7 +220,7 @@ int	exec_pipes(t_data *data)
 		exec_cmd(data, list);
 		list = list->next;
 	}
-	waitpid(pid_out, NULL, 0);
+//	waitpid(pid_out, NULL, 0);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
 	dup2(stdin, 0);

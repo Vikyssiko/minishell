@@ -44,8 +44,8 @@ void	call_builtin_func(t_data *data, t_cmd_list *list)
 		pwd();
 //	else if (ft_strcmp(list->value, "export") == 0)
 //		return (1);
-//	else if (ft_strcmp(list->value, "unset") == 0)
-//		unset(data, tree);
+	else if (ft_strcmp(list->value, "unset") == 0)
+		unset(data, list);
 	else if (ft_strcmp(list->value, "env") == 0)
 		env(data);
 	else if (ft_strcmp(list->value, "exit") == 0)
