@@ -14,10 +14,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/builtins.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/builtins.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/echo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/token_lists.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/token_lists.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/tree_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_init.c" afterDir="false" />
     </list>
@@ -36,33 +37,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MakefileLocalSettings">
-    <option name="availableProjects">
-      <map>
-        <entry>
-          <key>
-            <ExternalProjectPojo>
-              <option name="name" value="minishell" />
-              <option name="path" value="$PROJECT_DIR$" />
-            </ExternalProjectPojo>
-          </key>
-          <value>
-            <list>
-              <ExternalProjectPojo>
-                <option name="name" value="minishell" />
-                <option name="path" value="$PROJECT_DIR$" />
-              </ExternalProjectPojo>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="projectSyncType">
-      <map>
-        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
-      </map>
-    </option>
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -143,6 +117,10 @@
       <workItem from="1700232511669" duration="1042000" />
       <workItem from="1700239203819" duration="11380000" />
       <workItem from="1700313750378" duration="4246000" />
+      <workItem from="1700328553761" duration="3267000" />
+      <workItem from="1700339809600" duration="1253000" />
+      <workItem from="1700344472518" duration="2826000" />
+      <workItem from="1700399509161" duration="673000" />
     </task>
     <servers />
   </component>

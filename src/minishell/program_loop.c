@@ -35,15 +35,23 @@ void	start_loop(t_data *data)
 			continue ;
 
 		init_tree(data);
+//		exec_cmd(data, data->list);
+		manage_redir(data->list, data);
 		if (is_builtin(data->list))
 			call_builtin_func(data, data->list);
 
-//		echo(data->tree);
-//		env(data, data->tree);
-//		pwd();
-//		unset(data, data->tree);
-//		cd(data->tree);
-//		 print_tree(data->tree);
+//		print_tree(data->tree);
+	}
+}
+
+void	execute(t_data *data)
+{
+	t_cmd_list	*list;
+
+	list = data->list;
+	while (list)
+	{
+		list = list->next;
 	}
 }
 // printf("token length: %d\n", token_len(data->token_list));

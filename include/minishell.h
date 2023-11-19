@@ -147,7 +147,7 @@ int			lexical_analysis(t_data *data, char *input);
 // int			find_command_path(t_data *data, t_cmdexe *cmd);
 int			parse_command(t_data *data);
 void		child(t_data *data);
-// static char			*find_executable_path(char **paths, char *cmd);
+// static char			*cutable_path(char **paths, char *cmd);
 
 /* reset.c */
 void		reset_data(t_data *data);
@@ -236,5 +236,9 @@ int			unset_helper(char *tree_arg);
 void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void 		exit_builtin(t_data *data, t_cmd_list *list);
+
+void		manage_redir(t_cmd_list *list, t_data *data);
+
+int	exec_cmd(t_data *data, t_cmd_list *list);
 
 #endif

@@ -84,6 +84,8 @@ void	pwd(void)
 //If no directory operand is given and the HOME environment
 //variable is empty or undefined, the default behavior is
 //implementation-defined and no further steps shall be taken.
+//
+//function doesn't change PWD variable
 void	cd(t_data *data, t_cmd_list *list)
 {
 //	if (ft_strcmp(tree->value, "cd") != 0)

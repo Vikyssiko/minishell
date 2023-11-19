@@ -57,7 +57,7 @@ void	init_tree(t_data *data)
 
 	head = data->token_list;
 	data->list = create_list(data, data->token_list);
-	print_cmd_list(data->list);
+//	print_cmd_list(data->list);
 	data->token_list = head;
 }
 
@@ -138,9 +138,19 @@ t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
 		list->args_array = (char **)malloc(sizeof(char *) * (arg_nums));
 	while ((*token)->type != T_NEWLINE)
 	{
+		if ((*token)->type == T_APPEND || (*token)->type == T_DELIM
+			|| (*token)->type == T_RED_INP || (*token)->type == T_RED_OUT)
+		{
+			add_redir_token(&(list->redir_list), create_redir_token((*token), (*token)->next));
+			(*token) = (*token)->next->next;
+			continue ;
+		}
 		list->args_array[i] = ft_strdup((*token)->word);
 		*token = (*token)->next;
 		i++;
+//		list->args_array[i] = ft_strdup((*token)->word);
+//		*token = (*token)->next;
+//		i++;
 	}
 	list->args_array[i] = NULL;
 	return (list);
