@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 23:52:14 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/19 19:20:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_data(t_data **data, char **envp)
 	if (!*data)
 		exit(EXIT_FAILURE);
 	(*data)->env_list = NULL;
+	(*data)->path = NULL;
 	(*data)->tree = NULL;
 	(*data)->token_list = NULL;
 	(*data)->input_line = NULL;

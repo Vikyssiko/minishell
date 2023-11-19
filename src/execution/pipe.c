@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:58:01 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/19 14:21:31 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/19 19:15:30 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,9 +220,18 @@ int	exec_pipes(t_data *data)
 		exec_cmd(data, list);
 		list = list->next;
 	}
+	waitpid(pid_out, NULL, 0);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
 	dup2(stdin, 0);
 	dup2(stdout, 1);
 	return (0);
 }
+
+// void	exec_pipes(t_data *data, t_cmd_list *list)
+// {
+// 	int	fd[2];
+
+// 	if (pipe(fd) < 0)
+
+// }

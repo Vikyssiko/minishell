@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:51:13 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/12 21:40:02 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/19 23:44:00 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	start_loop(t_data *data)
 			add_history(line);
 		data->input_line = trim_input(line);
 		data->input_line = replace_dollars(data->input_line, data);
-//		printf("%s\n", data->input_line);
 		ft_strdel(&line);
 //		check_exit(data->input_line);
 		if ((odd_quote(data->input_line)) || (special_chars(data->input_line))

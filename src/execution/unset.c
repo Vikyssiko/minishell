@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:07:25 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/13 14:07:25 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:16:50 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,40 @@
 
 
 // check cd when unset is ready, there is a comment above cd function
-void	unset(t_data *data, t_tree *tree)
+void	unset(t_data *data, t_cmd_list *list)
 
 {
 	int		i;
-	char	*s;
+	int		j;
+	int		len;
 
 	i = 1;
-//	if (ft_strcmp(tree->value, "unset") != 0)
-//		return ;
-	if (!tree->args_array[i])
+	if (ft_strcmp(list->value, "unset") != 0)
 		return ;
-	if (unset_helper(tree->args_array[i]))
+	if (!list->args_array[i])
 		return ;
-	if (ft_strcmp(tree->value, "unset") == 0 && tree->args_array[i])
+	if (ft_strcmp(list->value, "unset") == 0 && list->args_array[i])
 	{
-		while (data->env_array[i])
+		while (list->args_array[i] != NULL)
 		{
-			if (ft_strncmp(data->env_array[i], tree->args_array[i], ft_strlen(tree->args_array[i])) == 0)
+			if (!unset_helper(list->args_array[i]))
 			{
-				s = data->env_array[i + 1];
-				free(data->env_array[i]);
-				data->env_array[i] = NULL;
-				data->env_array[i] = s;
-				i++;
-				while (data->env_array[i])
+				j = 0;
+				len = ft_strlen(list->args_array[i]);
+				while (data->env_array[j] != NULL)
 				{
-					data->env_array[i] = data->env_array[i + 1];
-					i++;
+					if (ft_strncmp(data->env_array[j], list->args_array[i], len) == 0
+						&& data->env_array[j][len] == '=' && (data->env_array[j][0] != '_' && data->env_array[j][1] != '='))
+					{
+						free(data->env_array[j]);
+						while (data->env_array[j + 1] != NULL)
+						{
+							data->env_array[j] = data->env_array[j + 1];
+							j++;
+						}
+						data->env_array[j] = NULL;
+					}
+					j++;
 				}
 			}
 			i++;
@@ -53,17 +59,14 @@ int	unset_helper(char *tree_arg)
 
 {
 	int	i;
-	// int	len;
 
 	i = 0;
 	while (tree_arg[i])
 	{
-		if ((ft_isalnum(tree_arg[i]) || tree_arg[i] != '_') && ((!ft_isalpha(tree_arg[0])) && tree_arg[0] != '_'))
+		if (((ft_isalnum(tree_arg[i]) || tree_arg[i] != '_') && ((!ft_isalpha(tree_arg[0])) && tree_arg[0] != '_')) || tree_arg[i] == '=')
 			return (printf("unset: `%s': not a valid identifier\n", tree_arg), 1);
 		i++;
 	}
-	// len = ft_strlen(tree_arg);
-	// if (env[len + 1] != '=')
-	// 	return (0);
 	return (0);
 }
+
