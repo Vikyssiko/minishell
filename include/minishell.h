@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/12 21:39:28 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/19 23:06:44 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ int			is_builtin(t_cmd_list *list);
 void		call_builtin_func(t_data *data, t_cmd_list *list);
 void		echo(t_cmd_list *list);
 void		env(t_data *data);
-void		unset(t_data *data, t_tree *tree);
+void		unset(t_data *data, t_cmd_list *list);
 int			unset_helper(char *tree_arg);
 void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);

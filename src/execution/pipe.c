@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:58:01 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/19 14:21:31 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/19 19:15:30 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ int	exec_pipe(t_data *data, t_cmd_list *list)
 
 int	exec_cmd(t_data *data, t_cmd_list *list)
 {
+	char	*path;
+	// char	*command_path;
 	int	pid_out;
 	int stdin;
 	int stdout;
@@ -155,17 +157,26 @@ int	exec_cmd(t_data *data, t_cmd_list *list)
 	stdin = dup(0);
 	stdout = dup(1);
 
-
 	pid_out = fork();
 	if (pid_out < 0)
 		return (2);
+	// path = find_envir_variable(data, "PATH=", 5);
+	// data->path = ft_split(find_envir_variable(data, "PATH=", 5), ':');
+	// int j = 0;
+	// while (data->env_array[j])
+	// {
+	// 	printf("%s\n", data->env_array[j]);
+	// 	j++;
+	// }
+	// printf("I am here\n");
+	// command_path = find_executable_path(data->path, list->value);
+	// printf("COMMAND PATH = %s\n", command_path);
 	if (pid_out == 0)
 	{
-//		printf("HERE\n");
 		manage_redir(list, data);
 		call_builtin_func(data, list);
 		execve(find_executable_path(data->path, list->value),
-			   list->args_array, data->env_array);
+			   list->args_array, &path);
 	}
 	waitpid(pid_out, NULL, 0);
 	close(STDOUT_FILENO);
@@ -175,10 +186,10 @@ int	exec_cmd(t_data *data, t_cmd_list *list)
 	return (0);
 }
 
-void	exec_pipes(t_data *data, t_cmd_list *list)
-{
-	int	fd[2];
+// void	exec_pipes(t_data *data, t_cmd_list *list)
+// {
+// 	int	fd[2];
 
-	if (pipe(fd) < 0)
+// 	if (pipe(fd) < 0)
 
-}
+// }

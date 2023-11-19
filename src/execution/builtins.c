@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buitins.c                                          :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/12 21:37:47 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/19 21:51:13 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	env(t_data *data)
 	int	i;
 
 	i = 0;
-//	if (ft_strcmp(tree->value, "env") != 0)
-//		return ;
+	if (ft_strcmp(data->list->value, "env") != 0)
+		return ;
 	while (data->env_array[i])
 	{
 		printf("%s\n", data->env_array[i]);
