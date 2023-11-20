@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:58:01 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/19 19:15:30 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/20 00:22:24 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int	exec_pipes(t_data *data)
 		exec_cmd(data, list);
 		list = list->next;
 	}
-	waitpid(pid_out, NULL, 0);
+	// waitpid(pid_out, NULL, 0);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
 	dup2(stdin, 0);
