@@ -12,31 +12,32 @@
 
 #include "../../include/minishell.h"
 
-// int	find_command_path(t_data *data, t_tree *tree)
-// {
-// 	char	*path;
-// 	char	*command_path;
+ char	*find_command_path(t_data *data, t_cmd_list *list)
+ {
+ 	char	*path;
+ 	char	*command_path;
 // 	int	i;
-
+//
 // 	i = 0;
-// 	path = find_envir_variable(data, "PATH=", 5);
-// 	if (!path)
-// 		return (1);
-// 	data->path = ft_split(path, ':');
-// 	if (!data->path)
-// 		return (1);
-// 	command_path = find_executable_path(data->path, data->tree->args_array[0]);
-// 	if (!command_path)
-// 	{
-// 		printf("minishell: %s: command not found\n", data->tree->args_array[0]);
-// 		return (1);
-// 	}
+ 	path = find_envir_variable(data, "PATH=", 5);
+ 	if (!path)
+ 		return (NULL);
+ 	data->path = ft_split(path, ':');
+ 	if (!data->path)
+ 		return (NULL);
+ 	command_path = find_executable_path(data->path, list->value);
+//	 printf("COMMAND PATH = %s\n", command_path);
+ 	if (!command_path)
+ 	{
+ 		printf("minishell: %s: command not found\n", list->value);
+ 		return (NULL);
+ 	}
 // 	printf("Executable_path: %s\n", command_path);
-// 	// cmd->path = ft_strdup(command_path);
-// 	// if (paths)
-// 		// free_2darray(paths);
-// 	return (0);
-// }
+ 	// cmd->path = ft_strdup(command_path);
+ 	// if (paths)
+ 		// free_2darray(paths);
+ 	return (command_path);
+ }
 
 char	*find_executable_path(char **paths, char *cmd)
 {
@@ -47,7 +48,6 @@ char	*find_executable_path(char **paths, char *cmd)
 	{
 		tmp = ft_strjoin(*paths, "/");
 		command = ft_strjoin(tmp, cmd);
-		free(tmp);
 		if (access(command, F_OK) == 0)
 			return (command);
 		free(command);
