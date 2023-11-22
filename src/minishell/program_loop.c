@@ -20,6 +20,7 @@ void	start_loop(t_data *data)
 	{
 		reset_data(data);
 		line = readline(data->input_minishell);
+//		line = readline("");
 		// data->input_line = "(1 | 2)";
 		if (handle_d(data, line))
 			continue ;
@@ -37,10 +38,8 @@ void	start_loop(t_data *data)
 		exec_pipes(data);
 //		exec_cmd(data, data->list);
 //		manage_redir(data->list, data);
-		if (is_builtin(data->list))
-			call_builtin_func(data, data->list);
-
-//		print_tree(data->tree);
+//		if (is_builtin(data->list))
+//			call_builtin_func(data, data->list);
 	}
 }
 

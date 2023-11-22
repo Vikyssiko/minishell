@@ -20,8 +20,6 @@ void	redir_output(char *name, t_data *data)
 	if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
 		data->exit_status = errno;
 	close(file);
-//	printf("hello\n");
-//	close(STDIN_FILENO);
 //		return (errno);
 }
 
@@ -29,7 +27,7 @@ void	redir_input(char *name, t_data *data)
 {
 	int	file;
 
-	file = open(name, O_WRONLY | O_TRUNC, 0777);
+	file = open(name, O_RDONLY, 0777);
 	if (file < 0)
 	{
 		printf("minishell: %s: No such file or directory\n", name);
@@ -41,7 +39,6 @@ void	redir_input(char *name, t_data *data)
 //		return (errno);
 	close(file);
 	// bash: end: No such file or directory
-//	close(file);
 }
 
 void	append(char *name, t_data *data)
@@ -53,24 +50,8 @@ void	append(char *name, t_data *data)
 		data->exit_status = errno;
 //		return (errno);
 	close(file);
-//	int	pid;
-//	int	file;
-//
-//	pid = fork();
-//	if (pid < 0)
-//		return (errno);
-//	if (pid == 0)
-//	{
-//		// 0777 permission
-//		file = open(tree->redir_word, O_WRONLY | O_CREAT | O_APPEND);
-//		if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
-//			return (errno);
-//		close(file);
-//	}
-//	waitpid(pid, NULL, 0);
 }
 
-// child process?
 void	manage_redir(t_cmd_list *list, t_data *data)
 {
 	t_redir	*redir_list;
@@ -90,8 +71,6 @@ void	manage_redir(t_cmd_list *list, t_data *data)
 //			delim(redir_list->redir_word->word, data);
 		redir_list = redir_list->next;
 	}
-//	call_builtin_func(data, data->list);
-//	close(STDOUT_FILENO);
 }
 
 int	count_pipes(t_cmd_list *list)
@@ -107,104 +86,50 @@ int	count_pipes(t_cmd_list *list)
 	return (pipes);
 }
 
-//int	exec_pipe(t_data *data, t_cmd_list *list)
-//{
-//	int fd[2];
-//	int	pid_out;
-////	int	pid_in;
-//
-//
-//	if (pipe(fd) < 0)
-//		return (1);
-//	pid_out = fork();
-//	if (pid_out < 0)
-//		return (2);
-//	if (pid_out == 0)
-//	{
-//		dup2(fd[1], STDOUT_FILENO);
-//		close(fd[0]);
-//		close(fd[1]);
-//		execve(find_executable_path(data->path, list->value),
-//			   list->args_array, data->env_array);
-//	}
-//
-////	pid_in = fork();
-////	if (pid_in < 0)
-////		return (3);
-////	if (pid_in == 0)
-////	{
-////		dup2(fd[0], STDIN_FILENO);
-////		close(fd[1]);
-////		close(fd[0]);
-////		execve(find_executable_path(data->path, right->value),
-////			   right->args_array, data->env_array);
-////	}
-//	close(fd[0]);
-//	close(fd[1]);
-//	waitpid(pid_out, NULL, 0);
-////	waitpid(pid_in, NULL, 0);
-//	return (0);
-//}
-
+//    !!!! exec error
 int	exec_cmd(t_data *data, t_cmd_list *list)
 {
-//	int	pid_out;
-//	int stdin;
-//	int stdout;
-//
-//	stdin = dup(0);
-//	stdout = dup(1);
-//
-//	pid_out = fork();
-//	if (pid_out < 0)
-//		return (2);
-//	if (pid_out == 0)
-//	{
-//		printf("HERE\n");
-		manage_redir(list, data);
-		if (is_builtin(list))
-			call_builtin_func(data, list);
-		else
-			execve(find_command_path(data, list),
-			   list->args_array, data->path);
-//	}
-//	waitpid(pid_out, NULL, 0);
-//	close(STDOUT_FILENO);
-//	close(STDIN_FILENO);
-//	dup2(stdin, 0);
-//	dup2(stdout, 1);
+	manage_redir(list, data);
+	if (is_builtin(list))
+	{
+		call_builtin_func(data, list);
+		exit(1);
+	}
+	else if (execve(find_command_path(data, list),
+		   list->args_array, data->path) < 0)
+		printf("exec error\n");
 	return (0);
 }
 
 int	exec_pipe(t_data *data, t_cmd_list *list)
 {
-	int	fd[2];
-	int	pid;
+	int 	pid;
+	int		fd[2];
 
-	if (pipe(fd) < 0)
-		return (1);
+	if (pipe(fd) == -1)
+		exit(0);
 	pid = fork();
-	if (pid < 0)
-		return (2);
+//	if (pid == -1)
+//		exit(0);
 	if (pid == 0)
 	{
+		dup2(fd[1], 1);
 		close(fd[0]);
-		if (dup2(fd[1], 1) < 0)
-			return (3);
-		exec_cmd(data, list);
-	}
-	else
-	{
 		close(fd[1]);
-		if (dup2(fd[0], 0) < 0)
-			return (4);
+		exec_cmd(data, list);
+//		perror("ls");
+//		exit(1);
 	}
+	waitpid(pid, NULL, 0);
+
+	dup2(fd[0], 0);
+	close(fd[0]);
+	close(fd[1]);
 	return (0);
 }
 
 int	exec_pipes(t_data *data)
 {
-//	int			pipes;
 	t_cmd_list	*list;
 	int stdin;
 	int stdout;
@@ -212,26 +137,20 @@ int	exec_pipes(t_data *data)
 	list = data->list;
 	stdin = dup(0);
 	stdout = dup(1);
-//	pipes = count_pipes(list);
-//	printf("I am here");
-	while (list)
+	while (list && list->next)
 	{
-//		printf("I am here: %s\n", list->redir_list->redir_word->word);
-		exec_cmd(data, list);
+		exec_pipe(data, list);
 		list = list->next;
 	}
-//	waitpid(pid_out, NULL, 0);
+	//errors
+	int 	pid;
+	pid = fork();
+	if (pid == 0)
+		exec_cmd(data, list);
+	waitpid(pid, NULL, 0);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
 	dup2(stdin, 0);
 	dup2(stdout, 1);
 	return (0);
 }
-
-// void	exec_pipes(t_data *data, t_cmd_list *list)
-// {
-// 	int	fd[2];
-
-// 	if (pipe(fd) < 0)
-
-// }
