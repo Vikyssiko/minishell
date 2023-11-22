@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:07:25 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/19 23:16:50 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/21 20:39:28 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 
 // check cd when unset is ready, there is a comment above cd function
-void	unset(t_data *data, t_cmd_list *list)
+void	unset(t_envir **env_list, t_cmd_list *list)
 
 {
 	int		i;
-	int		j;
-	int		len;
+	t_envir	*tail;
+	t_envir	*tmp;
 
 	i = 1;
 	if (ft_strcmp(list->value, "unset") != 0)
@@ -30,43 +30,36 @@ void	unset(t_data *data, t_cmd_list *list)
 	{
 		while (list->args_array[i] != NULL)
 		{
-			if (!unset_helper(list->args_array[i]))
+			if (!unset_export_helper(list->args_array[i]))
 			{
-				j = 0;
-				len = ft_strlen(list->args_array[i]);
-				while (data->env_array[j] != NULL)
+				tail = ft_envlast((*env_list));
+				while ((*env_list) != NULL)
 				{
-					if (ft_strncmp(data->env_array[j], list->args_array[i], len) == 0
-						&& data->env_array[j][len] == '=' && (data->env_array[j][0] != '_' && data->env_array[j][1] != '='))
-					{
-						free(data->env_array[j]);
-						while (data->env_array[j + 1] != NULL)
-						{
-							data->env_array[j] = data->env_array[j + 1];
-							j++;
-						}
-						data->env_array[j] = NULL;
-					}
-					j++;
+					tmp = (*env_list)->next;
+					if (ft_strcmp((*env_list)->var_name, list->args_array[i]) == 0
+						&& (ft_strcmp((*env_list)->var_name, "_") != 0))
+						ft_envdelone((*env_list));
+					(*env_list) = tmp;
 				}
+				(*env_list) = ft_envfirst(tail);
 			}
 			i++;
 		}
 	}
 }
 
-int	unset_helper(char *tree_arg)
+int	unset_export_helper(char *list_arg)
 
 {
 	int	i;
 
 	i = 0;
-	while (tree_arg[i])
+	while (list_arg[i])
 	{
-		if (((ft_isalnum(tree_arg[i]) || tree_arg[i] != '_') && ((!ft_isalpha(tree_arg[0])) && tree_arg[0] != '_')) || tree_arg[i] == '=')
-			return (printf("unset: `%s': not a valid identifier\n", tree_arg), 1);
+		if (((ft_isalnum(list_arg[i]) || list_arg[i] != '_') && ((!ft_isalpha(list_arg[0])) && list_arg[0] != '_')) || list_arg[i] == '=')
+			return (printf("unset: `%s': not a valid identifier\n", list_arg), 1);
 		i++;
 	}
 	return (0);
-}
+} 
 

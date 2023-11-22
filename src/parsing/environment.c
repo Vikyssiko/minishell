@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/07 14:04:15 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/22 01:04:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	save_envir(t_data *data, char **env_str)
 	while (env_str[j])
 		j++;
 	data->env_array = malloc(sizeof(char *) * (j + 1));
-	printf("save envir malloc success\n");
 	while (env_str[i])
 	{
 		data->env_array[i] = ft_strdup(env_str[i]);
@@ -31,44 +30,35 @@ void	save_envir(t_data *data, char **env_str)
 	data->env_array[i] = NULL;
 }
 
-int	find_envir_line(t_envir *env, char *var_name)
-{
-	int	i;
+t_envir	*create_env_list(char **envp)
 
-	i = 0;
-	while (var_name[i])
-	{
-		if (ft_strcmp(env->var_name[i], var_name) == 0)
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
-void	print_env_node(void *env_node)
 {
-	t_envir	*env;
+	t_envir	*env_list;
+	char	**envs;
 	int		i;
 
-	env = (t_envir *)env_node;
-	i = 0;
-	while (env->var_name[i])
+	i = 1;
+	while (envp[i])
 	{
-		printf("%s=%s\n", env->var_name[i], env->var_value[i]);
+		envs = ft_split(envp[i], '=');
+		if (i == 1)
+			env_list = ft_envnew(envs);
+		else
+			ft_envadd_back(&env_list, ft_envnew(envs));
+		free_2darray(envs);
 		i++;
 	}
+	return (env_list);
 }
 
-void	free_envir_array(char **env_array)
-{
-	int	i;
+// t_envir	*create_export_list(char **envp)
 
-	i = 0;
-	while (env_array[i])
-	{
-		free(env_array[i]);
-		i++;
-	}
-	free(env_array);
-	env_array = NULL;
-}
+// {
+// 	int ascii;
+
+// 	ascii = 'A';
+// 	while (ascii != '_')
+// 	{
+		
+// 	}
+// }

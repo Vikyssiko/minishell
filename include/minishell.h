@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/19 23:06:44 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/21 20:33:15 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ typedef enum e_token_type {
 }	t_token_type;
 
 typedef struct s_envir {
-	char		**var_name;
-	char		**var_value;
-	int			count;
+	char			*var_name;
+	char			*var_value;
+	int				equal;
+	struct s_envir	*next;
+	struct s_envir	*prev;
 }				t_envir;
 
 
@@ -97,7 +99,7 @@ typedef struct s_data {
 	struct s_tree	*tree;
 	struct s_token	*token_list;
 	t_envir			*env_list;
-	t_list			*sorted_env_list;
+	t_envir			*export_list;
 	int				exit_status;
 	int				pid;
 	int				arg_nums;
@@ -131,6 +133,7 @@ void		exit_shell(char *message, int exit_code, t_data *data);
 void		free_data(t_data *data);
 void		free_envir(t_envir *envir);
 void		free_2darray(char **array);
+void		ft_envclear(t_envir **env_list);
 
 /* handle_input.c */
 //void		check_exit(char *input);
@@ -160,21 +163,25 @@ void		start_loop(t_data *data);
 
 /* shlvl.c */
 void		incr_shell_lvl(t_data *data);
-void		export(t_envir **env_list, char *var_name, char *var_value);
 
 /* utils.c */
 char		*trim_input(char *input);
 void		process_input(char *input, char *str, int *i, int *j);
 
 /* Environment lists functions */
-void		ft_envadd_back(t_envir **lst, t_envir *new);
-void		ft_envadd_front(t_envir **lst, t_envir *new);
-void		ft_envclear(t_envir **lst);
-void		ft_envdelone(t_envir *lst, void (*del)(void *));
-void		ft_enviter(t_envir *lst, void (*f)(void *));
+// void		ft_envadd_back(t_envir **lst, t_envir *new);
+// void		ft_envadd_front(t_envir **lst, t_envir *new);
+// void		ft_envclear(t_envir **lst);
+// void		ft_envdelone(t_envir *lst, void (*del)(void *));
+// void		ft_enviter(t_envir *lst, void (*f)(void *));
 t_envir		*ft_envlast(t_envir *lst);
-t_envir		*ft_envnew(char *var_name, char *var_value);
-int			ft_envsize(t_envir *lst);
+t_envir		*ft_envfirst(t_envir *lst);
+t_envir		*ft_envnew(char **env_line);
+void		ft_envadd_back(t_envir **env_list, t_envir *new);
+t_envir		*create_env_list(char **envp);
+void		print_envir(t_envir	*envir);
+void		ft_envdelone(t_envir *env_list);
+// int			ft_envsize(t_envir *lst);
 
 /* quotes.c */
 int			odd_quote(char *str);
@@ -231,8 +238,9 @@ int			is_builtin(t_cmd_list *list);
 void		call_builtin_func(t_data *data, t_cmd_list *list);
 void		echo(t_cmd_list *list);
 void		env(t_data *data);
-void		unset(t_data *data, t_cmd_list *list);
-int			unset_helper(char *tree_arg);
+void		unset(t_envir **env_list, t_cmd_list *list);
+void		export(t_data *data, t_cmd_list *list);
+int			unset_export_helper(char *list_arg);
 void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void 		exit_builtin(t_data *data, t_cmd_list *list);
