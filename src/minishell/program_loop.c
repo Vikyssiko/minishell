@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:51:13 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/19 23:44:00 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/20 00:25:31 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	start_loop(t_data *data)
 			continue ;
 
 		init_tree(data);
-		exec_pipes(data);
+		// exec_pipes(data);
 //		exec_cmd(data, data->list);
 //		manage_redir(data->list, data);
 //		if (is_builtin(data->list))
