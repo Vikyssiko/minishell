@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:07:25 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/21 20:39:28 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/23 22:22:20 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	unset(t_envir **env_list, t_cmd_list *list)
 
 {
 	int		i;
-	t_envir	*tail;
+	t_envir	*address;
 	t_envir	*tmp;
 
 	i = 1;
@@ -30,25 +30,27 @@ void	unset(t_envir **env_list, t_cmd_list *list)
 	{
 		while (list->args_array[i] != NULL)
 		{
-			if (!unset_export_helper(list->args_array[i]))
+			if (!unset_helper(list->args_array[i]))
 			{
-				tail = ft_envlast((*env_list));
-				while ((*env_list) != NULL)
+				while (((*env_list)) != NULL)
 				{
+					if ((*env_list)->next)
+						address = (*env_list)->next;
+					else if ((*env_list)->prev)
+						address = (*env_list)->prev;
 					tmp = (*env_list)->next;
-					if (ft_strcmp((*env_list)->var_name, list->args_array[i]) == 0
-						&& (ft_strcmp((*env_list)->var_name, "_") != 0))
+					if (ft_strcmp((*env_list)->var_name, list->args_array[i]) == 0)
 						ft_envdelone((*env_list));
 					(*env_list) = tmp;
 				}
-				(*env_list) = ft_envfirst(tail);
+				(*env_list) = ft_envfirst(address);
 			}
 			i++;
 		}
 	}
 }
 
-int	unset_export_helper(char *list_arg)
+int	unset_helper(char *list_arg)
 
 {
 	int	i;
@@ -62,4 +64,3 @@ int	unset_export_helper(char *list_arg)
 	}
 	return (0);
 } 
-

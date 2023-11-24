@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   shlvl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/04 20:55:26 by eseferi          ###   ########.fr       */
+/*   Updated: 2023/11/23 22:49:22 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
 
-// else
-// 	export(&(*data).env_list, "SHLVL", "1");
-void	incr_shell_lvl(t_data *data)
-{
-	char	*shlvl;
-	int		level;
+// void	incr_shell_lvl(t_data *data)
+// {
+// 	char	*shlvl;
+// 	int		level;
 
-	level = 0;
-	shlvl = find_envir_variable(data, "SHLVL", ft_strlen("SHLVL"));
-	if (shlvl)
-	{
-		level = ft_atoi(shlvl);
-		level++;
-		if (level <= 999)
-			shlvl = ft_itoa(level);
-		else if (level == 1000)
-			shlvl = ft_strdup("\n");
-		else
-		{
-			level = 1;
-			shlvl = ft_strdup("1");
-		}
-	}
-	free(shlvl);
-}
+// 	level = 0;
+// 	shlvl = find_envir_variable(data, "SHLVL", ft_strlen("SHLVL"));
+// 	if (shlvl)
+// 	{
+// 		level = ft_atoi(shlvl);
+// 		level++;
+// 		if (level <= 999)
+// 			shlvl = ft_itoa(level);
+// 		else if (level == 1000)
+// 			shlvl = ft_strdup("\n");
+// 		else
+// 		{
+// 			level = 1;
+// 			shlvl = ft_strdup("1");
+// 		}
+// 	}
+// 	free(shlvl);
+// }
 
 // void	export(t_data **data, char *var_name, char *var_value)
 // {

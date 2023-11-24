@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/19 18:16:42 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/24 01:00:23 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	int	i;
 //
 // 	i = 0;
- 	path = find_envir_variable(data, "PATH=", 5);
+ 	path = find_envir_variable(data, "PATH");
  	if (!path)
  		return (NULL);
  	data->path = ft_split(path, ':');
@@ -56,16 +56,16 @@ char	*find_executable_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-char	*find_envir_variable(t_data *data, char *var_name, int len)
+char	*find_envir_variable(t_data *data, char *var_name)
 {
 	int	i;
 
 	i = 0;
-	while (data->env_array[i])
+	while (data->env_list)
 	{
-		if (ft_strncmp(data->env_array[i], var_name, len) == 0)
-			return (data->env_array[i] + len);
-		i++;
+		if (ft_strcmp(data->env_list->var_name, var_name) == 0)
+			return (data->env_list->var_value);
+		data->env_list = data->env_list->next;
 	}
 	return (NULL);
 }

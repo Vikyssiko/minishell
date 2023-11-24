@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:49:40 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 16:49:40 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:44:04 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

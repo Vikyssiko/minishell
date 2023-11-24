@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/21 20:33:15 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/24 01:00:37 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void		builtin_env(t_list *head);
 
 /* environment.c */
 void		save_envir(t_data *data, char **env_str);
-char		*find_envir_variable(t_data *data, char *var_name, int len);
+char		*find_envir_variable(t_data *data, char *var_name);
 void		print_env_node(void *env_node);
 int			find_envir_line(t_envir *env, char *var_name);
 void		free_envir_array(char **env_array);
@@ -180,7 +180,12 @@ t_envir		*ft_envnew(char **env_line);
 void		ft_envadd_back(t_envir **env_list, t_envir *new);
 t_envir		*create_env_list(char **envp);
 void		print_envir(t_envir	*envir);
+void		print_export(t_envir	*envir);
 void		ft_envdelone(t_envir *env_list);
+t_envir 	*swap_env(t_envir *first, t_envir *second);
+t_envir		*create_export_list(char **envp);
+char		**ft_singlesplit(char const *s, char c);
+t_envir		*sort_export(t_envir **export);
 // int			ft_envsize(t_envir *lst);
 
 /* quotes.c */
@@ -239,8 +244,10 @@ void		call_builtin_func(t_data *data, t_cmd_list *list);
 void		echo(t_cmd_list *list);
 void		env(t_data *data);
 void		unset(t_envir **env_list, t_cmd_list *list);
-void		export(t_data *data, t_cmd_list *list);
-int			unset_export_helper(char *list_arg);
+void		export(t_envir **env_list, t_envir **export_list, t_cmd_list *list);
+void		check_env(t_envir **env_list, char **arg);
+int			unset_helper(char *list_arg);
+int			export_helper(char *list_arg);
 void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void 		exit_builtin(t_data *data, t_cmd_list *list);

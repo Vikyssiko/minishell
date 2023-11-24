@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:51:13 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/20 22:55:03 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/24 01:04:33 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	start_loop(t_data *data)
 	{
 		reset_data(data);
 		line = readline(data->input_minishell);
-//		line = readline("");
-		// data->input_line = "(1 | 2)";
+		// line = readline("");
+		// data->input_line = "unset _";
 		if (handle_d(data, line))
 			continue ;
 		if (ft_strlen(line) > 0)
@@ -38,8 +38,8 @@ void	start_loop(t_data *data)
 		// exec_pipes(data);
 //		exec_cmd(data, data->list);
 //		manage_redir(data->list, data);
-//		if (is_builtin(data->list))
-//			call_builtin_func(data, data->list);
+		if (is_builtin(data->list))
+			call_builtin_func(data, data->list);
 	}
 }
 

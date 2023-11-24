@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/21 00:25:35 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/23 23:59:23 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ void	call_builtin_func(t_data *data, t_cmd_list *list)
 	else if (ft_strcmp(list->value, "pwd") == 0)
 		pwd();
 	else if (ft_strcmp(list->value, "export") == 0)
-		export(data, list);
+		export(&(data->env_list), &(data->export_list), list);
 	else if (ft_strcmp(list->value, "unset") == 0)
+	{
 		unset(&(data->env_list), list);
+		unset(&(data->export_list), list);
+	}
 	else if (ft_strcmp(list->value, "env") == 0)
 		env(data);
 	else if (ft_strcmp(list->value, "exit") == 0)
