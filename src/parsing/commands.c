@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/24 01:00:23 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:56:03 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@
  	if (!data->path)
  		return (NULL);
  	command_path = find_executable_path(data->path, list->value);
-//	 printf("COMMAND PATH = %s\n", command_path);
  	if (!command_path)
  	{
  		printf("minishell: %s: command not found\n", list->value);
  		return (NULL);
  	}
-// 	printf("Executable_path: %s\n", command_path);
  	// cmd->path = ft_strdup(command_path);
  	// if (paths)
  		// free_2darray(paths);
@@ -58,14 +56,32 @@ char	*find_executable_path(char **paths, char *cmd)
 
 char	*find_envir_variable(t_data *data, char *var_name)
 {
-	int	i;
+	int		i;
+	t_envir *tmp;
 
 	i = 0;
-	while (data->env_list)
+	tmp = data->env_list;
+	while (tmp)
 	{
-		if (ft_strcmp(data->env_list->var_name, var_name) == 0)
-			return (data->env_list->var_value);
-		data->env_list = data->env_list->next;
+		if (ft_strcmp(tmp->var_name, var_name) == 0)
+			return (tmp->var_value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+t_envir	*find_envir_node(t_envir *env_list, char *var_name)
+{
+	int	i;
+	t_envir *tmp;
+
+	i = 0;
+	tmp = env_list;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->var_name, var_name) == 0)
+			return (tmp);
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

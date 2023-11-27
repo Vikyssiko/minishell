@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:51:13 by eseferi           #+#    #+#             */
-/*   Updated: 2023/11/24 01:04:33 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:17:22 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ void	start_loop(t_data *data)
 			continue ;
 
 		init_tree(data);
-		// exec_pipes(data);
 //		exec_cmd(data, data->list);
-//		manage_redir(data->list, data);
+		// manage_redir(data->list, data);
 		if (is_builtin(data->list))
 			call_builtin_func(data, data->list);
+		else
+			exec_pipes(data);
+			
 	}
 }
 

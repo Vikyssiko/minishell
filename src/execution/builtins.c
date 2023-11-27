@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/23 23:59:23 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:53:49 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	call_builtin_func(t_data *data, t_cmd_list *list)
 		export(&(data->env_list), &(data->export_list), list);
 	else if (ft_strcmp(list->value, "unset") == 0)
 	{
-		unset(&(data->env_list), list);
-		unset(&(data->export_list), list);
+		unset(&(data->env_list), list, 0);
+		unset(&(data->export_list), list, 1);
 	}
 	else if (ft_strcmp(list->value, "env") == 0)
 		env(data);
@@ -94,14 +94,42 @@ void	cd(t_data *data, t_cmd_list *list)
 {
 //	if (ft_strcmp(tree->value, "cd") != 0)
 //		return ;
+	t_envir	*head_env;
+	t_envir	*head_exp;
+	
+	head_env = data->env_list;
+	head_exp = data->export_list;
 	if (!(list->args_array[1]))
-		chdir(getenv("HOME"));
+	{
+		if (find_envir_node(data->env_list, "HOME") == NULL)
+			printf("cd: HOME not set\n");
+		else if (chdir((find_envir_node(data->env_list, "HOME"))->var_value) == -1)
+		{
+			printf("cd: %s: no such file or directory\n", find_envir_node(data->env_list, "HOME")->var_value);
+			data->exit_status = errno;
+		}
+		else
+		{
+			cd_home(data, data->env_list);
+			cd_home(data, data->export_list);
+		}
+	}
 	else if (list->args_array[1] && chdir(list->args_array[1]) == -1)
 	{
 		printf("cd: no such file or directory: %s\n", list->args_array[1]);
 		data->exit_status = errno;
 	}
 //		perror(ft_strjoin("cd: no such file or directory: ", tree->args_array[1]));
+}
+
+void	cd_home(t_data *data, t_envir *env_list)
+
+{
+	
+	chdir(find_envir_variable(data, "HOME"));
+	env_list = find_envir_node(env_list, "PWD");
+	free(env_list->var_value);
+	env_list->var_value = ft_strdup(find_envir_variable(data, "HOME"));
 }
 
 void exit_builtin(t_data *data, t_cmd_list *list)

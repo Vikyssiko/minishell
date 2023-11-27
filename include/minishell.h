@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/24 01:00:37 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:43:09 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ t_envir 	*swap_env(t_envir *first, t_envir *second);
 t_envir		*create_export_list(char **envp);
 char		**ft_singlesplit(char const *s, char c);
 t_envir		*sort_export(t_envir **export);
+t_envir		*find_envir_node(t_envir *env_list, char *var_name);
+void		cd_home(t_data *data, t_envir *env_list);
 // int			ft_envsize(t_envir *lst);
 
 /* quotes.c */
@@ -243,10 +245,10 @@ int			is_builtin(t_cmd_list *list);
 void		call_builtin_func(t_data *data, t_cmd_list *list);
 void		echo(t_cmd_list *list);
 void		env(t_data *data);
-void		unset(t_envir **env_list, t_cmd_list *list);
+void		unset(t_envir **env_list, t_cmd_list *list, int value);
 void		export(t_envir **env_list, t_envir **export_list, t_cmd_list *list);
 void		check_env(t_envir **env_list, char **arg);
-int			unset_helper(char *list_arg);
+int			unset_helper(char *list_arg, int value);
 int			export_helper(char *list_arg);
 void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
