@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:06:29 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/28 01:10:04 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/28 01:12:20 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	echo(t_cmd_list *list)
 	if (list->args_array[i] && ft_strncmp(list->args_array[i], "-n", 2) == 0)
 	{
 		newline = 0;
-		while (list->args_array[i][0] == '-')
+		while (ft_strncmp(list->args_array[i], "-n", 2) == 0)
 			i++;
 	}
 	while (list->args_array[i])
