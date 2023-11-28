@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/28 22:09:32 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/28 22:58:12 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	cd(t_data *data, t_cmd_list *list)
 		}
 		else
 		{
-			pwd = ft_strdup(getcwd(pwd, 1));
+			pwd = getcwd(pwd, 1);
 			cd_folder(data, data->env_list, pwd);
 			cd_folder(data, data->export_list, pwd);
 			free(pwd);
@@ -178,7 +178,7 @@ void	cd_folder(t_data *data, t_envir *env_list, char *pwd)
 		env_list = find_envir_node(env_list, "PWD");
 		free(env_list->var_value);
 		cur_pwd = getcwd(cur_pwd, 1);
-		env_list->var_value = ft_strdup(cur_pwd);
+		env_list->var_value = cur_pwd;
 		env_list = head;
 	}
 }
