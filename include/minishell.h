@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/27 22:43:09 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/28 21:58:53 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ char		**ft_singlesplit(char const *s, char c);
 t_envir		*sort_export(t_envir **export);
 t_envir		*find_envir_node(t_envir *env_list, char *var_name);
 void		cd_home(t_data *data, t_envir *env_list);
+void		cd_folder(t_data *data, t_envir *env_list, char *pwd);
 // int			ft_envsize(t_envir *lst);
 
 /* quotes.c */

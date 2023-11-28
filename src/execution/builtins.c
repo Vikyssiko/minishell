@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/27 22:53:49 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/28 22:58:12 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ void	cd(t_data *data, t_cmd_list *list)
 {
 //	if (ft_strcmp(tree->value, "cd") != 0)
 //		return ;
-	t_envir	*head_env;
-	t_envir	*head_exp;
+	t_envir	*tmp_env;
+	t_envir	*tmp_exp;
+	char	*pwd;
 	
-	head_env = data->env_list;
-	head_exp = data->export_list;
+	tmp_env = data->env_list;
+	tmp_exp = data->export_list;
+	pwd = NULL;
 	if (!(list->args_array[1]))
 	{
 		if (find_envir_node(data->env_list, "HOME") == NULL)
@@ -112,20 +114,70 @@ void	cd(t_data *data, t_cmd_list *list)
 			cd_home(data, data->export_list);
 		}
 	}
-	else if (list->args_array[1] && chdir(list->args_array[1]) == -1)
+	else if (list->args_array[1])
 	{
-		printf("cd: no such file or directory: %s\n", list->args_array[1]);
-		data->exit_status = errno;
+
+		if (chdir(list->args_array[1]) == -1)
+		{
+			printf("cd: no such file or directory: %s\n", list->args_array[1]);
+			data->exit_status = errno;
+		}
+		else
+		{
+			pwd = getcwd(pwd, 1);
+			cd_folder(data, data->env_list, pwd);
+			cd_folder(data, data->export_list, pwd);
+			free(pwd);
+		}
 	}
 //		perror(ft_strjoin("cd: no such file or directory: ", tree->args_array[1]));
 }
 
 void	cd_home(t_data *data, t_envir *env_list)
 {
+	t_envir	*head;
+
+	head = env_list;
+	if (find_envir_node(env_list, "OLDPWD"))
+		{
+			env_list = find_envir_node(env_list, "OLDPWD");
+			free(env_list->var_value);
+			env_list->var_value = ft_strdup(find_envir_variable(data, "PWD"));
+			env_list = head;
+		}
 	chdir(find_envir_variable(data, "HOME"));
-	env_list = find_envir_node(env_list, "PWD");
-	free(env_list->var_value);
-	env_list->var_value = ft_strdup(find_envir_variable(data, "HOME"));
+	if (find_envir_node(env_list, "PWD"))
+	{
+		env_list = find_envir_node(env_list, "PWD");
+		free(env_list->var_value);
+		env_list->var_value = ft_strdup(find_envir_variable(data, "HOME"));
+		env_list = head;
+	}
+}
+
+void	cd_folder(t_data *data, t_envir *env_list, char *pwd)
+
+{
+	t_envir	*head;
+	char	*cur_pwd;
+
+	head = env_list;
+	cur_pwd = NULL;
+	if (find_envir_node(data->env_list, "OLDPWD"))
+	{
+		env_list = find_envir_node(env_list, "OLDPWD");
+		free(env_list->var_value);
+		env_list->var_value = ft_strdup(pwd);
+		env_list = head;
+	}
+	if (find_envir_node(data->env_list, "PWD"))
+	{
+		env_list = find_envir_node(env_list, "PWD");
+		free(env_list->var_value);
+		cur_pwd = getcwd(cur_pwd, 1);
+		env_list->var_value = cur_pwd;
+		env_list = head;
+	}
 }
 
 void exit_builtin(t_data *data, t_cmd_list *list)
