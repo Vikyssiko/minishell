@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/28 22:00:26 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/28 22:09:32 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	cd(t_data *data, t_cmd_list *list)
 	}
 	else if (list->args_array[1])
 	{
-		pwd = ft_strdup(getcwd(pwd, 1));
+		
 		if (chdir(list->args_array[1]) == -1)
 		{
 			printf("cd: no such file or directory: %s\n", list->args_array[1]);
@@ -126,10 +126,11 @@ void	cd(t_data *data, t_cmd_list *list)
 		}
 		else
 		{
+			pwd = ft_strdup(getcwd(pwd, 1));
 			cd_folder(data, data->env_list, pwd);
 			cd_folder(data, data->export_list, pwd);
+			free(pwd);
 		}
-		free(pwd);
 	}
 //		perror(ft_strjoin("cd: no such file or directory: ", tree->args_array[1]));
 }
