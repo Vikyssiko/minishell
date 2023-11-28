@@ -12,18 +12,6 @@
 
 #include "../../include/minishell.h"
 
-//t_tree	next_command(t_tree *tree)
-//{
-//	while (tree && tree->type != T_WORD)
-//	{
-//		if (tree->left && tree->left->type == T_WORD)
-//			tree = tree->left;
-//		else
-//			tree = tree->right;
-//	}
-//	return (tree);
-//}
-
 void	add_str_part(char *str, int i, int start, char **result)
 {
 	char	*new_str;

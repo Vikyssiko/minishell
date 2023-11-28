@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 11:37:27 by vkozlova         ###   ########.fr       */
+/*   Created: 2023/09/20 18:29:32 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/09/20 18:29:32 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
-#include <stdio.h>
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strchr_n(const char *str)
 {
-	while (*s1 != '\0' && *s2 != '\0' && *s1 == *s2)
+	while (str && *str)
 	{
-		s1++;
-		s2++;
+		if (*str == '\n')
+			return (1);
+		str++;
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	return (0);
+}
+
+size_t	ft_strlen_gnl(char *s)
+{
+	int	len;
+
+	len = 0;
+	if (s == NULL)
+		return (0);
+	while (s && *s)
+	{
+		len++;
+		s++;
+	}
+	return (len);
 }

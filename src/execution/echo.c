@@ -37,7 +37,6 @@ void	print_without_quotes(char *str)
 	}
 }
 
-// should it be in a different process?
 void	echo(t_cmd_list *list)
 {
 	int		i;

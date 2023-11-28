@@ -7,7 +7,7 @@ CFLAGS			=	-Wall -Wextra -Werror -Isrc -Iinclude
 RM				=	rm -rf
 
 # Paths and Files
-VPATH			=	src:src/conversion:src/list:src/memory:src/output:src/string
+VPATH			=	src:src/conversion:src/list:src/memory:src/output:src/string:src/get_next_line
 SRCS			=	ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c ft_isspace.c\
 					ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 					ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_bzero.c ft_calloc.c \
@@ -18,7 +18,8 @@ SRCS			=	ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c ft_isspace.c\
 					ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 					ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
 					ft_strjoin_free.c ft_strjoin_double_free.c ft_strdel.c ft_strcat.c  ft_strcpy.c\
-					ft_ssplit.c ft_split_n.c ft_chr_in_str.c
+					ft_ssplit.c ft_split_n.c ft_chr_in_str.c \
+					get_next_line.c get_next_line_utils.c
 							
 OBJS			=	$(addprefix obj/,$(SRCS:.c=.o))
 

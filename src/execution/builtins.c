@@ -70,8 +70,6 @@ void	env(t_data *data)
 	// }
 }
 
-// pwd: too many arguments
-// pwd: bad option: -h
 void	pwd(void)
 {
 	char	*cwd;
@@ -123,9 +121,7 @@ void	cd(t_data *data, t_cmd_list *list)
 }
 
 void	cd_home(t_data *data, t_envir *env_list)
-
 {
-	
 	chdir(find_envir_variable(data, "HOME"));
 	env_list = find_envir_node(env_list, "PWD");
 	free(env_list->var_value);
@@ -158,38 +154,3 @@ void exit_builtin(t_data *data, t_cmd_list *list)
 	exit_shell("exit", data->exit_status, data);
 	// free!!!
 }
-
-// void	builtin_unset(t_list **head, char *var_name)
-// {
-// 	t_list *curr = *head;
-// 	t_list *prev = NULL;
-
-// 	while (curr != NULL)
-// 	{
-// 		t_envir *env = (t_envir *)curr->content;
-// 		if (ft_strcmp(env->var_name, var_name) == 0)
-// 		{
-// 			if (prev == NULL)
-// 				*head = curr->next;
-// 			else
-// 				prev->next = curr->next;
-// 			ft_lstdelone(curr, &free);
-// 			return;
-// 		}
-// 		prev = curr;
-// 		curr = curr->next;
-// 	}
-// }
-
-// void	builtin_env(t_list *head)
-// {
-// 	t_envir *env;
-
-// 	while (head != NULL)
-// 	{
-// 		env = (t_envir *)head->content;
-// 		printf("%s=%s\n", env->var_name, env->var_value);
-// 		printf("\n");
-// 		head = head->next;
-// 	}
-// }
