@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:06:29 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/13 14:06:29 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/28 01:10:04 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ void	echo(t_cmd_list *list)
 	newline = 1;
 //	if (ft_strcmp(tree->value, "echo") != 0)
 //		return ;
-	if (list->args_array[i] && ft_strcmp(list->args_array[i], "-n") == 0)
+	if (list->args_array[i] && ft_strncmp(list->args_array[i], "-n", 2) == 0)
 	{
 		newline = 0;
-		i++;
+		while (list->args_array[i][0] == '-')
+			i++;
 	}
 	while (list->args_array[i])
 	{
