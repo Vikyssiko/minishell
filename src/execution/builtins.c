@@ -135,15 +135,15 @@ void	cd_home(t_data *data, t_envir *env_list)
 		{
 			env_list = find_envir_node(env_list, "OLDPWD");
 			free(env_list->var_value);
-			env_list->var_value = ft_strdup(find_envir_variable(data, "PWD"));
+			env_list->var_value = ft_strdup(find_envir_var(data, "PWD"));
 			env_list = head;
 		}
-	chdir(find_envir_variable(data, "HOME"));
+	chdir(find_envir_var(data, "HOME"));
 	if (find_envir_node(env_list, "PWD"))
 	{
 		env_list = find_envir_node(env_list, "PWD");
 		free(env_list->var_value);
-		env_list->var_value = ft_strdup(find_envir_variable(data, "HOME"));
+		env_list->var_value = ft_strdup(find_envir_var(data, "HOME"));
 		env_list = head;
 	}
 }

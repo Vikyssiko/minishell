@@ -27,7 +27,7 @@ void	start_loop(t_data *data)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);
-		data->input_line = replace_dollars(data->input_line, data);
+		data->input_line = replace_dollars(data);
 		ft_strdel(&line);
 //		check_exit(data->input_line);
 		if ((odd_quote(data->input_line)) || (special_chars(data->input_line))

@@ -17,7 +17,7 @@ char	*find_command_path(t_data *data, t_cmd_list *list)
  	char	*command_path;
 	char	*path;
 
- 	path = find_envir_variable(data, "PATH");
+ 	path = find_envir_var(data, "PATH");
  	if (!path)
  		return (NULL);
  	data->path = ft_split(path, ':');
@@ -52,7 +52,8 @@ char	*find_executable_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-char	*find_envir_variable(t_data *data, char *var_name)
+//two same functions!
+char	*find_envir_var(t_data *data, char *var_name)
 {
 	t_envir *tmp;
 

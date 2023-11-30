@@ -121,7 +121,7 @@ void		builtin_env(t_list *head);
 
 /* environment.c */
 void		save_envir(t_data *data, char **env_str);
-char		*find_envir_variable(t_data *data, char *var_name);
+char		*find_envir_var(t_data *data, char *var_name);
 void		print_env_node(void *env_node);
 int			find_envir_line(t_envir *env, char *var_name);
 void		free_envir_array(char **env_array);
@@ -140,7 +140,7 @@ void		ft_envclear(t_envir **env_list);
 void		print_parsed_input(char *command);
 int			is_valid_env(char *str);
 int			is_valid_env2(char *str);
-char		*replace_dollars(char *str, t_data *data);
+char		*replace_dollars(t_data *data);
 
 /* init_data.c */
 void		init_data(t_data **data, char **envp);

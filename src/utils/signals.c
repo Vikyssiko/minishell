@@ -47,7 +47,7 @@ int	handle_d(t_data *data, char *line)
 	{
 		rl_on_new_line();
 		rl_redisplay();
-		exit_shell("exit", 0, data);
+		exit_shell_no_free("exit\n", 0, data);
 	}
 	if (ft_strlen(line) == 0)
 	{
