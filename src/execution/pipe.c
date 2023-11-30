@@ -67,22 +67,15 @@ void	delim(char *name, t_data *data)
 //		exit(0);
 	if (pid == 0)
 	{
-		dup2(fd[1], 1);
-		close(fd[0]);
-		close(fd[1]);
-		str = get_next_line(0);
-//		str = readline(">");
-//		printf("B\n");
+//		str = get_next_line(0);
+		str = readline(">");
 		while (str && ft_strcmp(str, name) != 0)
 		{
-//			printf("A\n");
-			write(1, str, ft_strlen(str));
-			write(1, "\n", 1);
-			str = get_next_line(0);
-//			str = readline(">");
-//			printf("A\n");
+			write(fd[1], str, ft_strlen(str));
+			write(fd[1], "\n", 1);
+//			str = get_next_line(0);
+			str = readline(">");
 		}
-//		exec_cmd(data, list);
 //		perror("ls");
 		exit(1);
 	}
@@ -91,84 +84,6 @@ void	delim(char *name, t_data *data)
 	close(fd[0]);
 	close(fd[1]);
 ////	return (0);
-
-
-
-//	char	*str;
-////	int		stdout;
-////	int		stdin;
-//	int		fd;
-//	int		pid;
-//
-////	stdin = dup(0);
-////	stdout = dup(1);
-////	str = NULL;
-//	fd = open("hello.txt", O_RDWR, 0777);
-////	fd = dup(1);
-//	if (fd < 0)
-//		data->exit_status = errno;
-////	close(stdout);
-//
-//	pid = fork();
-//	if (pid == 0)
-//	{
-//		str = readline(">");
-//
-//		while (str && ft_strcmp(str, name) != 0)
-//		{
-//			write(fd, str, ft_strlen(str));
-//			write(fd, "\n", 1);
-//			str = readline(">");
-//		}
-//		exit(1);
-//	}
-//	waitpid(pid, NULL, 0);
-////	close(fd);
-////	fd = open("hello.txt", O_RDWR, 0777);
-//	char *read_str = NULL;
-//	read(fd, read_str, 10);
-//	printf("read_str: %s\n", read_str);
-//	printf("I am out of loop\n");
-////	close(fd);
-////	close(STDOUT_FILENO);
-////	close(STDIN_FILENO);
-////	dup2(stdout, 1);
-//	dup2(fd, 0);
-//	close(fd);
-
-
-
-//	int 	pid;
-//	int		fd[2];
-//
-//	if (pipe(fd) == -1)
-//		exit(0);
-//	pid = fork();
-////	if (pid == -1)
-////		exit(0);
-//	while (pid == 0 && ft_strcmp(name, ))
-//	{
-//		dup2(fd[1], 1);
-//		close(fd[0]);
-//		close(fd[1]);
-//
-////		perror("ls");
-////		exit(1);
-//	}
-//	waitpid(pid, NULL, 0);
-//	dup2(fd[0], 0);
-//	close(fd[0]);
-//	close(fd[1]);
-//	return (0);
-//
-//
-//	int	file;
-//
-//	file = open(name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-//	if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
-//		data->exit_status = errno;
-////		return (errno);
-//	close(file);
 }
 
 void	manage_redir(t_cmd_list *list, t_data *data)
@@ -211,11 +126,14 @@ int	exec_cmd(t_data *data, t_cmd_list *list)
 	if (is_builtin(list))
 	{
 		call_builtin_func(data, list);
-		exit(1);
+		exit(0);
 	}
 	else if (execve(find_command_path(data, list),
 		   list->args_array, data->path) < 0)
+	{
 		printf("exec error\n");
+		exit(1);
+	}
 	return (0);
 }
 
@@ -252,6 +170,14 @@ int	exec_pipes(t_data *data)
 	int stdout;
 
 	list = data->list;
+	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
+		|| ft_strcmp(list->value, "export") == 0
+		|| ft_strcmp(list->value, "cd") == 0
+		|| ft_strcmp(list->value, "exit") == 0))
+	{
+		call_builtin_func(data, data->list);
+		return (0);
+	}
 	stdin = dup(0);
 	stdout = dup(1);
 	while (list && list->next)

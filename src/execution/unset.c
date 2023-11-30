@@ -15,8 +15,8 @@
 
 // check cd when unset is ready, there is a comment above cd function
 void	unset(t_envir **env_list, t_cmd_list *list, int value)
-
 {
+//	printf("I am in unset function\n");
 	int		i;
 	t_envir	*address;
 	t_envir	*tmp;
@@ -51,7 +51,6 @@ void	unset(t_envir **env_list, t_cmd_list *list, int value)
 }
 
 int	unset_helper(char *list_arg, int value)
-
 {
 	int	i;
 

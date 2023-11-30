@@ -12,13 +12,11 @@
 
 #include "../../include/minishell.h"
 
- char	*find_command_path(t_data *data, t_cmd_list *list)
- {
- 	char	*path;
+char	*find_command_path(t_data *data, t_cmd_list *list)
+{
  	char	*command_path;
-// 	int	i;
-//
-// 	i = 0;
+	char	*path;
+
  	path = find_envir_variable(data, "PATH");
  	if (!path)
  		return (NULL);
@@ -35,7 +33,7 @@
  	// if (paths)
  		// free_2darray(paths);
  	return (command_path);
- }
+}
 
 char	*find_executable_path(char **paths, char *cmd)
 {
@@ -56,10 +54,8 @@ char	*find_executable_path(char **paths, char *cmd)
 
 char	*find_envir_variable(t_data *data, char *var_name)
 {
-	int		i;
 	t_envir *tmp;
 
-	i = 0;
 	tmp = data->env_list;
 	while (tmp)
 	{
@@ -72,10 +68,8 @@ char	*find_envir_variable(t_data *data, char *var_name)
 
 t_envir	*find_envir_node(t_envir *env_list, char *var_name)
 {
-	int	i;
 	t_envir *tmp;
 
-	i = 0;
 	tmp = env_list;
 	while (tmp)
 	{
@@ -85,19 +79,3 @@ t_envir	*find_envir_node(t_envir *env_list, char *var_name)
 	}
 	return (NULL);
 }
-
-// void	child(t_data *data)
-// {
-//     data->pid = fork();
-//     if (!data->pid)
-//     {
-// 		if (execve(data->cmd_list->path, data->cmd_list->args_array,
-//		data->path) == -1)
-// 			{
-// 				perror("execve");
-// 				exit(1);
-// 			}
-//     }
-// 	else
-// 		wait(NULL);
-// }

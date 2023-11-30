@@ -148,9 +148,6 @@ t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
 		list->args_array[i] = ft_strdup((*token)->word);
 		*token = (*token)->next;
 		i++;
-//		list->args_array[i] = ft_strdup((*token)->word);
-//		*token = (*token)->next;
-//		i++;
 	}
 	list->args_array[i] = NULL;
 	return (list);

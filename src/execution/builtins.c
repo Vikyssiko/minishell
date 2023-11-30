@@ -57,9 +57,6 @@ void	call_builtin_func(t_data *data, t_cmd_list *list)
 
 void	env(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	if (ft_strcmp(data->list->value, "env") != 0)
 		return ;
 	print_envir(data->env_list);
@@ -90,14 +87,8 @@ void	pwd(void)
 //function doesn't change PWD variable
 void	cd(t_data *data, t_cmd_list *list)
 {
-//	if (ft_strcmp(tree->value, "cd") != 0)
-//		return ;
-	t_envir	*tmp_env;
-	t_envir	*tmp_exp;
 	char	*pwd;
-	
-	tmp_env = data->env_list;
-	tmp_exp = data->export_list;
+
 	pwd = NULL;
 	if (!(list->args_array[1]))
 	{
@@ -105,7 +96,9 @@ void	cd(t_data *data, t_cmd_list *list)
 			printf("cd: HOME not set\n");
 		else if (chdir((find_envir_node(data->env_list, "HOME"))->var_value) == -1)
 		{
-			printf("cd: %s: no such file or directory\n", find_envir_node(data->env_list, "HOME")->var_value);
+			// ??????
+			perror(ft_strjoin("cd: ", list->args_array[1]));
+//			printf("cd: %s: no such file or directory\n", find_envir_node(data->env_list, "HOME")->var_value);
 			data->exit_status = errno;
 		}
 		else
@@ -116,10 +109,10 @@ void	cd(t_data *data, t_cmd_list *list)
 	}
 	else if (list->args_array[1])
 	{
-
 		if (chdir(list->args_array[1]) == -1)
 		{
-			printf("cd: no such file or directory: %s\n", list->args_array[1]);
+			perror(ft_strjoin("cd: ", list->args_array[1]));
+//			printf("cd: %s: no such file or directory\n", list->args_array[1]);
 			data->exit_status = errno;
 		}
 		else
@@ -182,7 +175,8 @@ void	cd_folder(t_data *data, t_envir *env_list, char *pwd)
 
 void exit_builtin(t_data *data, t_cmd_list *list)
 {
-	int i;
+	int		i;
+	char	*str;
 
 	i = 0;
 	if (list->args_array[1])
@@ -191,18 +185,20 @@ void exit_builtin(t_data *data, t_cmd_list *list)
 		{
 			if (!ft_isdigit(list->args_array[1][i]))
 			{
-				printf("bash: exit: %s: numeric argument required\n", list->args_array[1]);
-				exit_shell("exit", data->exit_status, data);
+				str = put_str_to_str("exit\nminishell: exit: %s: numeric argument required\n",
+									 list->args_array[1], data);
+				exit_shell(str, 255, data);
 			}
 			i++;
 		}
 		if (list->args_array[2])
 		{
-			printf("minishell: exit: too many arguments\n");
+			ft_putstr_fd("exit\nminishell: exit: too many arguments\n", STDERR_FILENO);
+			data->exit_status = 1;
 			return ;
 		}
-		exit_shell("exit", ft_atoi(list->args_array[1]), data);
+		exit_shell_no_free("exit\n", ft_atoi(list->args_array[1]), data);
 	}
-	exit_shell("exit", data->exit_status, data);
+	exit_shell_no_free("exit\n", data->exit_status, data);
 	// free!!!
 }
