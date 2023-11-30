@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:48:33 by alappas           #+#    #+#             */
-/*   Updated: 2023/11/24 00:56:25 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/29 19:45:50 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,29 @@ void	ft_envclear(t_envir **env_list)
 		free((*env_list));
 		(*env_list) = NULL;
 		(*env_list) = head;
+	}
+}
+
+void	free_list(t_data *data)
+
+{
+	int i;
+	t_cmd_list *tmp;
+
+	i = 0;
+	tmp = NULL;
+	if (!(data->list))
+		return ;
+	while ((data->list))
+	{
+		tmp = (data->list)->next;
+		free_2darray((data->list)->args_array);
+		if ((data->list)->redir_list)
+			free((data->list)->redir_list);
+		if ((data->list)->value)
+			free((data->list)->redir_list);
+		free((data->list));
+		(data->list) = tmp;
 	}
 }
 
