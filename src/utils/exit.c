@@ -15,7 +15,27 @@
 void	exit_shell(char *message, int exit_code, t_data *data)
 {
 	free_data(data);
+//	printf("exit\n");
+//	perror(message);
 	ft_putstr_fd(message, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	free(message);
+//	ft_putstr_fd("\n", STDERR_FILENO);
+//	printf("%i\n", exit_code);
+
+	//static??
+//	data->exit_status = exit_code;
+	exit(exit_code);
+}
+
+void	exit_shell_no_free(char *message, int exit_code, t_data *data)
+{
+	free_data(data);
+//	printf("exit\n");
+//	perror(message);
+	ft_putstr_fd(message, STDERR_FILENO);
+//	free(message);
+//	ft_putstr_fd("\n", STDERR_FILENO);
+//	data->exit_status = exit_code;
+//	printf("%i\n", exit_code);
 	exit(exit_code);
 }

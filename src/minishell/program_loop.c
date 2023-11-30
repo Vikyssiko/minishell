@@ -27,8 +27,12 @@ void	start_loop(t_data *data)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);
+<<<<<<< HEAD
 		data->input_line = replace_dollars(data->input_line, data);
 		next_level(data);
+=======
+		data->input_line = replace_dollars(data);
+>>>>>>> ba886a67d2eb6b07f53480cafd597af26d26c69a
 		ft_strdel(&line);
 //		check_exit(data->input_line);
 		if ((odd_quote(data->input_line)) || (special_chars(data->input_line))
@@ -36,8 +40,6 @@ void	start_loop(t_data *data)
 			continue ;
 
 		init_tree(data);
-//		exec_cmd(data, data->list);
-		// manage_redir(data->list, data);
 //		if (is_builtin(data->list))
 //			call_builtin_func(data, data->list);
 //		else

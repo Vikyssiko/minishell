@@ -121,7 +121,7 @@ void		builtin_env(t_list *head);
 
 /* environment.c */
 void		save_envir(t_data *data, char **env_str);
-char		*find_envir_variable(t_data *data, char *var_name);
+char		*find_envir_var(t_data *data, char *var_name);
 void		print_env_node(void *env_node);
 int			find_envir_line(t_envir *env, char *var_name);
 void		free_envir_array(char **env_array);
@@ -141,7 +141,7 @@ void		free_list(t_data *data);
 void		print_parsed_input(char *command);
 int			is_valid_env(char *str);
 int			is_valid_env2(char *str);
-char		*replace_dollars(char *str, t_data *data);
+char		*replace_dollars(t_data *data);
 
 /* init_data.c */
 void		init_data(t_data **data, char **envp);
@@ -258,9 +258,12 @@ void 		exit_builtin(t_data *data, t_cmd_list *list);
 
 void		manage_redir(t_cmd_list *list, t_data *data);
 
-int	exec_cmd(t_data *data, t_cmd_list *list);
-int	exec_pipe(t_data *data, t_cmd_list *list);
-int	exec_pipes(t_data *data);
+int			exec_cmd(t_data *data, t_cmd_list *list);
+int			exec_pipe(t_data *data, t_cmd_list *list);
+int			exec_pipes(t_data *data);
+
+char 		*put_str_to_str(char *dest, char *src, t_data *data);
+void		exit_shell_no_free(char *message, int exit_code, t_data *data);
 
 void	next_level(t_data *data);
 

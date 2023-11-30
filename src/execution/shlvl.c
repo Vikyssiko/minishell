@@ -6,22 +6,56 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/11/30 15:29:22 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/30 15:44:23 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	incr_shell_lvl(t_data *data)
-{
-    t_envir *env_shlvl;
-	int		level;
+// void	incr_shell_lvl(t_data *data)
+// {
+// 	char	*shlvl;
+// 	int		level;
 
-	level = 0;
-	env_shlvl = find_envir_node(data->env_list, "SHLVL");
-    level = ft_atoi(env_shlvl->var_value) + 1;
-	if (level == 999)
-    {
-        free((env_shlvl)->var_value);
-    }
-}
+// 	level = 0;
+// 	shlvl = find_envir_var(data, "SHLVL", ft_strlen("SHLVL"));
+// 	if (shlvl)
+// 	{
+// 		level = ft_atoi(shlvl);
+// 		level++;
+// 		if (level <= 999)
+// 			shlvl = ft_itoa(level);
+// 		else if (level == 1000)
+// 			shlvl = ft_strdup("\n");
+// 		else
+// 		{
+// 			level = 1;
+// 			shlvl = ft_strdup("1");
+// 		}
+// 	}
+// 	free(shlvl);
+// }
+
+// void	export(t_data **data, char *var_name, char *var_value)
+// {
+// 	t_envir	*new_envir;
+
+// 	new_envir = (t_envir *)malloc(sizeof(t_envir));
+// 	if (!new_envir)
+// 		return ;
+// 	new_envir->var_name = ft_strdup(var_name);
+// 	new_envir->var_value = ft_strdup(var_value);
+// 	new_envir->count = ft_strlen(var_value);
+// 	new_envir->next = NULL;
+// 	new_envir->prev = NULL;
+// 	if (*env_list)
+// 	{
+// 		t_envir *last_envir = *env_list;
+// 		while (last_envir->next)
+// 			last_envir = last_envir->next;
+// 		last_envir->next = new_envir;
+// 		new_envir->prev = last_envir;
+// 	}
+// 	else
+// 		*env_list = new_envir;
+// }

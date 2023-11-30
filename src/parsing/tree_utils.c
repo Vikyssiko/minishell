@@ -18,7 +18,6 @@ As I mentioned before, the previous commit doesn't give this error and frees the
 */
 
  void	free_tree(t_tree **tree)
-
  {
  	int i;
  	t_tree *right;

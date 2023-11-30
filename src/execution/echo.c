@@ -37,6 +37,20 @@ void	print_without_quotes(char *str)
 	}
 }
 
+int	check_flag(char	*flag)
+{
+	int	i;
+
+	i = 2;
+	while (flag && flag[i])
+	{
+		if (flag[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	echo(t_cmd_list *list)
 {
 	int		i;
@@ -44,13 +58,15 @@ void	echo(t_cmd_list *list)
 
 	i = 1;
 	newline = 1;
-//	if (ft_strcmp(tree->value, "echo") != 0)
-//		return ;
-	if (list->args_array[i] && ft_strncmp(list->args_array[i], "-n", 2) == 0)
+	while (list->args_array[i] && ft_strncmp(list->args_array[i], "-n", 2) == 0)
 	{
-		newline = 0;
-		while (ft_strncmp(list->args_array[i], "-n", 2) == 0)
+		if (check_flag(list->args_array[i]))
+		{
+			newline = 0;
 			i++;
+		}
+		else
+			break ;
 	}
 	while (list->args_array[i])
 	{

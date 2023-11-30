@@ -31,27 +31,31 @@ void	join_result_with_exit(int exit_status, char **result)
 	free(exit);
 }
 
-void	replace_variable(char *str, int *i, int *start, char **result)
+void	replace_variable(t_data *data, int *i, int *start, char **result)
 {
 	char	*new_str;
+	char *str;
 
+	str = data->input_line;
 	add_str_part(str, *i, *start, result);
 	*start = ++(*i);
 	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])))
 		(*i)++;
 	new_str = malloc(*i - *start + 1);
 	ft_strlcpy(new_str, &str[*start], *i - *start + 1);
-	*result = ft_strjoin(*result, getenv(new_str));
+	*result = ft_strjoin(*result, find_envir_var(data, new_str));
 	free(new_str);
 	*start = *i;
 }
 
-char	*replace_dollars(char *str, t_data *data)
+char	*replace_dollars(t_data *data)
 {
 	int		start;
 	char	*result;
 	int		i;
+	char	*str;
 
+	str = data->input_line;
 	start = 0;
 	i = 0;
 	result = NULL;
@@ -66,7 +70,7 @@ char	*replace_dollars(char *str, t_data *data)
 		}
 		else if (str[i] == '$' && str[i + 1] != ' '
 			&& !in_single_quotes(str, i))
-			replace_variable(str, &i, &start, &result);
+			replace_variable(data, &i, &start, &result);
 		else
 			i++;
 	}

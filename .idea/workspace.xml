@@ -13,18 +13,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/str_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/libft/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/include/libft.h" beforeDir="false" afterPath="$PROJECT_DIR$/libft/include/libft.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/src/string/ft_strcmp.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/src/string/ft_strcmp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minishell.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minishell.dSYM/Contents/Resources/DWARF/minishell" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/echo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/src/string/ft_strjoin.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/src/string/ft_strjoin.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/builtins.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/builtins.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/echo.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/unset.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/variables.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/variables.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/commands.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/commands.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/tree_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/tree_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/exit.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,23 +55,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/Users/vkozlova/CLionProjects/minishell/libft",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/vkozlova/CLionProjects/minishell/libft&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/libft" />
@@ -131,7 +134,8 @@
       <workItem from="1700401171418" duration="2770000" />
       <workItem from="1700518656593" duration="3107000" />
       <workItem from="1700593417828" duration="1202000" />
-      <workItem from="1701199536927" duration="9847000" />
+      <workItem from="1701199536927" duration="9984000" />
+      <workItem from="1701293585086" duration="7742000" />
     </task>
     <servers />
   </component>
