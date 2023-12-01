@@ -18,7 +18,7 @@
 // 	int		level;
 
 // 	level = 0;
-// 	shlvl = find_envir_var(data, "SHLVL", ft_strlen("SHLVL"));
+// 	shlvl = find_env_var(data, "SHLVL", ft_strlen("SHLVL"));
 // 	if (shlvl)
 // 	{
 // 		level = ft_atoi(shlvl);

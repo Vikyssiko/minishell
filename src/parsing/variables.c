@@ -43,7 +43,7 @@ void	replace_variable(t_data *data, int *i, int *start, char **result)
 		(*i)++;
 	new_str = malloc(*i - *start + 1);
 	ft_strlcpy(new_str, &str[*start], *i - *start + 1);
-	*result = ft_strjoin(*result, find_envir_var(data, new_str));
+	*result = ft_strjoin(*result, find_env_var(data, new_str));
 	free(new_str);
 	*start = *i;
 }

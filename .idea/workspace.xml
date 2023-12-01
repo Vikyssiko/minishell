@@ -13,20 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utils/str_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/echo" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/src/string/ft_strjoin.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/src/string/ft_strjoin.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/builtins.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/builtins.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/echo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/unset.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/shlvl.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/shlvl.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/commands.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/commands.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/tree_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/tree_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tree_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/variables.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/variables.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/exit.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,6 +128,7 @@
       <workItem from="1700593417828" duration="1202000" />
       <workItem from="1701199536927" duration="9984000" />
       <workItem from="1701293585086" duration="7742000" />
+      <workItem from="1701343824530" duration="3962000" />
     </task>
     <servers />
   </component>

@@ -17,7 +17,7 @@ char	*find_command_path(t_data *data, t_cmd_list *list)
  	char	*command_path;
 	char	*path;
 
- 	path = find_envir_var(data, "PATH");
+ 	path = find_env_var(data, "PATH");
  	if (!path)
  		return (NULL);
  	data->path = ft_split(path, ':');
@@ -53,7 +53,7 @@ char	*find_executable_path(char **paths, char *cmd)
 }
 
 //two same functions!
-char	*find_envir_var(t_data *data, char *var_name)
+char	*find_env_var(t_data *data, char *var_name)
 {
 	t_envir *tmp;
 
@@ -67,7 +67,7 @@ char	*find_envir_var(t_data *data, char *var_name)
 	return (NULL);
 }
 
-t_envir	*find_envir_node(t_envir *env_list, char *var_name)
+t_envir	*find_env_node(t_envir *env_list, char *var_name)
 {
 	t_envir *tmp;
 

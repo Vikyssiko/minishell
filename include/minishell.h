@@ -121,7 +121,7 @@ void		builtin_env(t_list *head);
 
 /* environment.c */
 void		save_envir(t_data *data, char **env_str);
-char		*find_envir_var(t_data *data, char *var_name);
+char		*find_env_var(t_data *data, char *var_name);
 void		print_env_node(void *env_node);
 int			find_envir_line(t_envir *env, char *var_name);
 void		free_envir_array(char **env_array);
@@ -186,7 +186,7 @@ t_envir 	*swap_env(t_envir *first, t_envir *second);
 t_envir		*create_export_list(char **envp);
 char		**ft_singlesplit(char const *s, char c);
 t_envir		*sort_export(t_envir **export);
-t_envir		*find_envir_node(t_envir *env_list, char *var_name);
+t_envir		*find_env_node(t_envir *env_list, char *var_name);
 void		cd_home(t_data *data, t_envir *env_list);
 void		cd_folder(t_data *data, t_envir *env_list, char *pwd);
 // int			ft_envsize(t_envir *lst);

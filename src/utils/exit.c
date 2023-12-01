@@ -20,7 +20,7 @@ void	exit_shell(char *message, int exit_code, t_data *data)
 	ft_putstr_fd(message, STDERR_FILENO);
 	free(message);
 //	ft_putstr_fd("\n", STDERR_FILENO);
-//	printf("%i\n", exit_code);
+//	printf("%i\n", data->exit_status);
 
 	//static??
 //	data->exit_status = exit_code;
@@ -29,6 +29,7 @@ void	exit_shell(char *message, int exit_code, t_data *data)
 
 void	exit_shell_no_free(char *message, int exit_code, t_data *data)
 {
+//	printf("%i\n", data->exit_status);
 	free_data(data);
 //	printf("exit\n");
 //	perror(message);
