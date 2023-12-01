@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/28 21:58:53 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/30 15:16:52 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void		free_data(t_data *data);
 void		free_envir(t_envir *envir);
 void		free_2darray(char **array);
 void		ft_envclear(t_envir **env_list);
+void		free_list(t_data *data);
 
 /* handle_input.c */
 //void		check_exit(char *input);
@@ -263,5 +264,7 @@ int			exec_pipes(t_data *data);
 
 char 		*put_str_to_str(char *dest, char *src, t_data *data);
 void		exit_shell_no_free(char *message, int exit_code, t_data *data);
+
+void	next_level(t_data *data);
 
 #endif

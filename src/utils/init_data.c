@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/24 00:56:39 by alappas          ###   ########.fr       */
+/*   Updated: 2023/11/29 19:46:53 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_data(t_data **data, char **envp)
 	(*data)->export_list = create_export_list((envp));
 	(*data)->path = NULL;
 	(*data)->tree = NULL;
+	(*data)->list = NULL;
 	(*data)->token_list = NULL;
 	(*data)->input_line = NULL;
 	(*data)->input_minishell = "minishell>> ";

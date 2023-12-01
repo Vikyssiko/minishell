@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/11 21:03:31 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/11/29 20:11:00 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
