@@ -35,3 +35,13 @@ char *put_str_to_str(char *dest, char *src, t_data *data)
 	result[result_i] = '\0';
 	return (result);
 }
+
+void	put_to_stderr_and_free(char *dest, char *src, t_data *data, int err)
+{
+	char	*str;
+
+	str = put_str_to_str(dest,src, data);
+	ft_putstr_fd(str, STDERR_FILENO);
+	free(str);
+	data->exit_status = err;
+}

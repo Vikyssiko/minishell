@@ -30,15 +30,15 @@ void	redir_input(char *name, t_data *data)
 	file = open(name, O_RDONLY, 0777);
 	if (file < 0)
 	{
-		printf("minishell: %s: No such file or directory\n", name);
-		data->exit_status = errno;
+		put_to_stderr_and_free("minishell: %s: No such file or directory\n",
+			name, data, 1);
+		exit(1);
 //		return (errno);
 	}
 	if (dup2(file, STDIN_FILENO) < 0)
 		data->exit_status = errno;
 //		return (errno);
 	close(file);
-	// bash: end: No such file or directory
 }
 
 void	append(char *name, t_data *data)
@@ -91,10 +91,8 @@ void	manage_redir(t_cmd_list *list, t_data *data)
 	t_redir	*redir_list;
 
 	redir_list = list->redir_list;
-//	printf("I am in manage redir function\n");
 	while (redir_list)
 	{
-//		printf("I am in manage redir loop\n");
 		if (redir_list->redir_token->type == T_RED_OUT)
 			redir_output(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_RED_INP)

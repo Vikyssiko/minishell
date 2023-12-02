@@ -22,27 +22,33 @@ void	no_dir_error(int err, char *dir, t_data *data)
 	data->exit_status = err;
 }
 
+void	cd_no_arg(t_data *data)
+{
+	t_envir	*home;
+
+	home = find_env_node(data->env_list, "HOME");
+	if (home == NULL)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+		data->exit_status = 1;
+	}
+	else if (chdir(home->var_value) == -1)
+		no_dir_error(errno, home->var_value, data);
+	else
+	{
+		cd_home(data, data->env_list);
+		cd_home(data, data->export_list);
+	}
+}
+
 void	cd(t_data *data, t_cmd_list *list)
 {
 	char	*pwd;
 
 	pwd = NULL;
 	if (!(list->args_array[1]))
-	{
-		if (find_env_node(data->env_list, "HOME") == NULL)
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
-			data->exit_status = 1;
-		}
-		else if (chdir((find_env_node(data->env_list, "HOME"))->var_value) == -1)
-			no_dir_error(errno, find_env_node(data->env_list, "HOME")->var_value, data);
-		else
-		{
-			cd_home(data, data->env_list);
-			cd_home(data, data->export_list);
-		}
-	}
-	else if (list->args_array[1] && chdir(list->args_array[1]) == -1)
+		cd_no_arg(data);
+	else if (chdir(list->args_array[1]) == -1)
 		no_dir_error(errno, list->args_array[1], data);
 	else
 	{
@@ -76,7 +82,6 @@ void	cd_home(t_data *data, t_envir *env_list)
 }
 
 void	cd_folder(t_data *data, t_envir *env_list, char *pwd)
-
 {
 	t_envir	*head;
 	char	*cur_pwd;

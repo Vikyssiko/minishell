@@ -31,7 +31,6 @@ void	save_envir(t_data *data, char **env_str)
 }
 
 t_envir	*create_env_list(char **envp)
-
 {
 	t_envir	*env_list;
 	char	**envs;
@@ -51,8 +50,8 @@ t_envir	*create_env_list(char **envp)
 	}
 	return (env_list);
 }
-t_envir	*sort_export(t_envir **export)
 
+t_envir	*sort_export(t_envir **export)
 {
 	t_envir	*head;
 
@@ -71,7 +70,6 @@ t_envir	*sort_export(t_envir **export)
 }
 
 t_envir	*create_export_list(char **envp)
-
 {
 	t_envir *export;
 	t_envir *head;
@@ -84,7 +82,6 @@ t_envir	*create_export_list(char **envp)
 }
 
 t_envir *swap_env(t_envir *first, t_envir *second)
-
 {
 	char *name;
 	char *value;

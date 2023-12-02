@@ -21,7 +21,7 @@ char	*trim_input(char *input)
 	if (!input || !*input)
 		return (NULL);
 	str = ft_calloc(1, ft_strlen(input) + 1);
-	if (!(str))
+	if (!str)
 		exit_shell("Error: malloc failed\n", 1, NULL);
 	i = 0;
 	j = 0;
@@ -46,7 +46,7 @@ void	process_input(char *input, char *str, int *i, int *j)
 	}
 }
 
-int	ft_is_in_stri(char c, char *str)
+int	is_chr_str(char c, char *str)
 {
 	int		i;
 
@@ -54,16 +54,9 @@ int	ft_is_in_stri(char c, char *str)
 	while (str[i])
 	{
 		if (str[i] == c)
-			return (i);
+			return (1);
 		i++;
 	}
-	return (-1);
-}
-
-int	is_chr_str(char c, char *str)
-{
-	if (ft_is_in_stri(c, str) >= 0)
-		return (1);
 	return (0);
 }
 

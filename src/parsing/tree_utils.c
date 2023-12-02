@@ -54,39 +54,3 @@ As I mentioned before, the previous commit doesn't give this error and frees the
 //    	free_2darray(tree->args_array);
 //    free(tree);
 // }
-
-void print_right_tree(t_tree *tree)
-{
-	int i;
-
-	i = 0;
-	if (tree == NULL)
-		return ;
-	while (tree)
-	{
-		printf("HEAD tree->type: %d\n", tree->type);
-		printf("HEAD tree->value: %s\n", tree->value);
-		if (tree->delim)
-			printf("DELIM = %s\n", tree->delim);
-		if (tree->args_array)
-		{
-			while (tree->args_array[i])
-			{
-				printf("HEAD tree->args_array[%d]: %s\n", i, tree->args_array[i]);
-				i++;
-			}
-		}
-		i = 0;
-		if (tree->left)
-		{
-			while (tree->left->args_array[i])
-			{
-				printf("LEFT tree->args_array[%d]: %s\n", i, tree->left->args_array[i]);
-				i++;
-			}
-		}
-		i = 0;
-		tree = tree->right;
-	}
-	printf("Completed printing the RIGHT tree\n\n");
-}

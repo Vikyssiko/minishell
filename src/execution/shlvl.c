@@ -18,7 +18,7 @@ void	incr_shell_lvl(t_data *data)
 	int		level;
 
 	level = 0;
-	env_shlvl = find_envir_node(data->env_list, "SHLVL");
+	env_shlvl = find_env_node(data->env_list, "SHLVL");
     level = ft_atoi(env_shlvl->var_value) + 1;
 	if (level == 999)
     {

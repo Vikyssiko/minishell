@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include    "../../include/minishell.h"
+#include "../../include/minishell.h"
 
-void    export(t_envir **env_list, t_envir **export_list, t_cmd_list *list)
-
+void	export(t_envir **env_list, t_envir **export_list,
+			t_cmd_list *list, t_data *data)
 {
 	int		i;
 	t_envir	*head_export;
@@ -27,7 +27,7 @@ void    export(t_envir **env_list, t_envir **export_list, t_cmd_list *list)
 	{
 		while (list->args_array[i] != NULL)
 		{
-			if (!export_helper(list->args_array[i]))
+			if (!export_helper(list->args_array[i], data))
 			{
 				arg = ft_singlesplit(list->args_array[i], '=');
 				while ((*export_list) != NULL)
@@ -66,12 +66,11 @@ void    export(t_envir **env_list, t_envir **export_list, t_cmd_list *list)
 }
 
 void	check_env(t_envir **env_list, char **arg)
-
 {
 	t_envir	*head;
-	
-	head = (*env_list);
-	while ((*env_list) != NULL)
+
+	head = *env_list;
+	while (*env_list)
 	{
 		if (ft_strcmp((*env_list)->var_name, arg[0]) == 0)
 		{
@@ -79,27 +78,31 @@ void	check_env(t_envir **env_list, char **arg)
 			(*env_list)->var_value = ft_strdup(arg[1]);
 			break ;
 		}
-		(*env_list) = (*env_list)->next;
+		*env_list = (*env_list)->next;
 	}
 	if (*env_list == NULL)
-		{
+	{
 		(*env_list) = head;
 		ft_envadd_back((env_list), ft_envnew(arg));
-		}
+	}
 	(*env_list) = head;
 }
 
-int	export_helper(char *list_arg)
-
+int	export_helper(char *list_arg, t_data *data)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (list_arg[i])
 	{
-		if (((ft_isalnum(list_arg[i]) || list_arg[i] != '_') && ((!ft_isalpha(list_arg[0])) && list_arg[0] != '_')))
-			return (printf("export: `%s': not a valid identifier\n", list_arg), 1);
+		if (((ft_isalnum(list_arg[i]) || list_arg[i] != '_')
+				&& ((!ft_isalpha(list_arg[0])) && list_arg[0] != '_')))
+		{
+			put_to_stderr_and_free("export: `%s': not a valid identifier\n",
+				list_arg, data, 1);
+			return (1);
+		}
 		i++;
 	}
 	return (0);
-} 
+}
