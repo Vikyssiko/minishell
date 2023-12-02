@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/11/23 23:56:45 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/02 22:50:45 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	print_export(t_envir	*envir)
 {
 	while (envir)
 	{
-		if (ft_strcmp(envir->var_value, "") == 0)
+		if (!envir->var_value)
 			printf("declare -x %s\n", envir->var_name);
 		else
 			printf("declare -x %s=\"%s\"\n", envir->var_name, envir->var_value);

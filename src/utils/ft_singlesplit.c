@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:29:04 by alappas           #+#    #+#             */
-/*   Updated: 2023/11/23 23:53:00 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/02 22:51:43 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_singlecountwords(char const *s, char c)
 	count = 0;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s == c)
 		{
 			count++;
             break ;
@@ -73,7 +73,7 @@ char    **ft_singlesplit(char const *s, char c)
     strs = malloc(sizeof(char *) * (count + 2));
     if (!strs)
 		return (NULL);
-    strs[count + 1] = NULL;
+    
 	i = 0;
     while (*s)
 	{
@@ -93,5 +93,6 @@ char    **ft_singlesplit(char const *s, char c)
 		else
 			s++;
 	}
+	strs[count + 1] = NULL;
 	return (strs);
 }
