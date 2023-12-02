@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_init.c                                        :+:      :+:    :+:   */
+/*   list_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -44,6 +44,7 @@ t_cmd_list 	*init_list()
 	t_cmd_list *list;
 
 	list = (t_cmd_list *)malloc(sizeof(t_cmd_list));
+	//malloc protect?
 	list->args_array = NULL;
 	list->value = NULL;
 	list->next = NULL;
@@ -51,7 +52,7 @@ t_cmd_list 	*init_list()
 	return (list);
 }
 
-void	init_tree(t_data *data)
+void	init_list_data(t_data *data)
 {
 	t_token	*head;
 
@@ -79,7 +80,6 @@ int	count_args(t_token *start, t_token *current)
 		start = start->next;
 		count++;
 	}
-//	printf("count: %i\n", count);
 	return (count);
 }
 
@@ -114,13 +114,12 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 	}
 	list->args_array[i] = NULL;
 	*start = (*start)->next;
-//	printf("I finished create_node execution\n");
 	return (list);
 }
 
 t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
 {
-	int		arg_nums;
+	int		arg_num;
 	int		i;
 	t_token	*token_copy;
 
@@ -133,9 +132,9 @@ t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
 		token_copy = token_copy->next->next;
 	list->value = (*token)->word;
 	i = 0;
-	arg_nums = count_args(*token, NULL);
-	if (arg_nums != 0)
-		list->args_array = (char **)malloc(sizeof(char *) * (arg_nums));
+	arg_num = count_args(*token, NULL);
+	if (arg_num != 0)
+		list->args_array = (char **)malloc(sizeof(char *) * (arg_num));
 	while ((*token)->type != T_NEWLINE)
 	{
 		if ((*token)->type == T_APPEND || (*token)->type == T_DELIM

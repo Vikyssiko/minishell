@@ -17,8 +17,6 @@ int	lexical_analysis(t_data *data, char *input)
 	if (!input || !input[0])
 		return (1);
 	tokenise(data, input);
-//	print_tokens(data);
-//	printf("Finished printing first batch\n");
 	if (token_analysis(data))
 		return (1);
 //	print_tokens(data);
@@ -65,6 +63,7 @@ void	tokenise(t_data *data, char *str)
 	{
 		if (word_len != 0)
 			add_token(&data->token_list, create_token(data, i, word_len));
+		// do we need it?
 		add_token(&data->token_list,
 			create_arg_token(data, "newline", T_NEWLINE));
 	}
@@ -99,8 +98,6 @@ void	set_token_type(t_token *token)
 		token->type = T_RED_OUT;
 	else if (!ft_strcmp(token->word, "|"))
 		token->type = T_PIPE;
-//	else if (!ft_strcmp(token->word, "$"))
-//		token->type = T_DOLLAR;
 	else if (token->type != T_NEWLINE)
 		token->type = T_WORD;
 }

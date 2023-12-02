@@ -14,12 +14,9 @@
 
 void	reset_data(t_data *data)
 {
-	data->forked = 0;
 	if (data->curr_dir)
 		ft_strdel(&data->curr_dir);
 	if (data->input_line && ft_strlen(data->input_line) > 0)
 		ft_strdel(&data->input_line);
 	free_tokens(&data->token_list, free);
-	// free_tree(&data->tree);
-	free_list(data);
 }

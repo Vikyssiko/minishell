@@ -30,15 +30,15 @@ void	redir_input(char *name, t_data *data)
 	file = open(name, O_RDONLY, 0777);
 	if (file < 0)
 	{
-		printf("minishell: %s: No such file or directory\n", name);
-		data->exit_status = errno;
+		put_to_stderr_and_free("minishell: %s: No such file or directory\n",
+			name, data, 1);
+		exit(1);
 //		return (errno);
 	}
 	if (dup2(file, STDIN_FILENO) < 0)
 		data->exit_status = errno;
 //		return (errno);
 	close(file);
-	// bash: end: No such file or directory
 }
 
 void	append(char *name, t_data *data)
@@ -68,18 +68,21 @@ void	delim(char *name, t_data *data)
 	if (pid == 0)
 	{
 //		str = get_next_line(0);
-		str = readline(">");
+		str = readline("> ");
 		while (str && ft_strcmp(str, name) != 0)
 		{
 			write(fd[1], str, ft_strlen(str));
 			write(fd[1], "\n", 1);
 //			str = get_next_line(0);
-			str = readline(">");
+			free(str);
+			str = readline("> ");
 		}
 //		perror("ls");
 		exit(1);
 	}
+//	sleep(1000);
 	waitpid(pid, NULL, 0);
+//	printf("child exec is over\n");
 	dup2(fd[0], 0);
 	close(fd[0]);
 	close(fd[1]);
@@ -91,10 +94,8 @@ void	manage_redir(t_cmd_list *list, t_data *data)
 	t_redir	*redir_list;
 
 	redir_list = list->redir_list;
-//	printf("I am in manage redir function\n");
 	while (redir_list)
 	{
-//		printf("I am in manage redir loop\n");
 		if (redir_list->redir_token->type == T_RED_OUT)
 			redir_output(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_RED_INP)
@@ -167,8 +168,8 @@ int	exec_pipe(t_data *data, t_cmd_list *list)
 int	exec_pipes(t_data *data)
 {
 	t_cmd_list	*list;
-	int stdin;
-	int stdout;
+	int 		stdin;
+	int 		stdout;
 
 	list = data->list;
 	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0

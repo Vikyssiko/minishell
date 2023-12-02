@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 22:29:35 by eseferi           #+#    #+#             */
-/*   Updated: 2023/10/23 21:10:36 by alappas          ###   ########.fr       */
+/*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
+/*   Updated: 2023/12/02 00:40:45 by vkozlova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
-	char	*str;
+	char	*result;
+	int		index;
+	int		i;
 
-	if (!s2)
-	{
-		str = ft_strdup(s1);
-		free((void*)s1);
-		return (str);
-	}
-	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)
-		+ 1))))
+	index = 0;
+	i = 0;
+	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (result == NULL)
 		return (NULL);
-	ft_strcpy(str, s1);
-	free((void*)s1);
-	ft_strcat(str, s2);
-	return (str);
+	while (s1 && s1[i])
+		result[index++] = s1[i++];
+	i = 0;
+	while (s2 && s2[i])
+		result[index++] = s2[i++];
+//	if (s1)
+//		free(s1);
+//	if (s2)
+//		free(s2);
+	result[index] = '\0';
+	return (result);
 }

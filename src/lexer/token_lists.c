@@ -50,7 +50,7 @@ t_redir	*create_redir_token(t_token *redir_token, t_token *word)
 
 void	add_redir_token(t_redir **head, t_redir *redir)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	if (!redir || !head)
 		return ;

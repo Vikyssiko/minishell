@@ -41,21 +41,17 @@ void	ft_envadd_back(t_envir **env_list, t_envir *new)
 	
 	if (!env_list)
 		return ;
-	if (env_list)
+	if (*env_list)
 	{
-		if (*env_list)
-		{
-			tmp = ft_envlast(*env_list);
-			tmp->next = new;
-			new->prev = tmp;
-			return ;
-		}
+		tmp = ft_envlast(*env_list);
+		tmp->next = new;
+		new->prev = tmp;
+		return ;
 	}
 	*env_list = new;
 }
 
 t_envir	*ft_envlast(t_envir *lst)
-
 {
 	t_envir	*node;
 
@@ -68,21 +64,6 @@ t_envir	*ft_envlast(t_envir *lst)
 }
 
 t_envir	*ft_envfirst(t_envir *lst)
-
-{
-	t_envir	*node;
-
-	node = lst;
-	if (node != NULL)
-	{
-		while (node->prev != NULL)
-			node = node->prev;
-	}
-	return (node);
-}
-
-t_envir	*ft_envline(t_envir *lst)
-
 {
 	t_envir	*node;
 
@@ -96,7 +77,6 @@ t_envir	*ft_envline(t_envir *lst)
 }
 
 void	print_envir(t_envir	*envir)
-
 {
 	while (envir)
 	{
@@ -105,8 +85,7 @@ void	print_envir(t_envir	*envir)
 	}
 }
 
-void	print_export(t_envir	*envir)
-
+void	print_export(t_envir *envir)
 {
 	while (envir)
 	{
@@ -119,7 +98,6 @@ void	print_export(t_envir	*envir)
 }
 
 void	ft_envdelone(t_envir *env_list)
-
 {
 	t_envir	*next;
 	t_envir	*prev;

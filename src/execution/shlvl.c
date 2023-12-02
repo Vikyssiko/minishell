@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/02 22:21:12 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/02 22:59:20 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,21 @@ void	incr_shell_lvl(t_data *data)
         free((env_shlvl)->var_value);
     }
 }
+// 	level = 0;
+// 	shlvl = find_env_var(data, "SHLVL", ft_strlen("SHLVL"));
+// 	if (shlvl)
+// 	{
+// 		level = ft_atoi(shlvl);
+// 		level++;
+// 		if (level <= 999)
+// 			shlvl = ft_itoa(level);
+// 		else if (level == 1000)
+// 			shlvl = ft_strdup("\n");
+// 		else
+// 		{
+// 			level = 1;
+// 			shlvl = ft_strdup("1");
+// 		}
+// 	}
+// 	free(shlvl);
+// }

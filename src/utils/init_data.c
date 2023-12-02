@@ -20,12 +20,11 @@ void	init_data(t_data **data, char **envp)
 	(*data)->env_list = create_env_list((envp));
 	(*data)->export_list = create_export_list((envp));
 	(*data)->path = NULL;
-	(*data)->tree = NULL;
 	(*data)->list = NULL;
 	(*data)->token_list = NULL;
 	(*data)->input_line = NULL;
 	(*data)->input_minishell = "minishell>> ";
-	(*data)->pid = getpid();
+//	(*data)->pid = getpid();
 	(*data)->curr_dir = getcwd(NULL, 0);
 	save_envir((*data), envp);
 	// incr_shell_lvl(*data);
