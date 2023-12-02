@@ -63,6 +63,7 @@ void	tokenise(t_data *data, char *str)
 	{
 		if (word_len != 0)
 			add_token(&data->token_list, create_token(data, i, word_len));
+		// do we need it?
 		add_token(&data->token_list,
 			create_arg_token(data, "newline", T_NEWLINE));
 	}

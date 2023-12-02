@@ -22,6 +22,7 @@ char	*trim_input(char *input)
 		return (NULL);
 	str = ft_calloc(1, ft_strlen(input) + 1);
 	if (!str)
+		//free!!!
 		exit_shell("Error: malloc failed\n", 1, NULL);
 	i = 0;
 	j = 0;

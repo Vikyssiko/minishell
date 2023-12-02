@@ -17,29 +17,29 @@ The problem is probably caused by a non-existing address data->tree->right, as d
 As I mentioned before, the previous commit doesn't give this error and frees the nodes accordingly, therefore something may be changed in the main code.
 */
 
- void	free_tree(t_tree **tree)
- {
- 	int i;
- 	t_tree *right;
-
- 	i = 0;
-	right = NULL;
- 	if (!(*tree))
- 		return ;
- 	while ((*tree))
- 	{
- 		right = (*tree)->right;
- 		if ((*tree)->left)
- 		{
- 			if ((*tree)->left->args_array)
- 				free_2darray((*tree)->left->args_array);
- 			free((*tree)->left);
- 		}
- 		free_2darray((*tree)->args_array);
- 		free((*tree));
- 		(*tree) = right;
- 	}
- }
+// void	free_tree(t_tree **tree)
+// {
+// 	int i;
+// 	t_tree *right;
+//
+// 	i = 0;
+//	right = NULL;
+// 	if (!(*tree))
+// 		return ;
+// 	while ((*tree))
+// 	{
+// 		right = (*tree)->right;
+// 		if ((*tree)->left)
+// 		{
+// 			if ((*tree)->left->args_array)
+// 				free_2darray((*tree)->left->args_array);
+// 			free((*tree)->left);
+// 		}
+// 		free_2darray((*tree)->args_array);
+// 		free((*tree));
+// 		(*tree) = right;
+// 	}
+// }
 
 // void free_tree(t_tree *tree)
 // {

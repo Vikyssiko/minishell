@@ -68,18 +68,21 @@ void	delim(char *name, t_data *data)
 	if (pid == 0)
 	{
 //		str = get_next_line(0);
-		str = readline(">");
+		str = readline("> ");
 		while (str && ft_strcmp(str, name) != 0)
 		{
 			write(fd[1], str, ft_strlen(str));
 			write(fd[1], "\n", 1);
 //			str = get_next_line(0);
-			str = readline(">");
+			free(str);
+			str = readline("> ");
 		}
 //		perror("ls");
 		exit(1);
 	}
+//	sleep(1000);
 	waitpid(pid, NULL, 0);
+//	printf("child exec is over\n");
 	dup2(fd[0], 0);
 	close(fd[0]);
 	close(fd[1]);
@@ -164,8 +167,8 @@ int	exec_pipe(t_data *data, t_cmd_list *list)
 int	exec_pipes(t_data *data)
 {
 	t_cmd_list	*list;
-	int stdin;
-	int stdout;
+	int 		stdin;
+	int 		stdout;
 
 	list = data->list;
 	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0

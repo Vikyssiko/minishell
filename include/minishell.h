@@ -59,8 +59,6 @@ typedef struct s_envir {
 	struct s_envir	*prev;
 }				t_envir;
 
-
-
 typedef struct s_token
 {
 	t_token_type		type;
@@ -76,33 +74,19 @@ typedef struct s_redir {
 }	t_redir;
 
 typedef struct s_cmd_list {
-//	t_token_type		type;
 	char				*value;
-//	char				*delim;
+	char				*delim;
 	char				**args_array;
 	t_redir 			*redir_list;
 	struct s_cmd_list	*next;
-//	struct s_tree	*prev;
 }				t_cmd_list;
 
-typedef struct s_tree {
-	t_token_type	type;
-	char			*value;
-	char			*delim;
-	char			**args_array;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}				t_tree;
-
 typedef struct s_data {
-	struct s_tree	*tree;
 	struct s_token	*token_list;
 	t_envir			*env_list;
 	t_envir			*export_list;
 	int				exit_status;
-	int				pid;
-	int				arg_nums;
-	int				forked;
+//	int				pid;
 	char			*input_minishell;
 	char			*input_line;
 	char			*curr_dir;
@@ -110,7 +94,6 @@ typedef struct s_data {
 	char			**env_array;
 	char			**cmd_array;
 	char			**path;
-
 	t_cmd_list		*list;
 }				t_data;
 
@@ -136,9 +119,7 @@ void		ft_envclear(t_envir **env_list);
 void		free_list(t_cmd_list *list);
 
 /* handle_input.c */
-int			is_valid_env(char *str);
-int			is_valid_env2(char *str);
-char		*replace_dollars(t_data *data, cahr *str);
+char		*replace_dollars(t_data *data, char *str);
 
 /* init_data.c */
 void		init_data(t_data **data, char **envp);
@@ -226,8 +207,6 @@ int			check_pipe(t_token *token);
 
 /*Binary Tree*/
 void		init_list_data(t_data *data);
-// void		free_tree(t_data *data);
-void		free_tree(t_tree **tree);
 
 /* builtins */
 int			is_builtin(t_cmd_list *list);

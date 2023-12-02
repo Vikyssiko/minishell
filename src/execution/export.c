@@ -21,9 +21,7 @@ void	export(t_envir **env_list, t_envir **export_list,
 
 	i = 1;
 	head_export = (*export_list);
-	if (ft_strcmp(list->value, "export") != 0)
-		return ;
-	if (ft_strcmp(list->value, "export") == 0 && list->args_array[i])
+	if (list->args_array[i])
 	{
 		while (list->args_array[i] != NULL)
 		{
@@ -58,7 +56,7 @@ void	export(t_envir **env_list, t_envir **export_list,
 		}
 		(*export_list) = sort_export(export_list);
 	}
-	else if (ft_strcmp(list->value, "export") == 0 && !list->args_array[i])
+	else if (!list->args_array[i])
 	{
 		print_export((*export_list));
 		return ;
