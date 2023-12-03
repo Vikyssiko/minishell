@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/02 23:13:46 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 21:17:57 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exit_shell(char *message, int exit_code, t_data *data)
 	//static??
 //	data->exit_status = exit_code;
 	if (data && data->list)
-		free_list(data->list);
+		free_list(&data->list);
 	free_data(data);
 	exit(exit_code);
 }
@@ -42,7 +42,7 @@ void	exit_shell_no_free(char *message, int exit_code, t_data *data)
 //	data->exit_status = exit_code;
 //	printf("%i\n", exit_code);
 	if (data && data->list)
-		free_list(data->list);
+		free_list(&data->list);
 	free_data(data);
 	exit(exit_code);
 }

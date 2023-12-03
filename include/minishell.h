@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/03 21:08:35 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 21:17:39 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		free_data(t_data *data);
 void		free_envir(t_envir *envir);
 void		free_2darray(char **array);
 void		ft_envclear(t_envir **env_list);
-void		free_list(t_cmd_list *list);
+void		free_list(t_cmd_list **list);
 
 /* handle_input.c */
 char		*replace_dollars(t_data *data, char *str);
