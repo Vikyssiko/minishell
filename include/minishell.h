@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/03 21:17:39 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 22:55:01 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_data {
 	char			*curr_dir;
 	char			*exit_str;
 	char			**env_array;
+	char			**new_env_array;
 	char			**cmd_array;
 	char			**path;
 	t_cmd_list		*list;

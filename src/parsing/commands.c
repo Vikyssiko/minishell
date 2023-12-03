@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/29 20:10:45 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 22:11:37 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ char	*find_command_path(t_data *data, t_cmd_list *list)
  	if (!data->path)
  		return (NULL);
  	command_path = find_executable_path(data->path, list->value);
- 	if (!command_path)
- 	{
-		put_to_stderr_and_free("minishell: %s: command not found\n", list->value,
-			data, 127);
- 		exit(127);
- 	}
+	//FIX IT HERE!
+ 	// if (!command_path)
+ 	// {
+	// 	put_to_stderr_and_free("minishell: %s: command not found\n", list->value,
+	// 		data, 127);
+ 	// 	exit(127);
+ 	// }
  	// cmd->path = ft_strdup(command_path);
  	// if (paths)
  		// free_2darray(paths);

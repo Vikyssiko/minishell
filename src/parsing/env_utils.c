@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/03 21:12:43 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 23:08:13 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	print_export(t_envir *envir)
 			printf("declare -x %s\n", envir->var_name);
 		// else if (envir->var_value && !odd_quote(envir->var_value))
 		// 	printf("declare -x %s=%s\n", envir->var_name, envir->var_value);
-		// else
+		else
 			printf("declare -x %s=\"%s\"\n", envir->var_name, envir->var_value);
 		envir = envir->next;
 	}

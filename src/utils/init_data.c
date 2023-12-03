@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/02 22:26:09 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 22:43:30 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	init_data(t_data **data, char **envp)
 //	(*data)->pid = getpid();
 	(*data)->curr_dir = getcwd(NULL, 0);
 	save_envir((*data), envp);
-	// incr_shell_lvl(*data);
+	incr_shell_lvl(*data);
 }
