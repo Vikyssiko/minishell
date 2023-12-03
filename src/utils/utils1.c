@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/06 22:16:53 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:12:09 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	process_input(char *input, char *str, int *i, int *j)
 			(*i)++;
 		while (input[*i] && in_quotes(input, *i))
 			str[(*j)++] = input[(*i)++];
-		str[(*j)++] = input[(*i)++];
+		if (input[*i])
+			str[(*j)++] = input[(*i)++];
 	}
 }
 

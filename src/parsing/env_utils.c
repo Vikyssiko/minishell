@@ -6,11 +6,37 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/02 22:50:45 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 21:12:43 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	*trim_input_env(char *input)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	str = ft_calloc(1, ft_strlen(input) + 1);
+	if (!str)
+		//free!!!
+		exit_shell("Error: malloc failed\n", 1, NULL);
+	i = 0;
+	j = 0;
+	while ((input[i] == '\"' || input[i] == '\'') && input[i])
+		i++;
+	while (input[i])
+	{
+		while ((input[i] == '\"' || input[i] == '\''))
+			(i)++;
+		if (input[i])
+			str[(j)++] = input[(i)++];
+	}
+	if (str[j] == '\"' || str[j] == '\'')
+		str[j] = '\0';
+	return (str);
+}
 
 t_envir	*ft_envnew(char **env_line)
 {
@@ -22,12 +48,12 @@ t_envir	*ft_envnew(char **env_line)
 	if (!env_list)
 		return (NULL);
 	if (env_line[i])
-		env_list->var_name = ft_strdup(env_line[i]);
+		env_list->var_name = trim_input_env(env_line[i]);
 	else
 		env_list->var_name = NULL;
 	i++;
 	if (env_line[i])
-		env_list->var_value = ft_strdup(env_line[i]);
+		env_list->var_value = trim_input_env(env_line[i]);
 	else
 		env_list->var_value = NULL;
 	env_list->next = NULL;
@@ -91,7 +117,9 @@ void	print_export(t_envir *envir)
 	{
 		if (!envir->var_value)
 			printf("declare -x %s\n", envir->var_name);
-		else
+		// else if (envir->var_value && !odd_quote(envir->var_value))
+		// 	printf("declare -x %s=%s\n", envir->var_name, envir->var_value);
+		// else
 			printf("declare -x %s=\"%s\"\n", envir->var_name, envir->var_value);
 		envir = envir->next;
 	}

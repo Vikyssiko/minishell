@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/02 22:21:22 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 21:08:35 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ t_envir		*sort_export(t_envir **export);
 t_envir		*find_env_node(t_envir *env_list, char *var_name);
 void		cd_home(t_data *data, t_envir *env_list);
 void		cd_folder(t_data *data, t_envir *env_list, char *pwd);
+char		*trim_input_env(char *input);
+
 // int			ft_envsize(t_envir *lst);
 
 /* quotes.c */

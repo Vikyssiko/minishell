@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/02 22:54:51 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/03 20:59:57 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	export(t_envir **env_list, t_envir **export_list,
 						if (arg[1])
 						{
 							free((*export_list)->var_value);
-							(*export_list)->var_value = ft_strdup(arg[1]);
+							(*export_list)->var_value = trim_input_env(arg[1]);
 							check_env(env_list, arg);
 						}
 						break ;
@@ -73,7 +73,7 @@ void	check_env(t_envir **env_list, char **arg)
 		if (ft_strcmp((*env_list)->var_name, arg[0]) == 0)
 		{
 			free((*env_list)->var_value);
-			(*env_list)->var_value = ft_strdup(arg[1]);
+			(*env_list)->var_value = trim_input_env(arg[1]);
 			break ;
 		}
 		*env_list = (*env_list)->next;
