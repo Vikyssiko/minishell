@@ -14,10 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/shlvl.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/shlvl.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/str_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/str_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/export.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/export.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/redir.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +129,8 @@
       <workItem from="1701471795309" duration="3825000" />
       <workItem from="1701525531971" duration="6726000" />
       <workItem from="1701709121140" duration="2079000" />
-      <workItem from="1701711354422" duration="3391000" />
+      <workItem from="1701711354422" duration="4254000" />
+      <workItem from="1701721467253" duration="1769000" />
     </task>
     <servers />
   </component>

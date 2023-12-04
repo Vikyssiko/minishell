@@ -31,7 +31,7 @@ void	redir_input(char *name, t_data *data)
 	file = open(name, O_RDONLY, 0777);
 	if (file < 0)
 		put_to_stderr_and_exit("minishell: %s: No such file or directory\n",
-							   name, data, errno);
+			name, data, errno);
 	if (dup2(file, STDIN_FILENO) < 0)
 		exit_shell_no_free("Error in input redirection\n", errno, data);
 //		data->exit_status = errno;
@@ -68,7 +68,8 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 	{
 		write(stdout, "> ", 2);
 		str = get_next_line(stdin);
-		while (str && ft_strncmp(str, name, ft_strlen(str)  - 1) != 0)
+		while (str && (ft_strncmp(str, name, ft_strlen(name)) != 0
+			|| ft_strlen(name) != ft_strlen(str) - 1))
 		{
 			write(fd[1], str, ft_strlen(str));
 //			write(fd[1], "\n", 1);

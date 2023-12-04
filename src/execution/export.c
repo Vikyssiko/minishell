@@ -96,8 +96,8 @@ int	export_helper(char *list_arg, t_data *data)
 		if (((ft_isalnum(list_arg[i]) || list_arg[i] != '_')
 				&& ((!ft_isalpha(list_arg[0])) && list_arg[0] != '_')))
 		{
-			put_to_stderr_and_free("export: `%s': not a valid identifier\n",
-				list_arg, data, 1);
+			put_to_stderr_and_free("minishell: export: `%s': "
+					"not a valid identifier\n",list_arg, data, 1);
 			return (1);
 		}
 		i++;
