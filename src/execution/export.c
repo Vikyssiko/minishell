@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/03 20:59:57 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 22:35:01 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	check_env(t_envir **env_list, char **arg)
 		}
 		*env_list = (*env_list)->next;
 	}
-	if (*env_list == NULL)
+	if (*env_list == NULL && arg[1] && ft_strcmp(arg[1], "") != 0)
 	{
 		(*env_list) = head;
 		ft_envadd_back((env_list), ft_envnew(arg));
