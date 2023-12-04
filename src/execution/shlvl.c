@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/04 18:28:46 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 22:37:38 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	incr_shell_lvl(t_data *data)
 	t_envir	*export_head;
 	// char    **shlvl_array;
 	int		level;
-
+	
 	env_shlvl = find_env_node(data->env_list, "SHLVL");
 	exp_shlvl = find_env_node(data->export_list, "SHLVL");
 	env_head = data->env_list;
