@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:58:01 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/04 22:43:52 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 22:53:59 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,6 @@ int	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 	return (0);
 }
 
-int	exec_cmd(t_data *data, t_cmd_list *list)
-{
-	manage_redir(list, data);
-	if (is_builtin(list))
-	{
-		call_builtin_func(data, list);
-		exit(0);
-	}
-	else if (find_command_path(data, list) == NULL)
-	{
-		if (access(list->args_array[0], X_OK) == -1)
-			{
-				printf("%s: command not found\n", list->args_array[0]);
-				// perror("");
-				exit(126);
-			}
-		else
-			execve(list->args_array[0], list->args_array, new_env_array(data));
-	}
-	else if (execve(find_command_path(data, list),
-		   list->args_array, new_env_array(data)) < 0)
-	{
-		// printf("exec error\n");
-		// printf("Do you enter here?\n");
-		exit(1);
-	}
-	return (0);
-}
 int	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
 {
 	int 	pid;
