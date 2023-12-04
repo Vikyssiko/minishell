@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:58:01 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/03 22:51:52 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:42:33 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,10 @@ int	exec_cmd(t_data *data, t_cmd_list *list)
 				exit(126);
 			}
 		else
-			execve(list->args_array[0], list->args_array, data->env_array);
+			execve(list->args_array[0], list->args_array, new_env_array(data));
 	}
 	else if (execve(find_command_path(data, list),
-		   list->args_array, data->env_array) < 0)
+		   list->args_array, new_env_array(data)) < 0)
 	{
 		// printf("exec error\n");
 		// printf("Do you enter here?\n");

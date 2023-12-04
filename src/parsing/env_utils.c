@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/03 23:08:13 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:42:23 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,37 @@ void	ft_envdelone(t_envir *env_list)
 	env_list->next = NULL;
 	env_list->prev = NULL;
 	free(env_list);
+}
+
+char	**new_env_array(t_data *data)
+
+{
+	t_envir *env_list;
+	char	**new_env_array;
+	int		i;
+
+	if (!data->env_list)
+		return (NULL);
+	env_list = data->env_list;
+	i = 0;
+	if (data->new_env_array)
+		free_2darray(data->new_env_array);
+	while (env_list != NULL)
+	{
+		i++;
+		env_list = env_list->next;
+	}
+	new_env_array = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	env_list = data->env_list;
+	while (env_list != NULL)
+	{
+		new_env_array[i] = ft_strjoin(env_list->var_name, "=");
+		new_env_array[i] = ft_strjoin(new_env_array[i], env_list->var_value);
+		env_list = env_list->next;
+		i++;
+	}
+	new_env_array[i] = NULL;
+	data->new_env_array = new_env_array;
+	return (new_env_array);
 }

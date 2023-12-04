@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/03 22:34:37 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 17:22:32 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,54 @@
 
 void	incr_shell_lvl(t_data *data)
 {
-    t_envir *env_shlvl;
-    char    **shlvl_array;
+	t_envir *env_shlvl;
+	t_envir *exp_shlvl;
+	// char    **shlvl_array;
 	int		level;
 
 	env_shlvl = find_env_node(data->env_list, "SHLVL");
-    level = ft_atoi(env_shlvl->var_value);
-    if (env_shlvl == NULL)
-    {
-        shlvl_array = malloc(sizeof(char *) * 2);
-        ft_envadd_back((&data->env_list), ft_envnew(shlvl_array));
-        free(shlvl_array);
-    }
-    else
-    {
-        level += 1;
-        ft_strdel(&env_shlvl->var_value);
-        env_shlvl->var_value = ft_itoa(level);
-    }
-	if (level == 1000)
-    {
-        free((env_shlvl)->var_value);
-    }
+	exp_shlvl = find_env_node(data->export_list, "SHLVL");
+	if (env_shlvl)
+		level = ft_atoi(env_shlvl->var_value);
+	else
+		level = 0;
+	if (level > 999)
+		printf("bash: warning: shell level (%d) too high, resetting to 1\n", level);
+	shlvl_helper(env_shlvl, level);
+	shlvl_helper(exp_shlvl, level);
 }
-// 	level = 0;
-// 	shlvl = find_env_var(data, "SHLVL", ft_strlen("SHLVL"));
-// 	if (shlvl)
-// 	{
-// 		level = ft_atoi(shlvl);
-// 		level++;
-// 		if (level <= 999)
-// 			shlvl = ft_itoa(level);
-// 		else if (level == 1000)
-// 			shlvl = ft_strdup("\n");
-// 		else
-// 		{
-// 			level = 1;
-// 			shlvl = ft_strdup("1");
-// 		}
-// 	}
-// 	free(shlvl);
-// }
+
+void    shlvl_helper(t_envir *env_list, int level)
+
+{
+	char	**shlvl_array;
+	if (env_list == NULL)
+	{
+		shlvl_array = malloc(sizeof(char *) * 2);
+		shlvl_array[0] = ft_strdup("SHLVL");
+		shlvl_array[1] = ft_strdup("1");
+		ft_envadd_back(&env_list, ft_envnew(shlvl_array));
+		free(shlvl_array);
+	}
+	else if (level == 999)
+	{
+		free(env_list->var_value);
+		env_list->var_value = ft_strdup("");
+	}
+	else if (ft_strcmp(env_list->var_value, "") == 0)
+	{
+		free(env_list->var_value);
+		env_list->var_value = ft_strdup("1");
+	}
+	else if (level > 999)
+	{
+		free(env_list->var_value);
+		env_list->var_value = ft_strdup("1");
+	}
+	else
+	{
+		level += 1;
+		ft_strdel(&env_list->var_value);
+		env_list->var_value = ft_itoa(level);
+	}
+}

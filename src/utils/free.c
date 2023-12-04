@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:48:33 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/03 21:22:09 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:41:56 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_data(t_data *data)
 	if (!data)
 		return ;
 	free_2darray(data->env_array);
+	free_2darray(data->new_env_array);
 	free_tokens(&data->token_list, free);
 	ft_envclear(&data->env_list);
 	ft_envclear(&data->export_list);
