@@ -32,31 +32,25 @@ void	incr_shell_lvl(t_data *data)
 }
 
 void    shlvl_helper(t_envir *env_list, int level)
-
 {
 	char	**shlvl_array;
+
 	if (env_list == NULL)
 	{
 		shlvl_array = malloc(sizeof(char *) * 2);
 		shlvl_array[0] = ft_strdup("SHLVL");
 		shlvl_array[1] = ft_strdup("1");
 		ft_envadd_back(&env_list, ft_envnew(shlvl_array));
-		free(shlvl_array);
+		free_2darray(shlvl_array);
 	}
-	else if (level == 999)
+	else if (level == 999 || ft_strcmp(env_list->var_value, "") == 0
+		|| level > 999)
 	{
 		free(env_list->var_value);
-		env_list->var_value = ft_strdup("");
-	}
-	else if (ft_strcmp(env_list->var_value, "") == 0)
-	{
-		free(env_list->var_value);
-		env_list->var_value = ft_strdup("1");
-	}
-	else if (level > 999)
-	{
-		free(env_list->var_value);
-		env_list->var_value = ft_strdup("1");
+		if (level == 999)
+			env_list->var_value = ft_strdup("");
+		else
+			env_list->var_value = ft_strdup("1");
 	}
 	else
 	{

@@ -45,3 +45,19 @@ void	put_to_stderr_and_free(char *dest, char *src, t_data *data, int err)
 	free(str);
 	data->exit_status = err;
 }
+
+void	put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err)
+{
+	char	*str;
+
+	str = put_str_to_str(dest,src, data);
+	ft_putstr_fd(str, STDERR_FILENO);
+	free(str);
+	data->exit_status = err;
+
+//	data->exit_status = exit_code;
+	if (data && data->list)
+		free_list(&data->list);
+	free_data(data);
+	exit(err);
+}

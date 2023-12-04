@@ -227,14 +227,15 @@ void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void 		exit_builtin(t_data *data, t_cmd_list *list);
 
-void		manage_redir(t_cmd_list *list, t_data *data);
+void		manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout);
 
-int			exec_cmd(t_data *data, t_cmd_list *list);
-int			exec_pipe(t_data *data, t_cmd_list *list);
+//int			exec_cmd(t_data *data, t_cmd_list *list);
+//int			exec_pipe(t_data *data, t_cmd_list *list);
 int			exec_pipes(t_data *data);
 
 char 		*put_str_to_str(char *dest, char *src, t_data *data);
 void		put_to_stderr_and_free(char *dest, char *src, t_data *data, int err);
+void		put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err);
 void		exit_shell_no_free(char *message, int exit_code, t_data *data);
 
 void	next_level(t_data *data);
