@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/28 22:19:31 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/04 22:29:46 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	check_pipe(t_token *tmp)
 {
-	if (tmp->type == T_PIPE && tmp->next->type != T_WORD
+	if (tmp->type == T_PIPE && (tmp->next->type == T_NEWLINE || !tmp->prev) /*&& tmp->next->type != T_WORD
 		&& tmp->next->type != T_RED_INP && tmp->next->type != T_RED_OUT
 		&& tmp->next->type != T_APPEND && tmp->next->type != T_DELIM
-		&& !tmp->prev && tmp->prev->type != T_WORD)
+		&& !tmp->prev && tmp->prev->type != T_WORD*/)
 	{
+		printf("I seg here\n");
 		printf("minishell: syntax error near %s\n", \
 		"unexpected token `|'");
 		return (1);
