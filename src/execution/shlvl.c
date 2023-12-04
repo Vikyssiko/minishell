@@ -47,20 +47,13 @@ void    shlvl_helper(t_envir *env_list, int level, t_envir *head)
 		ft_envadd_back(&head, ft_envnew(shlvl_array));
 		free(shlvl_array);
 	}
-	else if (level == 999)
+	else if (level >= 999 || ft_strcmp(env_list->var_value, "") == 0)
 	{
 		free(env_list->var_value);
-		env_list->var_value = ft_strdup("");
-	}
-	else if (ft_strcmp(env_list->var_value, "") == 0)
-	{
-		free(env_list->var_value);
-		env_list->var_value = ft_strdup("1");
-	}
-	else if (level > 999)
-	{
-		free(env_list->var_value);
-		env_list->var_value = ft_strdup("1");
+		if (level == 999)
+			env_list->var_value = ft_strdup("");
+		else
+			env_list->var_value = ft_strdup("1");
 	}
 	else
 	{
