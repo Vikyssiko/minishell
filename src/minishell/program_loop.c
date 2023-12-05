@@ -37,32 +37,32 @@ void	start_loop(t_data *data)
 	}
 }
 
-void	execute(t_data *data)
-{
-	t_cmd_list	*list;
-
-	list = data->list;
-	while (list)
-		list = list->next;
-}
-// printf("token length: %d\n", token_len(data->token_list));
-// free(data->input_line);
-void	next_level(t_data *data)
-{
-	int	pid;
-	
-	if (!ft_strcmp(data->input_line, "minishell"))
-	{
-		printf("I entered here\n");
-		pid = fork();
-		if (pid < 0)
-			exit (1);
-		else if (pid == 0)
-		{
-			// printf("Entering a new 'minishell' level\n");
-			incr_shell_lvl(data);
-			start_loop(data);
-		}
-		waitpid(pid, NULL, 0);
-	}
-}
+//void	execute(t_data *data)
+//{
+//	t_cmd_list	*list;
+//
+//	list = data->list;
+//	while (list)
+//		list = list->next;
+//}
+//// printf("token length: %d\n", token_len(data->token_list));
+//// free(data->input_line);
+//void	next_level(t_data *data)
+//{
+//	int	pid;
+//
+//	if (!ft_strcmp(data->input_line, "minishell"))
+//	{
+//		printf("I entered here\n");
+//		pid = fork();
+//		if (pid < 0)
+//			exit (1);
+//		else if (pid == 0)
+//		{
+//			// printf("Entering a new 'minishell' level\n");
+//			incr_shell_lvl(data);
+//			start_loop(data);
+//		}
+//		waitpid(pid, NULL, 0);
+//	}
+//}

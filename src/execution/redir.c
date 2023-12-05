@@ -56,10 +56,12 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 	int 	pid;
 	int		fd[2];
 	char	*str;
+	int		status;
 
 	if (pipe(fd) == -1)
 		exit(0);
 	pid = fork();
+	status = 0;
 	if (pid == -1)
 		data->exit_status = errno;
 //	if (pid == -1)
@@ -80,7 +82,8 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 //		perror("ls");
 		exit(1);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	data->exit_status = WEXITSTATUS(status);
 	dup2(fd[0], 0);
 	close(fd[0]);
 	close(fd[1]);
