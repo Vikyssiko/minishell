@@ -17,11 +17,8 @@ void	redir_output(char *name, t_data *data)
 	int	file;
 
 	file = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
-		exit_shell_no_free("Error in output redirection\n", errno, data);
-//		data->exit_status = errno;
-	close(file);
-//		return (errno);
+	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
+		exit_shell_no_mes(errno, data);
 }
 
 void	redir_input(char *name, t_data *data)
@@ -32,11 +29,8 @@ void	redir_input(char *name, t_data *data)
 	if (file < 0)
 		put_to_stderr_and_exit("minishell: %s: No such file or directory\n",
 			name, data, errno);
-	if (dup2(file, STDIN_FILENO) < 0)
-		exit_shell_no_free("Error in input redirection\n", errno, data);
-//		data->exit_status = errno;
-//		return (errno);
-	close(file);
+	if (dup2(file, STDIN_FILENO) < 0 || close(file) < 0)
+		exit_shell_no_mes(errno, data);
 }
 
 void	append(char *name, t_data *data)
@@ -44,11 +38,8 @@ void	append(char *name, t_data *data)
 	int	file;
 
 	file = open(name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (file < 0 || dup2(file, STDOUT_FILENO) < 0)
-		exit_shell_no_free("Error append\n", errno, data);
-//		data->exit_status = errno;
-//		return (errno);
-	close(file);
+	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
+		exit_shell_no_mes(errno, data);
 }
 
 void	delim(char *name, t_data *data, int stdin, int stdout)
@@ -58,14 +49,12 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 	char	*str;
 	int		status;
 
-	if (pipe(fd) == -1)
-		exit(0);
-	pid = fork();
+	if (pipe(fd) < 0)
+		exit_shell_no_mes(errno, data);
 	status = 0;
-	if (pid == -1)
-		data->exit_status = errno;
-//	if (pid == -1)
-//		exit(0);
+	pid = fork();
+	if (pid < 0)
+		exit_shell_no_mes(errno, data);
 	if (pid == 0)
 	{
 		write(stdout, "> ", 2);
@@ -74,7 +63,6 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 			|| ft_strlen(name) != ft_strlen(str) - 1))
 		{
 			write(fd[1], str, ft_strlen(str));
-//			write(fd[1], "\n", 1);
 			free(str);
 			write(stdout, "> ", 2);
 			str = get_next_line(stdin);
@@ -84,9 +72,8 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 	}
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
-	dup2(fd[0], 0);
-	close(fd[0]);
-	close(fd[1]);
+	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)
+		exit_shell_no_mes(errno, data);
 }
 
 void	manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout)

@@ -16,23 +16,24 @@ void	incr_shell_lvl(t_data *data)
 {
 	t_envir *env_shlvl;
 	t_envir *exp_shlvl;
-	t_envir	*env_head;
-	t_envir	*export_head;
-	// char    **shlvl_array;
 	int		level;
+	char	*str;
 	
 	env_shlvl = find_env_node(data->env_list, "SHLVL");
 	exp_shlvl = find_env_node(data->export_list, "SHLVL");
-	env_head = data->env_list;
-	export_head = data->export_list;
 	if (env_shlvl)
 		level = ft_atoi(env_shlvl->var_value);
 	else
 		level = 0;
 	if (level > 999)
-		printf("bash: warning: shell level (%d) too high, resetting to 1\n", level);
-	shlvl_helper(env_shlvl, level, env_head);
-	shlvl_helper(exp_shlvl, level, export_head);
+	{
+		str = ft_itoa(level);
+		put_to_stderr_and_free("minishell: warning: shell level (%s) "
+			"too high, resetting to 1\n", str, data, 0);
+		free(str);
+	}
+	shlvl_helper(env_shlvl, level, data->env_list);
+	shlvl_helper(exp_shlvl, level, data->export_list);
 }
 
 void    shlvl_helper(t_envir *env_list, int level, t_envir *head)

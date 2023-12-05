@@ -46,3 +46,16 @@ void	exit_shell_no_free(char *message, int exit_code, t_data *data)
 	free_data(data);
 	exit(exit_code);
 }
+
+void	exit_shell_no_mes(int exit_code, t_data *data)
+{
+//	printf("%i\n", data->exit_status);
+
+//	printf("exit\n");
+//	data->exit_status = exit_code;
+//	printf("%i\n", exit_code);
+	if (data && data->list)
+		free_list(&data->list);
+	free_data(data);
+	exit(exit_code);
+}
