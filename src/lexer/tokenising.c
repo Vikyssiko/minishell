@@ -31,8 +31,7 @@ t_token	*create_token(t_data *data, int i, int len)
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		// free!!!
-		exit_shell("Error: malloc failed\n", 1, data);
+		exit_shell_no_mes(1, data);
 	new->word = ft_substr(data->input_line, i - len, len);
 	new->type = T_WORD;
 	return (new);
@@ -44,8 +43,7 @@ t_token	*create_arg_token(t_data *data, char *word, enum e_token_type type)
 
 	new = ft_calloc(1, sizeof(t_token));
 	if (!new)
-		// free!!!
-		exit_shell("Error: malloc failed\n", 1, data);
+		exit_shell_no_mes(1, data);
 	new->word = ft_strdup(word);
 	new->type = type;
 	return (new);

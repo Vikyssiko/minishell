@@ -24,9 +24,3 @@ int	main(int argc, char **argv, char **envp)
 	free_data(data);
 	return (0);
 }
-//int fd;
-// if (read(0, NULL, 0) == -1)
-// 	return (0);
-// if ((fd = dup(0)) == -1)
-// 	return (0);
-// close(fd);

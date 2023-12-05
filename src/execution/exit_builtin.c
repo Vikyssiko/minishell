@@ -46,5 +46,5 @@ void	exit_builtin(t_data *data, t_cmd_list *list)
 		exit_shell_no_free("exit\n", ft_atoi(list->args_array[1]), data);
 	}
 	exit_shell_no_free("exit\n", data->exit_status, data);
-	// free!!!
+	//free
 }

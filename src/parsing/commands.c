@@ -24,16 +24,6 @@ char	*find_command_path(t_data *data, t_cmd_list *list)
  	if (!data->path)
  		return (NULL);
  	command_path = find_executable_path(data->path, list->value);
-	//FIX IT HERE!
- 	// if (!command_path)
- 	// {
-	// 	put_to_stderr_and_free("minishell: %s: command not found\n", list->value,
-	// 		data, 127);
- 	// 	exit(127);
- 	// }
- 	// cmd->path = ft_strdup(command_path);
- 	// if (paths)
- 		// free_2darray(paths);
  	return (command_path);
 }
 
