@@ -48,8 +48,6 @@ static void	*free_singlestrs(char **strs)
     int i;
     
     i = 0;
-    if (!strs)
-        return NULL;
     while (strs[i])
     {
         free(strs[i]);
@@ -61,7 +59,6 @@ static void	*free_singlestrs(char **strs)
 }
 
 char    **ft_singlesplit(char const *s, char c)
-
 {
     char	**strs;
 	int		i;
@@ -73,7 +70,6 @@ char    **ft_singlesplit(char const *s, char c)
     strs = malloc(sizeof(char *) * (count + 2));
     if (!strs)
 		return (NULL);
-    
 	i = 0;
     while (*s)
 	{

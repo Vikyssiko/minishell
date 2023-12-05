@@ -20,8 +20,7 @@ char	*trim_input_env(char *input)
 
 	str = ft_calloc(1, ft_strlen(input) + 1);
 	if (!str)
-		//free!!!
-		exit_shell("Error: malloc failed\n", 1, NULL);
+		exit_shell_no_mes(1, NULL);
 	i = 0;
 	j = 0;
 	while ((input[i] == '\"' || input[i] == '\'') && input[i])
@@ -117,8 +116,6 @@ void	print_export(t_envir *envir)
 	{
 		if (!envir->var_value)
 			printf("declare -x %s\n", envir->var_name);
-		// else if (envir->var_value && !odd_quote(envir->var_value))
-		// 	printf("declare -x %s=%s\n", envir->var_name, envir->var_value);
 		else
 			printf("declare -x %s=\"%s\"\n", envir->var_name, envir->var_value);
 		envir = envir->next;

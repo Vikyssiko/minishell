@@ -16,10 +16,20 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/exit_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/exit_builtin.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/redir.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/shlvl.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/shlvl.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/exit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/unset.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/tokenising.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/tokenising.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minishell/minishell.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/minishell.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/commands.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/commands.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/env_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/env_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/list_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/list_init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/tree_utils.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/free.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ft_singlesplit.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ft_singlesplit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/init_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/init_data.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +147,7 @@
       <workItem from="1701721467253" duration="2085000" />
       <workItem from="1701774533533" duration="3701000" />
       <workItem from="1701793832409" duration="696000" />
-      <workItem from="1701798471812" duration="1870000" />
+      <workItem from="1701798471812" duration="9361000" />
     </task>
     <servers />
   </component>

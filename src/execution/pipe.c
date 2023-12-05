@@ -18,10 +18,9 @@ void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 	if (is_builtin(list))
 	{
 		call_builtin_func(data, list);
-//		return ;
 		exit_shell_no_mes(0, data);
 	}
-	else if (find_command_path(data, list) == NULL
+	else if (list->args_array[0] && find_command_path(data, list) == NULL
 		&& access(list->args_array[0], X_OK) == -1)
 		put_to_stderr_and_exit("%s: command not found\n",
 			list->args_array[0], data, 127);
@@ -29,16 +28,16 @@ void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 		execve(list->args_array[0], list->args_array,
 			new_env_array(data));
 	else if (execve(find_command_path(data, list),
-		   list->args_array, new_env_array(data)) < 0)
+			list->args_array, new_env_array(data)) < 0)
 		exit_shell_no_mes(errno, data);
 	exit_shell_no_mes(errno, data);
 }
 
 int	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
 {
-	int 	pid;
-	int		fd[2];
-	int		status;
+	int	pid;
+	int	fd[2];
+	int	status;
 
 	if (pipe(fd) < 0)
 		exit_shell_no_mes(errno, data);
@@ -62,8 +61,8 @@ int	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
 
 void	exec_last_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 {
-	int 	pid;
-	int		status;
+	int	pid;
+	int	status;
 
 	status = 0;
 	pid = fork();
@@ -81,25 +80,36 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 		exit_shell_no_mes(errno, data);
 }
 
+int	check_not_child_exec_builtins(t_cmd_list *list)
+{
+	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
+			|| ft_strcmp(list->value, "export") == 0
+			|| ft_strcmp(list->value, "cd") == 0
+			|| ft_strcmp(list->value, "exit") == 0))
+		return (1);
+	return (0);
+}
+
 void	exec_pipes(t_data *data)
 {
 	t_cmd_list	*list;
-	int 		stdin;
-	int 		stdout;
+	int			stdin;
+	int			stdout;
 
 	list = data->list;
-	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
-		|| ft_strcmp(list->value, "export") == 0
-		|| ft_strcmp(list->value, "cd") == 0
-		|| ft_strcmp(list->value, "exit") == 0))
-	{
-		call_builtin_func(data, data->list);
-		return ;
-	}
 	stdin = dup(0);
 	stdout = dup(1);
 	if (stdin < 0 || stdout < 0)
 		exit_shell_no_mes(errno, data);
+	if (check_not_child_exec_builtins(list))
+	{
+		manage_redir(list, data, stdin, stdout);
+		call_builtin_func(data, data->list);
+		if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
+			|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0)
+			exit_shell_no_mes(errno, data);
+		return ;
+	}
 	while (list && list->next)
 	{
 		exec_pipe(data, list, stdin, stdout);

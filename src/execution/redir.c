@@ -83,6 +83,7 @@ void	manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout)
 	redir_list = list->redir_list;
 	while (redir_list)
 	{
+//		printf("I am in redir func\n");
 		if (redir_list->redir_token->type == T_RED_OUT)
 			redir_output(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_RED_INP)

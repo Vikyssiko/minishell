@@ -31,16 +31,6 @@
 # include <errno.h>
 # include "../libft/include/libft.h"
 
-# define MAX_ENV_VARS 100
-# define MAX_DOLLAR_VALUE_LEN 100
-# define MAX_PATH_LEN 100
-# define MAX_CMD_LEN 100
-
-# define NEW_LINE_ERR	"syntax error near unexpected token `newline'"
-# define SINGLE_PIPE_ERR		"syntax error near unexpected token `|'"
-# define DOUBLE_PIPE_ERR		"syntax error near unexpected token `||'"
-# define DEL_ERR			"syntax error near unexpected token `<<'"
-
 typedef enum e_token_type {
 	T_WORD = 1,
 	T_NEWLINE,
@@ -86,7 +76,6 @@ typedef struct s_data {
 	t_envir			*env_list;
 	t_envir			*export_list;
 	int				exit_status;
-//	int				pid;
 	char			*input_minishell;
 	char			*input_line;
 	char			*curr_dir;
@@ -98,22 +87,19 @@ typedef struct s_data {
 	t_cmd_list		*list;
 }				t_data;
 
-/* builtins.c */
-void		builtin_unset(t_list **head, char *var_name);
-void		builtin_env(t_list *head);
-
 /* environment.c */
 void		save_envir(t_data *data, char **env_str);
 char		*find_env_var(t_data *data, char *var_name);
 void		print_env_node(void *env_node);
-int			find_envir_line(t_envir *env, char *var_name);
-void		free_envir_array(char **env_array);
 
 /* exit.c */
+void		exit_shell_no_free(char *message, int exit_code, t_data *data);
+void		exit_shell_no_mes(int exit_code, t_data *data);
 void		exit_shell(char *message, int exit_code, t_data *data);
 
 /* free.c */
 void		free_data(t_data *data);
+//???
 void		free_envir(t_envir *envir);
 void		free_2darray(char **array);
 void		ft_envclear(t_envir **env_list);
@@ -128,8 +114,6 @@ void		init_data(t_data **data, char **envp);
 /* parsing_commads.c */
 int			lexical_analysis(t_data *data, char *input);
 char *		find_command_path(t_data *data, t_cmd_list *list);
-int			parse_command(t_data *data);
-void		child(t_data *data);
 
 /* reset.c */
 void		reset_data(t_data *data);
@@ -148,18 +132,13 @@ char		*trim_input(char *input);
 void		process_input(char *input, char *str, int *i, int *j);
 
 /* Environment lists functions */
-// void		ft_envadd_back(t_envir **lst, t_envir *new);
-// void		ft_envadd_front(t_envir **lst, t_envir *new);
-// void		ft_envclear(t_envir **lst);
-// void		ft_envdelone(t_envir *lst, void (*del)(void *));
-// void		ft_enviter(t_envir *lst, void (*f)(void *));
 t_envir		*ft_envlast(t_envir *lst);
 t_envir		*ft_envfirst(t_envir *lst);
 t_envir		*ft_envnew(char **env_line);
 void		ft_envadd_back(t_envir **env_list, t_envir *new);
 t_envir		*create_env_list(char **envp);
 void		print_envir(t_envir	*envir);
-void		print_export(t_envir	*envir);
+void		print_export(t_envir *envir);
 void		ft_envdelone(t_envir *env_list);
 t_envir 	*swap_env(t_envir *first, t_envir *second);
 t_envir		*create_export_list(char **envp);
@@ -172,13 +151,11 @@ char		*trim_input_env(char *input);
 char		**new_env_array(t_data *data);
 void    	shlvl_helper(t_envir *env_list, int level, t_envir *head);
 
-// int			ft_envsize(t_envir *lst);
-
 /* quotes.c */
 int			odd_quote(char *str);
 int			special_chars(char *str);
 int			in_quotes(char *s, int pos);
-int			in_single_quotes(char *s, int pos); // ??
+int			in_single_quotes(char *s, int pos);
 
 /* tokens */
 char		*ft_strstr(const char *haystack, const char *needle);
@@ -210,7 +187,7 @@ int			syntax_errors(t_token *token, t_data *data);
 int			check_red(t_token *token);
 int			check_pipe(t_token *token);
 
-/*Binary Tree*/
+/* command list*/
 void		init_list_data(t_data *data);
 
 /* builtins */
@@ -229,16 +206,10 @@ void 		exit_builtin(t_data *data, t_cmd_list *list);
 
 void		manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout);
 
-//int			exec_cmd(t_data *data, t_cmd_list *list);
-//int			exec_pipe(t_data *data, t_cmd_list *list);
 void		exec_pipes(t_data *data);
 
 char 		*put_str_to_str(char *dest, char *src, t_data *data);
 void		put_to_stderr_and_free(char *dest, char *src, t_data *data, int err);
 void		put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err);
-void		exit_shell_no_free(char *message, int exit_code, t_data *data);
-void		exit_shell_no_mes(int exit_code, t_data *data);
-
-void	next_level(t_data *data);
 
 #endif

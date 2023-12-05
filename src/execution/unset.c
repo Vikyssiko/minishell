@@ -19,9 +19,10 @@ void	unset(t_envir **env_list, t_data *data, int value)
 	t_envir	*tmp;
 
 	i = 1;
-	if (!data->list->args_array[i])
+	if (data->list && data->list->args_array
+		&& (!data->list->args_array[0] || !data->list->args_array[i]))
 		return ;
-	while (data->list->args_array[i])
+	while (data->list && data->list->args_array && data->list->args_array[i])
 	{
 		if (!unset_helper(data->list->args_array[i], value, data))
 		{

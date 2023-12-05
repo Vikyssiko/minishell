@@ -23,7 +23,6 @@ void	init_data(t_data **data, char **envp)
 	(*data)->input_line = NULL;
 	(*data)->new_env_array = NULL;
 	(*data)->input_minishell = "minishell>> ";
-//	(*data)->pid = getpid();
 	(*data)->curr_dir = getcwd(NULL, 0);
 	save_envir((*data), envp);
 	(*data)->env_list = create_env_list((((*data)->env_array)));

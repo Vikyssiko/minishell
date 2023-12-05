@@ -93,12 +93,15 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 	arg_num = count_args(*start, current);
 	list = init_list();
 	start_copy = (*start);
-	while (start_copy->type != T_WORD)
-		start_copy = start_copy->next->next;
+	while (start_copy && start_copy->type != T_WORD && start_copy->type != T_NEWLINE)
+	{
+		if (start_copy->next)
+			start_copy = start_copy->next->next;
+	}
 	list->value = start_copy->word;
 	list->args_array = (char **)malloc(sizeof(char *) * (arg_num + 1));
-//	if (!list->args_array)
-
+	if (!list->args_array)
+		exit(1);
 	while (*start != current)
 	{
 		if ((*start)->type == T_APPEND || (*start)->type == T_DELIM
@@ -128,9 +131,12 @@ t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
 //		return (NULL);
 //	list->type = (*token)->type;
 	token_copy = (*token);
-	while (token_copy->type != T_WORD)
-		token_copy = token_copy->next->next;
-	list->value = (*token)->word;
+	while (token_copy && token_copy->type != T_WORD && token_copy->type != T_NEWLINE)
+	{
+		if (token_copy->next)
+			token_copy = token_copy->next->next;
+	}
+	list->value = token_copy->word;
 	i = 0;
 	arg_num = count_args(*token, NULL);
 	if (arg_num != 0)

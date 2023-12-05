@@ -112,15 +112,16 @@ void	free_list(t_cmd_list **list)
 	{
 		tmp = (*list)->next;
 		free_2darray((*list)->args_array);
-		if ((*list)->redir_list)
-		{
-			if ((*list)->redir_list->redir_token->word)
-				ft_strdel(&(*list)->redir_list->redir_token->word);
-			if ((*list)->redir_list->redir_word->word)
-				ft_strdel(&(*list)->redir_list->redir_word->word);
-		}
-		// if ((*list)->value)
-		// 	ft_strdel(&(*list)->value);
+//		if ((*list)->redir_list)
+//		{
+//			if ((*list)->redir_list->redir_token->word)
+//				ft_strdel(&(*list)->redir_list->redir_token->word);
+//			if ((*list)->redir_list->redir_word->word)
+//				ft_strdel(&(*list)->redir_list->redir_word->word);
+//		}
+//		 if ((*list)->value)
+////			 (*list)->value = NULL;
+//		 	ft_strdel(&(*list)->value);
 		free((*list));
 		(*list) = tmp;
 	}
