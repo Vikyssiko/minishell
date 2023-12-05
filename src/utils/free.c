@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:48:33 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/04 15:41:56 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 23:18:56 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_data(t_data *data)
 	ft_envclear(&data->env_list);
 	ft_envclear(&data->export_list);
 	free_list(&data->list);
+	ft_strdel(&data->input_line);
 	free(data);
 	data = NULL;
 }
