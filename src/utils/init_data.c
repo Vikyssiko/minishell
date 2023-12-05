@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/04 22:38:12 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 22:35:15 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_data(t_data **data, char **envp)
 	if (!*data)
 		exit(EXIT_FAILURE);
 	(*data)->path = NULL;
+	(*data)->exit_status = 0;
 	(*data)->list = NULL;
 	(*data)->token_list = NULL;
 	(*data)->input_line = NULL;

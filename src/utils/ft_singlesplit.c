@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:29:04 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/05 22:00:08 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 23:06:00 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,15 @@ static void	*free_singlestrs(char **strs)
     return NULL;
 }
 
+void	iterate_str(char const **s, int count, char c)
+
+{
+	if (count == 0)
+		(*s) += ft_singlewordlen((*s), c);
+	else
+		(*s) += ft_singlewordlen((*s), c) + 1;
+}
+
 char    **ft_singlesplit(char const *s, char c)
 {
     char	**strs;
@@ -81,7 +90,7 @@ char    **ft_singlesplit(char const *s, char c)
 				free_singlestrs(strs);
 				return (NULL);
 			}
-			s += ft_singlewordlen(s, c) + 1;
+			iterate_str(&s, count, c);
 			i++;
 				strs[i] = ft_substr(s, 0, ft_strlen(s));
             break ;

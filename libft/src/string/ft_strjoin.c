@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/03 21:43:01 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 22:38:30 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2 && s2[i])
 		result[index++] = s2[i++];
 	// if (s1)
-	// 	free(s1);
+	// 	ft_strdel(&s1);
 	// if (s2)
-	// 	free(s2);
+	// 	ft_strdel(&s2);
 	result[index] = '\0';
 	return (result);
 }
