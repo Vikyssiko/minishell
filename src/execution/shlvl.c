@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/04 22:37:38 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 21:51:52 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void    shlvl_helper(t_envir *env_list, int level, t_envir *head)
 		shlvl_array[0] = ft_strdup("SHLVL");
 		shlvl_array[1] = ft_strdup("1");
 		ft_envadd_back(&head, ft_envnew(shlvl_array));
+		free(shlvl_array[0]);
+		free(shlvl_array[1]);
 		free(shlvl_array);
 	}
 	else if (level >= 999 || ft_strcmp(env_list->var_value, "") == 0)

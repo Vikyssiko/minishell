@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/04 22:35:01 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 20:17:05 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,8 @@ void	export(t_envir **env_list, t_envir **export_list,
 			if (!export_helper(list->args_array[i], data))
 			{
 				arg = ft_singlesplit(list->args_array[i], '=');
-				while ((*export_list) != NULL)
-				{
-					if (ft_strcmp((*export_list)->var_name, arg[0]) == 0)
-					{
-						if (arg[1])
-						{
-							free((*export_list)->var_value);
-							(*export_list)->var_value = trim_input_env(arg[1]);
-							check_env(env_list, arg);
-						}
-						break ;
-					}
-					(*export_list) = (*export_list)->next;
-				}
-				if (*export_list == NULL)
-				{
-					(*export_list) = head_export;
-					ft_envadd_back((export_list), ft_envnew(arg));
-					if (arg[1] && ft_strcmp(arg[1], "") != 0)
-						ft_envadd_back((env_list), ft_envnew(arg));
-				}
+				check_export(env_list, export_list, arg);
+				check_export_null(head_export, env_list, export_list, arg);
 				(*export_list) = head_export;
 				free_2darray(arg);
 			}
@@ -56,10 +37,42 @@ void	export(t_envir **env_list, t_envir **export_list,
 		}
 		(*export_list) = sort_export(export_list);
 	}
-	else if (!list->args_array[i])
-	{
+	else
 		print_export((*export_list));
-		return ;
+}
+
+void	check_export_null(t_envir *head_export, t_envir **env_list,
+		t_envir **export_list, char **arg)
+
+{
+	if (*export_list == NULL)
+	{
+		(*export_list) = head_export;
+		ft_envadd_back((export_list), ft_envnew(arg));
+		if (arg[1] && ft_strcmp(arg[1], "") != 0)
+			ft_envadd_back((env_list), ft_envnew(arg));
+	}
+}
+
+void	check_export(t_envir **env_list, t_envir **export_list, char **arg)
+
+{
+	t_envir	*head_export;
+
+	head_export = (*export_list);
+	while ((*export_list) != NULL)
+	{
+		if (ft_strcmp((*export_list)->var_name, arg[0]) == 0)
+		{
+			if (arg[1])
+			{
+				free((*export_list)->var_value);
+				(*export_list)->var_value = trim_input_env(arg[1]);
+				check_env(env_list, arg);
+			}
+			break ;
+		}
+		(*export_list) = (*export_list)->next;
 	}
 }
 
@@ -97,7 +110,7 @@ int	export_helper(char *list_arg, t_data *data)
 				&& ((!ft_isalpha(list_arg[0])) && list_arg[0] != '_')))
 		{
 			put_to_stderr_and_free("minishell: export: `%s': "
-					"not a valid identifier\n",list_arg, data, 1);
+				"not a valid identifier\n", list_arg, data, 1);
 			return (1);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/04 18:27:40 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 20:13:52 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,8 @@ void		env(t_data *data);
 void		unset(t_envir **env_list, t_data *data, int value);
 void		export(t_envir **env_list, t_envir **export_list, t_cmd_list *list, t_data *data);
 void		check_env(t_envir **env_list, char **arg);
+void		check_export(t_envir **env_list, t_envir **export_list, char **arg);
+void		check_export_null(t_envir *head_export, t_envir **env_list, t_envir **export_list, char **arg);
 int			unset_helper(char *list_arg, int value, t_data *data);
 int			export_helper(char *list_arg, t_data *data);
 void		pwd(void);
