@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:49:40 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/05 22:55:12 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 23:22:39 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	add_str_part(char *str, int i, int start, char **result)
 
 	new_str = malloc(i - start + 1);
 	ft_strlcpy(new_str, &str[start], i - start + 1);
+	free(*result);
 	*result = ft_strjoin(*result, new_str);
 	free(new_str);
 }
