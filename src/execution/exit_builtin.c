@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 21:29:06 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/05 22:34:37 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/05 23:31:36 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exit_builtin(t_data *data, t_cmd_list *list)
 			data->exit_status = 1;
 			return ;
 		}
-		// exit_shell_no_free("exit\n", ft_atoi(list->args_array[1]), data);
+		exit_shell_no_free("exit\n", ft_atoi(list->args_array[1]), data);
 	}
 	exit_shell_no_free("exit\n", data->exit_status, data);
 	//free

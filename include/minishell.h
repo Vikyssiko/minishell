@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/05 20:13:52 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 03:04:28 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void		ft_envadd_back(t_envir **env_list, t_envir *new);
 t_envir		*create_env_list(char **envp);
 void		print_envir(t_envir	*envir);
 void		print_export(t_envir *envir);
-void		ft_envdelone(t_envir *env_list);
+t_envir		*ft_envdelone(t_envir *env_list);
 t_envir 	*swap_env(t_envir *first, t_envir *second);
 t_envir		*create_export_list(char **envp);
 char		**ft_singlesplit(char const *s, char c);

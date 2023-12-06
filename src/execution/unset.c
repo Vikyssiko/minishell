@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:07:25 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/03 23:00:49 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 03:04:25 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ void	unset(t_envir **env_list, t_data *data, int value)
 		{
 			while (((*env_list)) != NULL)
 			{
-				if ((*env_list)->next)
-					address = (*env_list)->next;
-				else if ((*env_list)->prev)
-					address = (*env_list)->prev;
 				tmp = (*env_list)->next;
 				if (ft_strcmp((*env_list)->var_name, data->list->args_array[i]) == 0)
-					ft_envdelone((*env_list));
+					address = ft_envdelone((*env_list));
 				(*env_list) = tmp;
 			}
-			(*env_list) = ft_envfirst(address);
 		}
+		(*env_list) = ft_envfirst(address);
 		i++;
 	}
 }

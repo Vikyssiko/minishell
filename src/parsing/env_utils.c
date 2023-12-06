@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/05 21:38:20 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 03:01:02 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,10 @@ t_envir	*ft_envfirst(t_envir *lst)
 	t_envir	*node;
 
 	node = lst;
-	if (node != NULL)
-	{
-		while (node->prev != NULL)
-			node = node->prev;
-	}
+	if (node == NULL)
+		return (NULL);
+	while (node->prev != NULL)
+		node = node->prev;
 	return (node);
 }
 
@@ -122,31 +121,34 @@ void	print_export(t_envir *envir)
 	}
 }
 
-void	ft_envdelone(t_envir *env_list)
+t_envir	*ft_envdelone(t_envir *env_list)
 {
-	t_envir	*next;
-	t_envir	*prev;
+	t_envir	*next_node;
+	t_envir	*prev_node;
 
 	if (!env_list)
-		return ;
-	next = env_list->next;
-	prev = env_list->prev;
+		return (NULL);
+	next_node = env_list->next;
+	prev_node = env_list->prev;
 	if (env_list->var_name)
 		free(env_list->var_name);
 	if (env_list->var_value)
 		free(env_list->var_value);
-	if (next != NULL && prev != NULL)
+	if (next_node != NULL && prev_node != NULL)
 	{
-		prev->next = next;
-		next->prev = prev;
+		prev_node->next = next_node;
+		next_node->prev = prev_node;
 	}
-	else if (prev)
-		prev->next = NULL;
-	else if (next)
-		next->prev = NULL;
+	else if (prev_node && !next_node)
+		prev_node->next = NULL;
+	else if (next_node && !prev_node)
+		next_node->prev = NULL;
 	env_list->next = NULL;
 	env_list->prev = NULL;
 	free(env_list);
+	if (next_node)
+		return(next_node);
+	return(prev_node);
 }
 
 char	**new_env_array(t_data *data)

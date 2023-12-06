@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/05 20:17:05 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 02:57:03 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,23 @@ void	check_export(t_envir **env_list, t_envir **export_list, char **arg)
 void	check_env(t_envir **env_list, char **arg)
 {
 	t_envir	*head;
+	t_envir	*tmp;
 
 	head = *env_list;
+	tmp = *env_list;
 	while (*env_list)
 	{
-		if (ft_strcmp((*env_list)->var_name, arg[0]) == 0)
+		if (ft_strcmp((tmp)->var_name, arg[0]) == 0)
 		{
-			free((*env_list)->var_value);
-			(*env_list)->var_value = trim_input_env(arg[1]);
+			free((tmp)->var_value);
+			(tmp)->var_value = trim_input_env(arg[1]);
 			break ;
 		}
-		*env_list = (*env_list)->next;
+		tmp = (tmp)->next;
 	}
-	if (*env_list == NULL && arg[1] && ft_strcmp(arg[1], "") != 0)
+	if (tmp == NULL && arg[1] && ft_strcmp(arg[1], "") != 0)
 	{
-		(*env_list) = head;
+		// (*env_list) = head;
 		ft_envadd_back((env_list), ft_envnew(arg));
 	}
 	(*env_list) = head;
