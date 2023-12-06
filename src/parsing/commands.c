@@ -14,17 +14,17 @@
 
 char	*find_command_path(t_data *data, t_cmd_list *list)
 {
- 	char	*command_path;
+	char	*command_path;
 	char	*path;
 
- 	path = find_env_var(data, "PATH");
- 	if (!path)
- 		return (NULL);
- 	data->path = ft_split(path, ':');
- 	if (!data->path)
- 		return (NULL);
- 	command_path = find_executable_path(data->path, list->value);
- 	return (command_path);
+	path = find_env_var(data, "PATH");
+	if (!path)
+		return (NULL);
+	data->path = ft_split(path, ':');
+	if (!data->path)
+		return (NULL);
+	command_path = find_executable_path(data->path, list->value);
+	return (command_path);
 }
 
 char	*find_executable_path(char **paths, char *cmd)
@@ -47,7 +47,7 @@ char	*find_executable_path(char **paths, char *cmd)
 //two same functions!
 char	*find_env_var(t_data *data, char *var_name)
 {
-	t_envir *tmp;
+	t_envir	*tmp;
 
 	tmp = data->env_list;
 	while (tmp)
@@ -61,7 +61,7 @@ char	*find_env_var(t_data *data, char *var_name)
 
 t_envir	*find_env_node(t_envir *env_list, char *var_name)
 {
-	t_envir *tmp;
+	t_envir	*tmp;
 
 	tmp = env_list;
 	while (tmp)

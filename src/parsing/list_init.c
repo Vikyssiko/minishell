@@ -39,12 +39,13 @@ void	print_cmd_list(t_cmd_list *list)
 	}
 }
 
-t_cmd_list 	*init_list()
+t_cmd_list	*init_list(void)
 {
-	t_cmd_list *list;
+	t_cmd_list	*list;
 
 	list = (t_cmd_list *)malloc(sizeof(t_cmd_list));
-	//malloc protect?
+	if (!list)
+		exit(1);
 	list->args_array = NULL;
 	list->value = NULL;
 	list->next = NULL;
@@ -83,22 +84,28 @@ int	count_args(t_token *start, t_token *current)
 	return (count);
 }
 
+int	find_list_value(t_token **start, t_cmd_list **list)
+{
+	int		arg_num;
+	t_token	*start_copy;
+
+	arg_num = count_args(*start, NULL);
+	*list = init_list();
+	start_copy = (*start);
+	while (start_copy && start_copy->type != T_WORD
+		&& start_copy->type != T_NEWLINE && start_copy->next)
+		start_copy = start_copy->next->next;
+	(*list)->value = start_copy->word;
+	return (arg_num);
+}
+
 t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 {
 	int		arg_num;
 	int		i;
-	t_token	*start_copy;
 
 	i = 0;
-	arg_num = count_args(*start, current);
-	list = init_list();
-	start_copy = (*start);
-	while (start_copy && start_copy->type != T_WORD && start_copy->type != T_NEWLINE)
-	{
-		if (start_copy->next)
-			start_copy = start_copy->next->next;
-	}
-	list->value = start_copy->word;
+	arg_num = find_list_value(start, &list);
 	list->args_array = (char **)malloc(sizeof(char *) * (arg_num + 1));
 	if (!list->args_array)
 		exit(1);
@@ -107,7 +114,8 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 		if ((*start)->type == T_APPEND || (*start)->type == T_DELIM
 			|| (*start)->type == T_RED_INP || (*start)->type == T_RED_OUT)
 		{
-			add_redir_token(&(list->redir_list), create_redir_token((*start), (*start)->next));
+			add_redir_token(&(list->redir_list),
+				create_redir_token((*start), (*start)->next));
 			(*start) = (*start)->next->next;
 			continue ;
 		}
@@ -120,38 +128,29 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list)
 	return (list);
 }
 
-t_cmd_list	*create_last_node(t_token **token, t_cmd_list *list)
+t_cmd_list	*create_last_node(t_token **start, t_cmd_list *list)
 {
 	int		arg_num;
 	int		i;
-	t_token	*token_copy;
 
-	list = init_list();
-//	if (!list)
-//		return (NULL);
-//	list->type = (*token)->type;
-	token_copy = (*token);
-	while (token_copy && token_copy->type != T_WORD && token_copy->type != T_NEWLINE)
-	{
-		if (token_copy->next)
-			token_copy = token_copy->next->next;
-	}
-	list->value = token_copy->word;
 	i = 0;
-	arg_num = count_args(*token, NULL);
+	arg_num = find_list_value(start, &list);
 	if (arg_num != 0)
 		list->args_array = (char **)malloc(sizeof(char *) * (arg_num));
-	while ((*token)->type != T_NEWLINE)
+	if (!list->args_array)
+		exit(1);
+	while ((*start)->type != T_NEWLINE)
 	{
-		if ((*token)->type == T_APPEND || (*token)->type == T_DELIM
-			|| (*token)->type == T_RED_INP || (*token)->type == T_RED_OUT)
+		if ((*start)->type == T_APPEND || (*start)->type == T_DELIM
+			|| (*start)->type == T_RED_INP || (*start)->type == T_RED_OUT)
 		{
-			add_redir_token(&(list->redir_list), create_redir_token((*token), (*token)->next));
-			(*token) = (*token)->next->next;
+			add_redir_token(&(list->redir_list),
+				create_redir_token((*start), (*start)->next));
+			(*start) = (*start)->next->next;
 			continue ;
 		}
-		list->args_array[i] = ft_strdup((*token)->word);
-		*token = (*token)->next;
+		list->args_array[i] = ft_strdup((*start)->word);
+		*start = (*start)->next;
 		i++;
 	}
 	list->args_array[i] = NULL;

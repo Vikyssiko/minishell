@@ -34,7 +34,7 @@ void	handle_c(int signo)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (signo == SIGTSTP || signo == SIGQUIT)
+	if (signo == SIGTSTP)
 	{
 		rl_replace_line("", 0);
 		rl_redisplay();

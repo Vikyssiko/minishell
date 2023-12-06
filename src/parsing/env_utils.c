@@ -63,7 +63,7 @@ t_envir	*ft_envnew(char **env_line)
 void	ft_envadd_back(t_envir **env_list, t_envir *new)
 {
 	t_envir	*tmp;
-	
+
 	if (!env_list)
 		return ;
 	if (*env_list)
@@ -152,7 +152,7 @@ void	ft_envdelone(t_envir *env_list)
 char	**new_env_array(t_data *data)
 
 {
-	t_envir *env_list;
+	t_envir	*env_list;
 	char	**new_env_array;
 	int		i;
 
