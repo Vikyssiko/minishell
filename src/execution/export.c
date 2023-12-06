@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 19:58:51 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 23:02:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int	export_helper(char *list_arg, t_data *data)
 	i = 0;
 	while (list_arg[i])
 	{
-		if (((ft_isalnum(list_arg[i]) || list_arg[i] != '_')
-				&& ((!ft_isalpha(list_arg[0])) && list_arg[0] != '_')))
+		if ((!(ft_isalnum(list_arg[i])) && list_arg[i] != '_'
+				&& list_arg[i] != '=') || (!ft_isalpha(list_arg[0])))
 		{
 			put_to_stderr("minishell: export: `%s': "
 				"not a valid identifier\n", list_arg, data, 1);
