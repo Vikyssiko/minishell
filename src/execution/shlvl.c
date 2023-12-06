@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/05 21:51:52 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:57:22 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	incr_shell_lvl(t_data *data)
 {
-	t_envir *env_shlvl;
-	t_envir *exp_shlvl;
+	t_envir	*env_shlvl;
+	t_envir	*exp_shlvl;
 	int		level;
 	char	*str;
-	
+
 	env_shlvl = find_env_node(data->env_list, "SHLVL");
 	exp_shlvl = find_env_node(data->export_list, "SHLVL");
 	if (env_shlvl)
@@ -36,10 +36,11 @@ void	incr_shell_lvl(t_data *data)
 	shlvl_helper(exp_shlvl, level, data->export_list);
 }
 
-void    shlvl_helper(t_envir *env_list, int level, t_envir *head)
+void	shlvl_helper(t_envir *env_list, int level, t_envir *head)
 
 {
 	char	**shlvl_array;
+
 	if (env_list == NULL)
 	{
 		shlvl_array = malloc(sizeof(char *) * 2);

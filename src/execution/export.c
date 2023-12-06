@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 02:57:03 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:58:51 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	export(t_envir **env_list, t_envir **export_list,
 			if (!export_helper(list->args_array[i], data))
 			{
 				arg = ft_singlesplit(list->args_array[i], '=');
-				check_export(env_list, export_list, arg);
+				check_export(data, export_list, &head_export, arg);
 				check_export_null(head_export, env_list, export_list, arg);
+				check_env(data, env_list, arg);
 				(*export_list) = head_export;
 				free_2darray(arg);
 			}
@@ -41,25 +42,18 @@ void	export(t_envir **env_list, t_envir **export_list,
 		print_export((*export_list));
 }
 
-void	check_export_null(t_envir *head_export, t_envir **env_list,
-		t_envir **export_list, char **arg)
+void	check_export(t_data *data, t_envir **export_list,
+		t_envir **head_export, char **arg)
 
 {
-	if (*export_list == NULL)
+	if (check_export_exist(data) == 0)
 	{
-		(*export_list) = head_export;
-		ft_envadd_back((export_list), ft_envnew(arg));
-		if (arg[1] && ft_strcmp(arg[1], "") != 0)
-			ft_envadd_back((env_list), ft_envnew(arg));
+		data->export_list = ft_envnew(arg);
+		(*head_export) = data->export_list;
+		if (check_env_exist(data) == 0 && arg[1] && ft_strcmp(arg[1], "") != 0)
+			data->env_list = ft_envnew(arg);
+		return ;
 	}
-}
-
-void	check_export(t_envir **env_list, t_envir **export_list, char **arg)
-
-{
-	t_envir	*head_export;
-
-	head_export = (*export_list);
 	while ((*export_list) != NULL)
 	{
 		if (ft_strcmp((*export_list)->var_name, arg[0]) == 0)
@@ -68,7 +62,6 @@ void	check_export(t_envir **env_list, t_envir **export_list, char **arg)
 			{
 				free((*export_list)->var_value);
 				(*export_list)->var_value = trim_input_env(arg[1]);
-				check_env(env_list, arg);
 			}
 			break ;
 		}
@@ -76,14 +69,21 @@ void	check_export(t_envir **env_list, t_envir **export_list, char **arg)
 	}
 }
 
-void	check_env(t_envir **env_list, char **arg)
+void	check_env(t_data *data, t_envir **env_list, char **arg)
 {
 	t_envir	*head;
 	t_envir	*tmp;
 
 	head = *env_list;
 	tmp = *env_list;
-	while (*env_list)
+	if (!arg[1])
+		return ;
+	if (check_env_exist(data) == 0 && arg[1] && ft_strcmp(arg[1], "") != 0)
+	{
+		data->env_list = ft_envnew(arg);
+		return ;
+	}
+	while (tmp)
 	{
 		if (ft_strcmp((tmp)->var_name, arg[0]) == 0)
 		{
@@ -94,10 +94,7 @@ void	check_env(t_envir **env_list, char **arg)
 		tmp = (tmp)->next;
 	}
 	if (tmp == NULL && arg[1] && ft_strcmp(arg[1], "") != 0)
-	{
-		// (*env_list) = head;
 		ft_envadd_back((env_list), ft_envnew(arg));
-	}
 	(*env_list) = head;
 }
 

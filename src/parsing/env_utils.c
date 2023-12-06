@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 03:01:02 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:51:41 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,51 +76,6 @@ void	ft_envadd_back(t_envir **env_list, t_envir *new)
 	*env_list = new;
 }
 
-t_envir	*ft_envlast(t_envir *lst)
-{
-	t_envir	*node;
-
-	node = lst;
-	if (node == NULL)
-		return (NULL);
-	while (node->next != NULL)
-		node = node->next;
-	return (node);
-}
-
-t_envir	*ft_envfirst(t_envir *lst)
-{
-	t_envir	*node;
-
-	node = lst;
-	if (node == NULL)
-		return (NULL);
-	while (node->prev != NULL)
-		node = node->prev;
-	return (node);
-}
-
-void	print_envir(t_envir	*envir)
-{
-	while (envir)
-	{
-		printf("%s=%s\n", envir->var_name, envir->var_value);
-		envir = envir->next;
-	}
-}
-
-void	print_export(t_envir *envir)
-{
-	while (envir)
-	{
-		if (!envir->var_value)
-			printf("declare -x %s\n", envir->var_name);
-		else
-			printf("declare -x %s=\"%s\"\n", envir->var_name, envir->var_value);
-		envir = envir->next;
-	}
-}
-
 t_envir	*ft_envdelone(t_envir *env_list)
 {
 	t_envir	*next_node;
@@ -146,13 +101,12 @@ t_envir	*ft_envdelone(t_envir *env_list)
 	env_list->next = NULL;
 	env_list->prev = NULL;
 	free(env_list);
-	if (next_node)
-		return(next_node);
-	return(prev_node);
+	if (prev_node)
+		return (prev_node);
+	return (next_node);
 }
 
 char	**new_env_array(t_data *data)
-
 {
 	t_envir	*env_list;
 	char	**new_env_array;

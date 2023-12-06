@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:07:25 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/06 03:04:25 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:57:57 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,28 @@
 void	unset(t_envir **env_list, t_data *data, int value)
 {
 	int		i;
-	t_envir	*address;
 	t_envir	*tmp;
 
 	i = 1;
-	if (data->list && data->list->args_array
-		&& (!data->list->args_array[0] || !data->list->args_array[i]))
+	tmp = (*env_list);
+	if (!data->list->args_array[i])
 		return ;
 	while (data->list && data->list->args_array && data->list->args_array[i])
 	{
 		if (!unset_helper(data->list->args_array[i], value, data))
 		{
-			while (((*env_list)) != NULL)
+			while (((tmp)) != NULL)
 			{
-				tmp = (*env_list)->next;
-				if (ft_strcmp((*env_list)->var_name, data->list->args_array[i]) == 0)
-					address = ft_envdelone((*env_list));
-				(*env_list) = tmp;
+				if (ft_strcmp((tmp)->var_name, data->list->args_array[i]) == 0)
+				{
+					tmp = ft_envdelone((tmp));
+					(*env_list) = ft_envfirst(tmp);
+					tmp = (*env_list);
+					break ;
+				}
+				tmp = tmp->next;
 			}
 		}
-		(*env_list) = ft_envfirst(address);
 		i++;
 	}
 }

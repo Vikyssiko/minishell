@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/06 02:03:22 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:53:26 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_envir	*sort_export(t_envir **export)
 	t_envir	*head;
 
 	head = (*export);
-	while ((*export)->next != NULL)
+	while ((*export) && (*export)->next != NULL)
 	{
 		if (strcmp((*export)->var_name, (*export)->next->var_name) > 0)
 		{

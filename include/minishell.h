@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/06 03:04:28 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 19:37:59 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ void		cd_folder(t_data *data, t_envir *env_list, char *pwd);
 char		*trim_input_env(char *input);
 char		**new_env_array(t_data *data);
 void		shlvl_helper(t_envir *env_list, int level, t_envir *head);
+int			check_export_exist(t_data *data);
+int			check_env_exist(t_data *data);
+int			check_both_lists(t_data *data);
+void		create_new_export(t_data *data, char **arg);
 
 /* quotes.c */
 int			odd_quote(char *str);
@@ -203,8 +207,9 @@ void		env(t_data *data);
 void		unset(t_envir **env_list, t_data *data, int value);
 void		export(t_envir **env_list, t_envir **export_list,
 				t_cmd_list *list, t_data *data);
-void		check_env(t_envir **env_list, char **arg);
-void		check_export(t_envir **env_list, t_envir **export_list, char **arg);
+void		check_env(t_data *data, t_envir **env_list, char **arg);
+void		check_export(t_data *data, t_envir **export_list,
+				t_envir **head_export, char **arg);
 void		check_export_null(t_envir *head_export, t_envir **env_list,
 				t_envir **export_list, char **arg);
 int			unset_helper(char *list_arg, int value, t_data *data);
