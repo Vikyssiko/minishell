@@ -21,13 +21,6 @@
 #  define BUFFER_SIZE 10
 # endif
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-	struct s_list	*prev;
-}					t_list;
-
 int			ft_countwords(char const *s, char c);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);

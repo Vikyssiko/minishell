@@ -115,5 +115,6 @@ void	exec_pipes(t_data *data)
 		exec_pipe(data, list, stdin, stdout);
 		list = list->next;
 	}
-	exec_last_cmd(data, list, stdin, stdout);
+	if (list && list->args_array && list->args_array[0])
+		exec_last_cmd(data, list, stdin, stdout);
 }

@@ -102,9 +102,24 @@ void	ft_envclear(t_envir **env_list)
 	}
 }
 
+void	free_redir_list(t_redir **redir)
+{
+	t_redir	*tmp;
+
+	tmp = NULL;
+	if (!(*redir))
+		return ;
+	while (*redir)
+	{
+		tmp = (*redir)->next;
+		free(*redir);
+		*redir = tmp;
+	}
+}
+
 void	free_list(t_cmd_list **list)
 {
-	t_cmd_list *tmp;
+	t_cmd_list	*tmp;
 
 	tmp = NULL;
 	if (!(*list))
@@ -113,13 +128,11 @@ void	free_list(t_cmd_list **list)
 	{
 		tmp = (*list)->next;
 		free_2darray((*list)->args_array);
-//		if ((*list)->redir_list)
-//		{
-//			if ((*list)->redir_list->redir_token->word)
-//				ft_strdel(&(*list)->redir_list->redir_token->word);
-//			if ((*list)->redir_list->redir_word->word)
-//				ft_strdel(&(*list)->redir_list->redir_word->word);
-//		}
+		if ((*list)->redir_list)
+		{
+			free_redir_list(&((*list)->redir_list));
+			free((*list)->redir_list);
+		}
 //		 if ((*list)->value)
 ////			 (*list)->value = NULL;
 //		 	ft_strdel(&(*list)->value);
