@@ -36,7 +36,7 @@ char *put_str_to_str(char *dest, char *src, t_data *data)
 	return (result);
 }
 
-void	put_to_stderr_and_free(char *dest, char *src, t_data *data, int err)
+void	put_to_stderr(char *dest, char *src, t_data *data, int err)
 {
 	char	*str;
 
@@ -60,4 +60,11 @@ void	put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err)
 		free_list(&data->list);
 	free_data(data);
 	exit(err);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

@@ -31,7 +31,8 @@
 # include <errno.h>
 # include "../libft/include/libft.h"
 
-typedef enum e_token_type {
+typedef enum e_token_type
+{
 	T_WORD = 1,
 	T_NEWLINE,
 	T_RED_INP,
@@ -41,13 +42,14 @@ typedef enum e_token_type {
 	T_DELIM,
 }	t_token_type;
 
-typedef struct s_envir {
+typedef struct s_envir
+{
 	char			*var_name;
 	char			*var_value;
 	int				equal;
 	struct s_envir	*next;
 	struct s_envir	*prev;
-}				t_envir;
+}	t_envir;
 
 typedef struct s_token
 {
@@ -55,23 +57,26 @@ typedef struct s_token
 	char				*word;
 	struct s_token		*next;
 	struct s_token		*prev;
-}					t_token;
+}	t_token;
 
-typedef struct s_redir {
-	t_token 		*redir_token;
-	t_token 		*redir_word;
+typedef struct s_redir
+{
+	t_token			*redir_token;
+	t_token			*redir_word;
 	struct s_redir	*next;
 }	t_redir;
 
-typedef struct s_cmd_list {
+typedef struct s_cmd_list
+{
 	char				*value;
 	char				*delim;
 	char				**args_array;
-	t_redir 			*redir_list;
+	t_redir				*redir_list;
 	struct s_cmd_list	*next;
 }				t_cmd_list;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	struct s_token	*token_list;
 	t_envir			*env_list;
 	t_envir			*export_list;
@@ -113,7 +118,7 @@ void		init_data(t_data **data, char **envp);
 
 /* parsing_commads.c */
 int			lexical_analysis(t_data *data, char *input);
-char *		find_command_path(t_data *data, t_cmd_list *list);
+char		*find_command_path(t_data *data, t_cmd_list *list);
 
 /* reset.c */
 void		reset_data(t_data *data);
@@ -140,7 +145,7 @@ t_envir		*create_env_list(char **envp);
 void		print_envir(t_envir	*envir);
 void		print_export(t_envir *envir);
 t_envir		*ft_envdelone(t_envir *env_list);
-t_envir 	*swap_env(t_envir *first, t_envir *second);
+t_envir		*swap_env(t_envir *first, t_envir *second);
 t_envir		*create_export_list(char **envp);
 char		**ft_singlesplit(char const *s, char c);
 t_envir		*sort_export(t_envir **export);
@@ -149,7 +154,7 @@ void		cd_home(t_data *data, t_envir *env_list);
 void		cd_folder(t_data *data, t_envir *env_list, char *pwd);
 char		*trim_input_env(char *input);
 char		**new_env_array(t_data *data);
-void    	shlvl_helper(t_envir *env_list, int level, t_envir *head);
+void		shlvl_helper(t_envir *env_list, int level, t_envir *head);
 
 /* quotes.c */
 int			odd_quote(char *str);
@@ -196,22 +201,26 @@ void		call_builtin_func(t_data *data, t_cmd_list *list);
 void		echo(t_cmd_list *list);
 void		env(t_data *data);
 void		unset(t_envir **env_list, t_data *data, int value);
-void		export(t_envir **env_list, t_envir **export_list, t_cmd_list *list, t_data *data);
+void		export(t_envir **env_list, t_envir **export_list,
+				t_cmd_list *list, t_data *data);
 void		check_env(t_envir **env_list, char **arg);
 void		check_export(t_envir **env_list, t_envir **export_list, char **arg);
-void		check_export_null(t_envir *head_export, t_envir **env_list, t_envir **export_list, char **arg);
+void		check_export_null(t_envir *head_export, t_envir **env_list,
+				t_envir **export_list, char **arg);
 int			unset_helper(char *list_arg, int value, t_data *data);
 int			export_helper(char *list_arg, t_data *data);
 void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
-void 		exit_builtin(t_data *data, t_cmd_list *list);
+void		exit_builtin(t_data *data, t_cmd_list *list);
 
 void		manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout);
 
 void		exec_pipes(t_data *data);
 
-char 		*put_str_to_str(char *dest, char *src, t_data *data);
-void		put_to_stderr_and_free(char *dest, char *src, t_data *data, int err);
-void		put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err);
+char		*put_str_to_str(char *dest, char *src, t_data *data);
+void		put_to_stderr(char *dest, char *src, t_data *data, int err);
+void		put_to_stderr_and_exit(char *dest, char *src,
+				t_data *data, int err);
+void		ft_putstr_fd(char *s, int fd);
 
 #endif

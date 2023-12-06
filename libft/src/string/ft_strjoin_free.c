@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
@@ -28,10 +28,10 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	i = 0;
 	while (s2 && s2[i])
 		result[index++] = s2[i++];
-//	if (s1)
-//		free(s1);
-//	if (s2)
-//		free(s2);
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
 	result[index] = '\0';
 	return (result);
 }

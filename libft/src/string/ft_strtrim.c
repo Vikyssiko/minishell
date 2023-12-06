@@ -11,35 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
-#include "../../../include/minishell.h"
 
-//char	*ft_strtrim(char const *s1, char const *set)
-//{
-//	char	*trimmed;
-//	size_t	start;
-//	size_t	end;
-//
-//	if (!s1 || !set)
-//		return (NULL);
-//	start = 0;
-//	end = ft_strlen(s1) - 1;
-//	while (s1[start] && ft_strchr(set, s1[start]))
-//		start++;
-//	if (start == end + 1)
-//		return (ft_strdup(""));
-//	while (ft_strchr(set, s1[end]))
-//		end--;
-//	trimmed = ft_substr(s1, start, end - start + 1);
-//	if (!trimmed)
-//		return (NULL);
-//	return (trimmed);
-//}
+int		find_end_index(char const *s1, char const *set, int set_index);
 
-static int		find_end_index(char const *s1, char const *set, int set_index);
+int		find_start_index(char const *s1, char const *set);
 
-static int		find_start_index(char const *s1, char const *set);
-
-static char		*create_string(char const *s1, int size, int start_index);
+char	*create_string(char const *s1, int size, int start_index);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -63,7 +40,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (create_string(s1, size, start_index));
 }
 
-static char	*create_string(char const *s1, int size, int start_index)
+char	*create_string(char const *s1, int size, int start_index)
 {
 	char	*result;
 	int		index;
@@ -78,7 +55,7 @@ static char	*create_string(char const *s1, int size, int start_index)
 	return (result);
 }
 
-static int	find_start_index(char const *s1, char const *set)
+int	find_start_index(char const *s1, char const *set)
 {
 	int	index;
 	int	set_index;
@@ -106,7 +83,7 @@ static int	find_start_index(char const *s1, char const *set)
 	return (index);
 }
 
-static int	find_end_index(char const *s1, char const *set, int set_index)
+int	find_end_index(char const *s1, char const *set, int set_index)
 {
 	int	index;
 	int	set_size;

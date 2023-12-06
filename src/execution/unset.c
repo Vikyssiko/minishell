@@ -51,7 +51,7 @@ int	unset_helper(char *list_arg, int value, t_data *data)
 			|| list_arg[i] == '=')
 		{
 			if (value == 0)
-				put_to_stderr_and_free("unset: `%s': not a valid identifier\n",
+				put_to_stderr("unset: `%s': not a valid identifier\n",
 					list_arg, data, 1);
 			return (1);
 		}

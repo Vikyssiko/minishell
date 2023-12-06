@@ -28,7 +28,7 @@ void	incr_shell_lvl(t_data *data)
 	if (level > 999)
 	{
 		str = ft_itoa(level);
-		put_to_stderr_and_free("minishell: warning: shell level (%s) "
+		put_to_stderr("minishell: warning: shell level (%s) "
 			"too high, resetting to 1\n", str, data, 0);
 		free(str);
 	}
