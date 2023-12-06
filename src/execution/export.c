@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:42 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 23:02:42 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 23:26:45 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int	export_helper(char *list_arg, t_data *data)
 			return (1);
 		}
 		i++;
+		if (list_arg[i] == '=')
+			return (0);
 	}
 	return (0);
 }

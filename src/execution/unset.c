@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:07:25 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/06 23:04:37 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 23:29:02 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	unset_helper(char *list_arg, int value, t_data *data)
 	i = 0;
 	while (list_arg[i])
 	{
-		if ((!(ft_isalnum(list_arg[i])) && list_arg[i] != '_'
-				&& list_arg[i] != '=') || (!ft_isalpha(list_arg[0])))
+		if ((!(ft_isalnum(list_arg[i])) && list_arg[i] != '_')
+			|| (!ft_isalpha(list_arg[0])))
 		{
 			if (value == 0)
 				put_to_stderr("unset: `%s': not a valid identifier\n",
