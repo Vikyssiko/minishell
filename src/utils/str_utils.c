@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 00:28:31 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/11/30 00:28:31 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/12/06 20:34:00 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char *put_str_to_str(char *dest, char *src, t_data *data)
+char	*put_str_to_str(char *dest, char *src, t_data *data)
 {
 	int		dest_i;
 	int		src_i;
@@ -40,7 +40,7 @@ void	put_to_stderr(char *dest, char *src, t_data *data, int err)
 {
 	char	*str;
 
-	str = put_str_to_str(dest,src, data);
+	str = put_str_to_str(dest, src, data);
 	ft_putstr_fd(str, STDERR_FILENO);
 	free(str);
 	data->exit_status = err;
@@ -50,11 +50,10 @@ void	put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err)
 {
 	char	*str;
 
-	str = put_str_to_str(dest,src, data);
+	str = put_str_to_str(dest, src, data);
 	ft_putstr_fd(str, STDERR_FILENO);
 	free(str);
 	data->exit_status = err;
-
 //	data->exit_status = exit_code;
 	if (data && data->list)
 		free_list(&data->list);

@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 19:51:41 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 21:09:33 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,7 @@ char	**new_env_array(t_data *data)
 	i = 0;
 	if (data->new_env_array)
 		free_2darray(data->new_env_array);
-	while (env_list != NULL)
-	{
-		i++;
-		env_list = env_list->next;
-	}
-	new_env_array = (char **)malloc(sizeof(char *) * (i + 1));
+	new_env_array = (char **)malloc(sizeof(char *) * (ft_lilen(env_list) + 1));
 	i = 0;
 	env_list = data->env_list;
 	while (env_list != NULL)

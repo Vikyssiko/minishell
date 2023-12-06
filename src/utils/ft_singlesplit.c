@@ -6,98 +6,84 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:29:04 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/05 23:06:00 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 20:33:50 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	ft_singlewordlen(char const *s, char c)
+static int	ft_singlewordlen(char const *str, char c)
 {
-    int len;
-    
-    len = 0;
-    while (*s && *s != c)
-    {
-        len++;
-        s++;
-    }
-    return len;
+	int	len;
+
+	len = 0;
+	while (*str && *str != c)
+	{
+		len++;
+		str++;
+	}
+	return (len);
 }
 
-int	ft_singlecountwords(char const *s, char c)
+int	ft_singlecountwords(char const *str, char c)
 {
 	int	count;
 
 	count = 0;
-	while (*s)
+	while (*str)
 	{
-		if (*s == c)
+		if (*str == c)
 		{
 			count++;
-            break ;
+			break ;
 		}
-		else
-			s++;
+		str++;
 	}
 	return (count);
 }
 
 static void	*free_singlestrs(char **strs)
 {
-    int i;
-    
-    i = 0;
-    while (strs[i])
-    {
-        free(strs[i]);
-        strs[i] = NULL;
-        i++;
-    }
-    free(strs);
-    return NULL;
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		free(strs[i]);
+		strs[i] = NULL;
+		i++;
+	}
+	free(strs);
+	return (NULL);
 }
 
-void	iterate_str(char const **s, int count, char c)
+void	iterate_str(char const **str, int count, char c)
 
 {
 	if (count == 0)
-		(*s) += ft_singlewordlen((*s), c);
+		(*str) += ft_singlewordlen((*str), c);
 	else
-		(*s) += ft_singlewordlen((*s), c) + 1;
+		(*str) += ft_singlewordlen((*str), c) + 1;
 }
 
-char    **ft_singlesplit(char const *s, char c)
+char	**ft_singlesplit(char const *str, char c)
 {
-    char	**strs;
+	char	**strs;
 	int		i;
 	int		count;
 
-    if (!s)
+	if (!str)
 		return (NULL);
-	count = ft_singlecountwords(s, c);
-    strs = malloc(sizeof(char *) * (count + 2));
-    if (!strs)
+	count = ft_singlecountwords(str, c);
+	strs = malloc(sizeof(char *) * (count + 2));
+	if (!strs)
 		return (NULL);
 	i = 0;
-    while (*s)
-	{
-		if (*s != c)
-		{
-			strs[i] = ft_substr(s, 0, ft_singlewordlen(s, c));
-			if (!strs[i])
-			{
-				free_singlestrs(strs);
-				return (NULL);
-			}
-			iterate_str(&s, count, c);
-			i++;
-				strs[i] = ft_substr(s, 0, ft_strlen(s));
-            break ;
-		}
-		else
-			s++;
-	}
+	strs[i] = ft_substr(str, 0, ft_singlewordlen(str, c));
+	if (!strs[i])
+		return (free_singlestrs(strs));
+	iterate_str(&str, count, c);
+	strs[++i] = ft_substr(str, 0, ft_strlen(str));
 	strs[count + 1] = NULL;
 	return (strs);
 }

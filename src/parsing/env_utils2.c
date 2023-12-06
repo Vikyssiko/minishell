@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:48:05 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 19:49:09 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 21:09:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,20 @@ t_envir	*ft_envlast(t_envir *lst)
 	while (node->next != NULL)
 		node = node->next;
 	return (node);
+}
+
+int	ft_lilen(t_envir *env_list)
+
+{
+	int		i;
+	t_envir	*tmp;
+
+	i = 0;
+	tmp = env_list;
+	while (tmp != NULL)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
