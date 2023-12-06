@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 21:09:33 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/06 21:28:29 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,8 @@ t_envir	*ft_envdelone(t_envir *env_list)
 		return (NULL);
 	next_node = env_list->next;
 	prev_node = env_list->prev;
-	if (env_list->var_name)
-		free(env_list->var_name);
-	if (env_list->var_value)
-		free(env_list->var_value);
+	ft_strdel(&env_list->var_name);
+	ft_strdel(&env_list->var_value);
 	if (next_node != NULL && prev_node != NULL)
 	{
 		prev_node->next = next_node;
