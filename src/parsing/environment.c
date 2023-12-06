@@ -71,8 +71,8 @@ t_envir	*sort_export(t_envir **export)
 
 t_envir	*create_export_list(char **envp)
 {
-	t_envir *export;
-	t_envir *head;
+	t_envir	*export;
+	t_envir	*head;
 
 	export = create_env_list(envp);
 	head = export;
@@ -81,10 +81,10 @@ t_envir	*create_export_list(char **envp)
 	return (export);
 }
 
-t_envir *swap_env(t_envir *first, t_envir *second)
+t_envir	*swap_env(t_envir *first, t_envir *second)
 {
-	char *name;
-	char *value;
+	char	*name;
+	char	*value;
 
 	name = first->var_name;
 	value = first->var_value;

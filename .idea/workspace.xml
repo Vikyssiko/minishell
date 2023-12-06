@@ -15,21 +15,15 @@
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/exit_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/exit_builtin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/redir.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/unset.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/tokenising.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/tokenising.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minishell/minishell.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/minishell.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/lexical_analysis.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/lexical_analysis.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/commands.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/commands.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/env_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/env_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/environment.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/environment.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/list_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/list_init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/tree_utils.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/free.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ft_singlesplit.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ft_singlesplit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/init_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/init_data.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/signals.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/signals.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +141,8 @@
       <workItem from="1701721467253" duration="2085000" />
       <workItem from="1701774533533" duration="3701000" />
       <workItem from="1701793832409" duration="696000" />
-      <workItem from="1701798471812" duration="9361000" />
+      <workItem from="1701798471812" duration="9861000" />
+      <workItem from="1701814927642" duration="5601000" />
     </task>
     <servers />
   </component>

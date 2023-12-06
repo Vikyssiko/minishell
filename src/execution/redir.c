@@ -44,7 +44,7 @@ void	append(char *name, t_data *data)
 
 void	delim(char *name, t_data *data, int stdin, int stdout)
 {
-	int 	pid;
+	int		pid;
 	int		fd[2];
 	char	*str;
 	int		status;
@@ -60,15 +60,14 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 		write(stdout, "> ", 2);
 		str = get_next_line(stdin);
 		while (str && (ft_strncmp(str, name, ft_strlen(name)) != 0
-			|| ft_strlen(name) != ft_strlen(str) - 1))
+				|| ft_strlen(name) != ft_strlen(str) - 1))
 		{
 			write(fd[1], str, ft_strlen(str));
 			free(str);
 			write(stdout, "> ", 2);
 			str = get_next_line(stdin);
 		}
-//		perror("ls");
-		exit(1);
+		exit(0);
 	}
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
@@ -83,7 +82,6 @@ void	manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout)
 	redir_list = list->redir_list;
 	while (redir_list)
 	{
-//		printf("I am in redir func\n");
 		if (redir_list->redir_token->type == T_RED_OUT)
 			redir_output(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_RED_INP)
