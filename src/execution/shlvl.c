@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:54:40 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 20:01:45 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/07 21:40:07 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,21 @@ void	incr_shell_lvl(t_data *data)
 			"too high, resetting to 1\n", str, data, 0);
 		free(str);
 	}
-	shlvl_helper(env_shlvl, level, data->env_list);
-	shlvl_helper(exp_shlvl, level, data->export_list);
+	shlvl_helper(data, env_shlvl, level, data->env_list);
+	shlvl_helper(data, exp_shlvl, level, data->export_list);
 }
 
-void	shlvl_helper(t_envir *env_list, int level, t_envir *head)
+void	shlvl_high(t_envir *env_list, int level)
+
+{
+	free(env_list->var_value);
+	if (level == 999)
+		env_list->var_value = ft_strdup("");
+	else
+		env_list->var_value = ft_strdup("1");
+}
+
+void	shlvl_helper(t_data *data, t_envir *env_list, int level, t_envir *head)
 
 {
 	char	**shlvl_array;
@@ -44,6 +54,8 @@ void	shlvl_helper(t_envir *env_list, int level, t_envir *head)
 	if (env_list == NULL)
 	{
 		shlvl_array = malloc(sizeof(char *) * 2);
+		if (!shlvl_array)
+			exit_shell_no_mes(1, data);
 		shlvl_array[0] = ft_strdup("SHLVL");
 		shlvl_array[1] = ft_strdup("1");
 		ft_envadd_back(&head, ft_envnew(shlvl_array));
@@ -52,13 +64,7 @@ void	shlvl_helper(t_envir *env_list, int level, t_envir *head)
 		free(shlvl_array);
 	}
 	else if (level >= 999 || ft_strcmp(env_list->var_value, "") == 0)
-	{
-		free(env_list->var_value);
-		if (level == 999)
-			env_list->var_value = ft_strdup("");
-		else
-			env_list->var_value = ft_strdup("1");
-	}
+		shlvl_high(env_list, level);
 	else
 	{
 		level += 1;
