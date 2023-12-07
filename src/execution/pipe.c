@@ -15,7 +15,6 @@
 void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 {
 	manage_redir(list, data, stdin, stdout);
-//	printf("I am in exec cmd %s\n", list->args_array[0]);
 	if (is_builtin(list))
 	{
 		call_builtin_func(data, list);
@@ -30,12 +29,11 @@ void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 			&& ft_strcmp(list->args_array[0], "minishell") != 0))
 		execve(list->args_array[0], list->args_array,
 			new_env_array(data));
-//	else if (find_command_path(data, list) == NULL
-//		&& (!find_env_node(data->env_list, "PATH")
-//			 && ft_strcmp(list->args_array[0], "./minishell") == 0))
-////		printf("HERE\n");
-//		put_to_stderr_and_exit("minishell: minishell: No such file "
-//			"or directory\n", "", data, 127);
+	else if (find_command_path(data, list) == NULL
+		&& (!find_env_node(data->env_list, "PATH")
+			&& ft_strcmp(list->args_array[0], "./minishell") == 0))
+		exit_shell_no_free("minishell: minishell: No such file "
+			"or directory\n", 127, data);
 	else if (execve(find_command_path(data, list),
 			list->args_array, new_env_array(data)) < 0)
 		exit_shell_no_mes(errno, data);

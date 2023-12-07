@@ -31,10 +31,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	while (s2 && s2[i])
 		result[index++] = s2[i++];
-	// if (s1)
-	// 	ft_strdel(&s1);
-	// if (s2)
-	// 	ft_strdel(&s2);
 	result[index] = '\0';
 	return (result);
 }

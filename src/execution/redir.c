@@ -46,7 +46,6 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 {
 	int		pid;
 	int		fd[2];
-	char	*str;
 	int		status;
 
 	if (pipe(fd) < 0)
@@ -56,19 +55,7 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 	if (pid < 0)
 		exit_shell_no_mes(errno, data);
 	if (pid == 0)
-	{
-		write(stdout, "> ", 2);
-		str = get_next_line(stdin);
-		while (str && (ft_strncmp(str, name, ft_strlen(name)) != 0
-				|| ft_strlen(name) != ft_strlen(str) - 1))
-		{
-			write(fd[1], str, ft_strlen(str));
-			free(str);
-			write(stdout, "> ", 2);
-			str = get_next_line(stdin);
-		}
-		exit(0);
-	}
+		read_input_delim(name, stdin, stdout, fd[1]);
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
 	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)

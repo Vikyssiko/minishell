@@ -229,6 +229,9 @@ void		put_to_stderr_and_exit(char *dest, char *src,
 				t_data *data, int err);
 void		ft_putstr_fd(char *s, int fd);
 
-t_cmd_list	*free_list_node_get_next(t_cmd_list **list);
+t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list);
+t_cmd_list	*create_last_node(t_token **start, t_cmd_list *list);
+
+void		read_input_delim(char *name, int stdin, int stdout, int fd);
 
 #endif

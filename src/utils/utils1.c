@@ -22,7 +22,6 @@ char	*trim_input(char *input)
 		return (NULL);
 	str = ft_calloc(1, ft_strlen(input) + 1);
 	if (!str)
-		//free!!!
 		exit_shell("Error: malloc failed\n", 1, NULL);
 	i = 0;
 	j = 0;
@@ -82,4 +81,21 @@ char	*ft_strstr(const char *haystack, const char *needle)
 		needle_size--;
 	}
 	return (NULL);
+}
+
+void	read_input_delim(char *name, int stdin, int stdout, int fd)
+{
+	char	*str;
+
+	write(stdout, "> ", 2);
+	str = get_next_line(stdin);
+	while (str && (ft_strncmp(str, name, ft_strlen(name)) != 0
+			|| ft_strlen(name) != ft_strlen(str) - 1))
+	{
+		write(fd, str, ft_strlen(str));
+		free(str);
+		write(stdout, "> ", 2);
+		str = get_next_line(stdin);
+	}
+	exit(0);
 }
