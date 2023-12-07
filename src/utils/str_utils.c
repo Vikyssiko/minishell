@@ -54,9 +54,6 @@ void	put_to_stderr_and_exit(char *dest, char *src, t_data *data, int err)
 	ft_putstr_fd(str, STDERR_FILENO);
 	free(str);
 	data->exit_status = err;
-//	data->exit_status = exit_code;
-	if (data && data->list)
-		free_list(&data->list);
 	free_data(data);
 	exit(err);
 }

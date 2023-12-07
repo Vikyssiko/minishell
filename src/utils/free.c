@@ -18,7 +18,7 @@ void	free_data(t_data *data)
 		return ;
 	free_2darray(data->env_array);
 	free_2darray(data->new_env_array);
-	free_tokens(&data->token_list, free);
+	free_tokens(&data->token_list);
 	ft_envclear(&data->env_list);
 	ft_envclear(&data->export_list);
 	free_list(&data->list);
@@ -27,12 +27,12 @@ void	free_data(t_data *data)
 	data = NULL;
 }
 
-void	free_tokens(t_token **begin, void (*del)(void *))
+void	free_tokens(t_token **begin)
 {
 	t_token	*tmp;
 	t_token	*tmp2;
 
-	if (!begin || !del)
+	if (!begin)
 		return ;
 	tmp = *begin;
 	while (tmp)
@@ -60,6 +60,21 @@ void	free_redir_list(t_redir **redir)
 	}
 }
 
+//t_cmd_list	*free_list_node_get_next(t_cmd_list **list)
+//{
+//	t_cmd_list	*tmp;
+//
+//	tmp = (*list)->next;
+//	free_2darray((*list)->args_array);
+//	if ((*list)->redir_list)
+//	{
+//		free_redir_list(&((*list)->redir_list));
+//		free((*list)->redir_list);
+//	}
+//	free((*list));
+//	return (tmp);
+//}
+
 void	free_list(t_cmd_list **list)
 {
 	t_cmd_list	*tmp;
@@ -76,9 +91,6 @@ void	free_list(t_cmd_list **list)
 			free_redir_list(&((*list)->redir_list));
 			free((*list)->redir_list);
 		}
-//		 if ((*list)->value)
-////			 (*list)->value = NULL;
-//		 	ft_strdel(&(*list)->value);
 		free((*list));
 		(*list) = tmp;
 	}
