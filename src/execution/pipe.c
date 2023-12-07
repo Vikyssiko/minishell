@@ -24,7 +24,9 @@ void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 		&& access(list->args_array[0], X_OK) == -1)
 		put_to_stderr_and_exit("%s: command not found\n",
 			list->args_array[0], data, 127);
-	else if (find_command_path(data, list) == NULL)
+	else if (find_command_path(data, list) == NULL
+		&& (find_env_node(data->env_list, "PATH")
+			&& ft_strcmp(list->args_array[0], "minishell") != 0))
 		execve(list->args_array[0], list->args_array,
 			new_env_array(data));
 	else if (execve(find_command_path(data, list),

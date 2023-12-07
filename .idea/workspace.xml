@@ -15,8 +15,7 @@
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/include/libft.h" beforeDir="false" afterPath="$PROJECT_DIR$/libft/include/libft.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/free.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +135,9 @@
       <workItem from="1701793832409" duration="696000" />
       <workItem from="1701798471812" duration="9861000" />
       <workItem from="1701814927642" duration="5788000" />
-      <workItem from="1701861504003" duration="5340000" />
+      <workItem from="1701861504003" duration="8300000" />
+      <workItem from="1701897836138" duration="680000" />
+      <workItem from="1701906000683" duration="650000" />
     </task>
     <servers />
   </component>
