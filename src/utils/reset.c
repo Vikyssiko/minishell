@@ -14,9 +14,11 @@
 
 void	reset_data(t_data *data)
 {
+	if (!data)
+		return ;
+	free_tokens(&data->token_list);
+	free_list(&data->list);
+	ft_strdel(&data->input_line);
 	if (data->curr_dir)
 		ft_strdel(&data->curr_dir);
-	if (data->input_line && ft_strlen(data->input_line) > 0)
-		ft_strdel(&data->input_line);
-	free_tokens(&data->token_list, free);
 }

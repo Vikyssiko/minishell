@@ -171,7 +171,7 @@ int			in_single_quotes(char *s, int pos);
 char		*ft_strstr(const char *haystack, const char *needle);
 int			is_chr_str(char c, char *str);
 void		tokenise(t_data *data, char *str);
-void		free_tokens(t_token **begin, void (*del)(void *));
+void		free_tokens(t_token **begin);
 t_token		*create_token(t_data *data, int i, int len);
 t_token		*create_arg_token(t_data *data, char *word, enum e_token_type type);
 void		add_token(t_token **token, t_token *new);
@@ -228,5 +228,7 @@ void		put_to_stderr(char *dest, char *src, t_data *data, int err);
 void		put_to_stderr_and_exit(char *dest, char *src,
 				t_data *data, int err);
 void		ft_putstr_fd(char *s, int fd);
+
+t_cmd_list	*free_list_node_get_next(t_cmd_list **list);
 
 #endif

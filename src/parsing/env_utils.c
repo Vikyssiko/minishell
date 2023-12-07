@@ -113,7 +113,6 @@ char	**new_env_array(t_data *data)
 	if (!data->env_list)
 		return (NULL);
 	env_list = data->env_list;
-	i = 0;
 	if (data->new_env_array)
 		free_2darray(data->new_env_array);
 	new_env_array = (char **)malloc(sizeof(char *) * (ft_lilen(env_list) + 1));
