@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/06 21:11:07 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/07 21:37:46 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void		cd_home(t_data *data, t_envir *env_list);
 void		cd_folder(t_data *data, t_envir *env_list, char *pwd);
 char		*trim_input_env(char *input);
 char		**new_env_array(t_data *data);
-void		shlvl_helper(t_envir *env_list, int level, t_envir *head);
+void		shlvl_helper(t_data *data, t_envir *env_list, int level, t_envir *head);
 int			check_export_exist(t_data *data);
 int			check_env_exist(t_data *data);
 int			check_both_lists(t_data *data);
