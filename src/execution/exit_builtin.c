@@ -20,7 +20,10 @@ void	check_arg_is_num(t_data *data, t_cmd_list *list)
 	i = 0;
 	while (list->args_array[1][i])
 	{
-		if (!ft_isdigit(list->args_array[1][i]))
+		if ((!ft_isdigit(list->args_array[1][i])
+			&& (list->args_array[1][0] != '+' && list->args_array[1][0] != '-'))
+			|| ((list->args_array[1][0] == '+' || list->args_array[1][0] == '-')
+			&& !ft_isdigit(list->args_array[1][1])))
 		{
 			str = put_str_to_str("exit\nminishell: exit: "
 					"%s: numeric argument required\n",

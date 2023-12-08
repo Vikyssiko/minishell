@@ -12,15 +12,13 @@
 
 # Variables
 CC					=	gcc
-CFLAGS				=	-Wall -Wextra -Iinclude -Isrc -O3 -g #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS				=	-Wall -Wextra -Iinclude -Isrc -O3 -g -fsanitize=address
 
 RM					=	rm -rf
 
 NAME				=	minishell
 
 # readline, leaks, valgrind
-#RL_PREFIX="-L/goinfre/vkozlova/.brew/opt/readline/lib"
-#RL_CFLAGS="-I/goinfre/vkozlova/.brew/opt/readline/include"
 RL_PREFIX = $(HOME)/.local/pkg/readline
 RL_CFLAGS = -I $(RL_PREFIX)/include
 RL_LIBS   = -L $(RL_PREFIX)/lib -lreadline -lhistory -lcurses

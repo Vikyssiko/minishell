@@ -60,21 +60,6 @@ void	free_redir_list(t_redir **redir)
 	}
 }
 
-//t_cmd_list	*free_list_node_get_next(t_cmd_list **list)
-//{
-//	t_cmd_list	*tmp;
-//
-//	tmp = (*list)->next;
-//	free_2darray((*list)->args_array);
-//	if ((*list)->redir_list)
-//	{
-//		free_redir_list(&((*list)->redir_list));
-//		free((*list)->redir_list);
-//	}
-//	free((*list));
-//	return (tmp);
-//}
-
 void	free_list(t_cmd_list **list)
 {
 	t_cmd_list	*tmp;

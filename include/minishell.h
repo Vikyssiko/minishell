@@ -69,7 +69,7 @@ typedef struct s_redir
 typedef struct s_cmd_list
 {
 	char				*value;
-	char				*delim;
+//	char				*delim;
 	char				**args_array;
 	t_redir				*redir_list;
 	struct s_cmd_list	*next;

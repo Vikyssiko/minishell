@@ -29,7 +29,7 @@ void	print_without_quotes(char *str)
 		}
 		if (str[i] && str[i] != quote)
 			printf("%c", str[i++]);
-		if (str[i] == quote)
+		else if (str[i] == quote)
 		{
 			closed = 1;
 			i++;

@@ -25,8 +25,7 @@ void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 		put_to_stderr_and_exit("%s: command not found\n",
 			list->args_array[0], data, 127);
 	else if (find_command_path(data, list) == NULL
-		&& (find_env_node(data->env_list, "PATH")
-			&& ft_strcmp(list->args_array[0], "minishell") != 0))
+		&& (find_env_node(data->env_list, "PATH")))
 		execve(list->args_array[0], list->args_array,
 			new_env_array(data));
 	else if (find_command_path(data, list) == NULL
@@ -72,19 +71,23 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 	int	status;
 
 	status = 0;
-	pid = fork();
-	if (pid < 0)
-		exit_shell_no_mes(errno, data);
-	if (pid == 0)
+	if (list && ((list->args_array && list->args_array[0])
+			|| list->redir_list->redir_token->type == T_DELIM))
 	{
-		exec_cmd(data, list, stdin, stdout);
-		exit_shell_no_mes(errno, data);
+		pid = fork();
+		if (pid < 0)
+			exit_shell_no_mes(errno, data);
+		if (pid == 0)
+		{
+			exec_cmd(data, list, stdin, stdout);
+			exit_shell_no_mes(errno, data);
+		}
+		waitpid(pid, &status, 0);
+		data->exit_status = WEXITSTATUS(status);
+		if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
+			|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0)
+			exit_shell_no_mes(errno, data);
 	}
-	waitpid(pid, &status, 0);
-	data->exit_status = WEXITSTATUS(status);
-	if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
-		|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0)
-		exit_shell_no_mes(errno, data);
 }
 
 int	check_not_child_exec_builtins(t_cmd_list *list)
@@ -122,6 +125,5 @@ void	exec_pipes(t_data *data)
 		exec_pipe(data, list, stdin, stdout);
 		list = list->next;
 	}
-	if (list && list->args_array && list->args_array[0])
-		exec_last_cmd(data, list, stdin, stdout);
+	exec_last_cmd(data, list, stdin, stdout);
 }

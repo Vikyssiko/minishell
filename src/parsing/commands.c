@@ -44,7 +44,6 @@ char	*find_executable_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-//two same functions!
 char	*find_env_var(t_data *data, char *var_name)
 {
 	t_envir	*tmp;

@@ -12,6 +12,31 @@
 
 #include "../../include/minishell.h"
 
+void	print_cmd_list(t_cmd_list *list)
+{
+	int	i;
+
+	while (list)
+	{
+		i = 0;
+		if (list->value)
+			printf("value: %s\n", list->value);
+		while (list->args_array && list->args_array[i])
+		{
+			if (list->args_array[i])
+				printf("args_array[%i]: %s\n", i, list->args_array[i]);
+			i++;
+		}
+		while (list->redir_list)
+		{
+			printf("redir token: %s\n", list->redir_list->redir_token->word);
+			printf("redir word: %s\n", list->redir_list->redir_word->word);
+			list->redir_list = list->redir_list->next;
+		}
+		list = list->next;
+	}
+}
+
 t_cmd_list	*create_list(t_data *data, t_token *token);
 
 void	init_list_data(t_data *data)
