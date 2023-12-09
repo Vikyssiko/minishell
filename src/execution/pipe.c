@@ -184,8 +184,7 @@ void	exec_pipe(t_data *data, t_cmd_list *list)
 	if (list && list->prev && fork() == 0)
 	{
 		close_fds(&first_pipe, pipes, NULL);
-		dup2(pipes->fd[0], 0);
-		close(pipes->fd[0]);
+		redir_input_to_pipe(pipes->fd[0], data);
 		exec_cmd(data, list);
 		exit_shell_no_mes(errno, data);
 	}
@@ -220,18 +219,13 @@ void	exec_pipe(t_data *data, t_cmd_list *list)
 	return_in_out(data);
 }
 
-int	check_not_child_exec_builtins(t_cmd_list *list, t_data *data)
+int	check_not_child_exec_builtins(t_cmd_list *list)
 {
 	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
 		|| ft_strcmp(list->value, "export") == 0
 		|| ft_strcmp(list->value, "cd") == 0
 		|| ft_strcmp(list->value, "exit") == 0))
-	{
-		manage_redir(list, data);
-		call_builtin_func(data, data->list);
-		return_in_out(data);
 		return (1);
-	}
 	return (0);
 }
 
@@ -245,7 +239,14 @@ void	exec_pipes(t_data *data)
 	data->out = dup(1);
 	if (data->in < 0 || data->out < 0)
 		exit_shell_no_mes(errno, data);
-	if (!check_not_child_exec_builtins(list, data) && list && list->next)
+	if (check_not_child_exec_builtins(list))
+	{
+		manage_redir(list, data);
+		call_builtin_func(data, data->list);
+		return_in_out(data);
+		return ;
+	}
+	if (list && list->next)
 		exec_pipe(data, list);
 	else
 		exec_last_cmd(data, list);
