@@ -13,12 +13,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/echo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/exit_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/exit_builtin.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/list_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/list_init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/node.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/node.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/init_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/init_data.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/signals.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/signals.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,6 +148,12 @@
       <workItem from="1701979040509" duration="7000" />
       <workItem from="1701979192446" duration="2097000" />
       <workItem from="1701981362553" duration="9874000" />
+      <workItem from="1701994609407" duration="608000" />
+      <workItem from="1702047159836" duration="10619000" />
+      <workItem from="1702062716523" duration="2206000" />
+      <workItem from="1702069672075" duration="10689000" />
+      <workItem from="1702118611684" duration="13661000" />
+      <workItem from="1702139745714" duration="4324000" />
     </task>
     <servers />
   </component>

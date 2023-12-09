@@ -21,6 +21,7 @@ t_cmd_list	*init_list(void)
 		exit(1);
 	list->args_array = NULL;
 	list->value = NULL;
+	list->prev = NULL;
 	list->next = NULL;
 	list->redir_list = NULL;
 	return (list);

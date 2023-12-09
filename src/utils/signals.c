@@ -23,6 +23,7 @@ void	handle_signal(void)
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGTSTP, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGPIPE, &sa, NULL);
 }
 
 void	handle_c(int signo)
@@ -39,6 +40,11 @@ void	handle_c(int signo)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+//	if (signo == SIGPIPE)
+//	{
+////		ft_putstr_fd("I got SIGPIPE\n", STDERR_FILENO);
+////		exit(0);
+//	}
 }
 
 int	handle_d(t_data *data, char *line)

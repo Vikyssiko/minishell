@@ -42,6 +42,13 @@ typedef enum e_token_type
 	T_DELIM,
 }	t_token_type;
 
+typedef struct	s_pipe_list
+{
+	int					fd[2];
+	struct s_pipe_list		*next;
+	struct s_pipe_list		*prev;
+}	t_pipe_list;
+
 typedef struct s_envir
 {
 	char			*var_name;
@@ -69,10 +76,10 @@ typedef struct s_redir
 typedef struct s_cmd_list
 {
 	char				*value;
-//	char				*delim;
 	char				**args_array;
 	t_redir				*redir_list;
 	struct s_cmd_list	*next;
+	struct s_cmd_list	*prev;
 }				t_cmd_list;
 
 typedef struct s_data
@@ -90,6 +97,8 @@ typedef struct s_data
 	char			**cmd_array;
 	char			**path;
 	t_cmd_list		*list;
+//	int				stdin;
+//	int				stdout;
 }				t_data;
 
 /* environment.c */
@@ -234,5 +243,6 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list);
 t_cmd_list	*create_last_node(t_token **start, t_cmd_list *list);
 
 void		read_input_delim(char *name, int stdin, int stdout, int fd);
+void		return_in_out(int stdin, int stdout, t_data *data);
 
 #endif
