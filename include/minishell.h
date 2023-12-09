@@ -97,8 +97,8 @@ typedef struct s_data
 	char			**cmd_array;
 	char			**path;
 	t_cmd_list		*list;
-//	int				stdin;
-//	int				stdout;
+	int				in;
+	int				out;
 }				t_data;
 
 /* environment.c */
@@ -229,7 +229,7 @@ void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void		exit_builtin(t_data *data, t_cmd_list *list);
 
-void		manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout);
+void		manage_redir(t_cmd_list *list, t_data *data);
 
 void		exec_pipes(t_data *data);
 
@@ -243,6 +243,6 @@ t_cmd_list	*create_node(t_token **start, t_token *current, t_cmd_list *list);
 t_cmd_list	*create_last_node(t_token **start, t_cmd_list *list);
 
 void		read_input_delim(char *name, int stdin, int stdout, int fd);
-void		return_in_out(int stdin, int stdout, t_data *data);
+void		return_in_out(t_data *data);
 
 #endif

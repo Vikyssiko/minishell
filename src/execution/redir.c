@@ -42,7 +42,7 @@ void	append(char *name, t_data *data)
 		exit_shell_no_mes(errno, data);
 }
 
-void	delim(char *name, t_data *data, int stdin, int stdout)
+void	delim(char *name, t_data *data)
 {
 	int		pid;
 	int		fd[2];
@@ -55,14 +55,14 @@ void	delim(char *name, t_data *data, int stdin, int stdout)
 	if (pid < 0)
 		exit_shell_no_mes(errno, data);
 	if (pid == 0)
-		read_input_delim(name, stdin, stdout, fd[1]);
+		read_input_delim(name, data->in, data->out, fd[1]);
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
 	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)
 		exit_shell_no_mes(errno, data);
 }
 
-void	manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout)
+void	manage_redir(t_cmd_list *list, t_data *data)
 {
 	t_redir	*redir_list;
 
@@ -76,7 +76,7 @@ void	manage_redir(t_cmd_list *list, t_data *data, int stdin, int stdout)
 		else if (redir_list->redir_token->type == T_APPEND)
 			append(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_DELIM)
-			delim(redir_list->redir_word->word, data, stdin, stdout);
+			delim(redir_list->redir_word->word, data);
 		redir_list = redir_list->next;
 	}
 }

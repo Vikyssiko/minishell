@@ -12,9 +12,17 @@
 
 #include "../../include/minishell.h"
 
-void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
+void	return_in_out(t_data *data)
 {
-	manage_redir(list, data, stdin, stdout);
+	if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
+		|| dup2(data->in, 0) < 0 || dup2(data->out, 1) < 0
+		|| close(data->in) < 0 || close(data->out) < 0)
+		exit_shell_no_mes(errno, data);
+}
+
+void	exec_cmd(t_data *data, t_cmd_list *list)
+{
+	manage_redir(list, data);
 	if (is_builtin(list))
 	{
 		call_builtin_func(data, list);
@@ -39,12 +47,13 @@ void	exec_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 	exit_shell_no_mes(errno, data);
 }
 
-void	exec_last_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
+void	exec_last_cmd(t_data *data, t_cmd_list *list)
 {
 	int	pid;
 	int	status;
 
 	status = 0;
+	pid = 0;
 	if (list && ((list->args_array && list->args_array[0])
 				 || list->redir_list->redir_token->type == T_DELIM))
 	{
@@ -53,20 +62,17 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
 			exit_shell_no_mes(errno, data);
 		if (pid == 0)
 		{
-			exec_cmd(data, list, stdin, stdout);
+			exec_cmd(data, list);
 			exit_shell_no_mes(errno, data);
 		}
 		while (waitpid(-1, &status, 0) > 0);
 		data->exit_status = WEXITSTATUS(status);
 	}
 	else
-		manage_redir(list, data, stdin, stdout);
+		manage_redir(list, data);
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
-	if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
-		|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0
-		|| close(stdin) < 0 || close(stdout) < 0)
-		exit_shell_no_mes(errno, data);
+	return_in_out(data);
 }
 
 int	count_pipes(t_cmd_list *list)
@@ -138,7 +144,33 @@ void	close_fds(t_pipe_list **first_pipe, t_pipe_list *in, t_pipe_list *out)
 	}
 }
 
-void	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
+t_cmd_list	*get_last_cmd(t_cmd_list *list)
+{
+	while (list && list->next)
+		list = list->next;
+	return (list);
+}
+
+t_pipe_list 	*get_last_pipe(t_pipe_list *pipes)
+{
+	while (pipes && pipes->next)
+		pipes = pipes->next;
+	return (pipes);
+}
+
+void	redir_input_to_pipe(int fd, t_data *data)
+{
+	if (dup2(fd, 0) < 0 || close(fd) < 0)
+		exit_shell_no_mes(errno, data);
+}
+
+void	redir_output_to_pipe(int fd, t_data *data)
+{
+	if (dup2(fd, 1) < 0 || close(fd) < 0)
+		exit_shell_no_mes(errno, data);
+}
+
+void	exec_pipe(t_data *data, t_cmd_list *list)
 {
 	t_pipe_list	*pipes;
 	t_pipe_list	*first_pipe;
@@ -147,16 +179,14 @@ void	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
 	status = 0;
 	first_pipe = create_pipes(list);
 	pipes = first_pipe;
-	while (list && list->next)
-		list = list->next;
-	while (pipes && pipes->next)
-		pipes = pipes->next;
+	list = get_last_cmd(list);
+	pipes = get_last_pipe(pipes);
 	if (list && list->prev && fork() == 0)
 	{
 		close_fds(&first_pipe, pipes, NULL);
 		dup2(pipes->fd[0], 0);
 		close(pipes->fd[0]);
-		exec_cmd(data, list, stdin, stdout);
+		exec_cmd(data, list);
 		exit_shell_no_mes(errno, data);
 	}
 	if (list && list->prev)
@@ -171,7 +201,7 @@ void	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
 			close(pipes->fd[0]);
 			dup2(pipes->next->fd[1], 1);
 			close(pipes->next->fd[1]);
-			exec_cmd(data, list, stdin, stdout);
+			exec_cmd(data, list);
 			exit_shell_no_mes(errno, data);
 		}
 		list = list->prev;
@@ -181,25 +211,27 @@ void	exec_pipe(t_data *data, t_cmd_list *list, int stdin, int stdout)
 		close_fds(&first_pipe, NULL, pipes);
 		dup2(pipes->fd[1], 1);
 		close(pipes->fd[1]);
-		exec_cmd(data, list, stdin, stdout);
+		exec_cmd(data, list);
 		exit_shell_no_mes(errno, data);
 	}
 	close_fds(&first_pipe, NULL, NULL);
 	while (wait(&status) > 0);
 	data->exit_status = WEXITSTATUS(status);
-	if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
-		|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0
-		|| close(stdin) < 0 || close(stdout) < 0)
-		exit_shell_no_mes(errno, data);
+	return_in_out(data);
 }
 
-int	check_not_child_exec_builtins(t_cmd_list *list)
+int	check_not_child_exec_builtins(t_cmd_list *list, t_data *data)
 {
 	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
 		|| ft_strcmp(list->value, "export") == 0
 		|| ft_strcmp(list->value, "cd") == 0
 		|| ft_strcmp(list->value, "exit") == 0))
+	{
+		manage_redir(list, data);
+		call_builtin_func(data, data->list);
+		return_in_out(data);
 		return (1);
+	}
 	return (0);
 }
 
@@ -207,82 +239,20 @@ int	check_not_child_exec_builtins(t_cmd_list *list)
 void	exec_pipes(t_data *data)
 {
 	t_cmd_list	*list;
-	int			stdin;
-	int			stdout;
 
 	list = data->list;
-	stdin = dup(0);
-	stdout = dup(1);
-	if (stdin < 0 || stdout < 0)
+	data->in = dup(0);
+	data->out = dup(1);
+	if (data->in < 0 || data->out < 0)
 		exit_shell_no_mes(errno, data);
-	if (check_not_child_exec_builtins(list))
-	{
-		manage_redir(list, data, stdin, stdout);
-		call_builtin_func(data, data->list);
-		if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
-			|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0)
-			exit_shell_no_mes(errno, data);
-		return ;
-	}
-	if (list && list->next)
-		exec_pipe(data, list, stdin, stdout);
+	if (!check_not_child_exec_builtins(list, data) && list && list->next)
+		exec_pipe(data, list);
 	else
-		exec_last_cmd(data, list, stdin, stdout);
+		exec_last_cmd(data, list);
 }
 
-void	exec_last_cmd(t_data *data, t_cmd_list *list, int stdin, int stdout)
-{
-	int	pid;
-	int	status;
 
-	status = 0;
-	pid = 0;
-	if (list && ((list->args_array && list->args_array[0])
-				 || list->redir_list->redir_token->type == T_DELIM))
-	{
-		pid = fork();
-		if (pid < 0)
-			exit_shell_no_mes(errno, data);
-		if (pid == 0)
-		{
-			exec_cmd(data, list, stdin, stdout);
-			exit_shell_no_mes(errno, data);
-		}
-		waitpid(pid, &status, 0);
-		data->exit_status = WEXITSTATUS(status);
-	}
-	else
-		manage_redir(list, data, stdin, stdout);
-	while (waitpid(pid, &status, 0) > 0);
-	if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
-		|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0
-		|| close(stdin) < 0 || close(stdout) < 0)
-		exit_shell_no_mes(errno, data);
-//	return_in_out(stdin, stdout, data);
-}
-
-//void	return_in_out(int stdin, int stdout, t_data *data)
-//{
-//	if (close(STDOUT_FILENO) < 0 || close(STDIN_FILENO) < 0
-//		|| dup2(stdin, 0) < 0 || dup2(stdout, 1) < 0
-//		|| close(stdin) < 0 || close(stdout) < 0)
-//		exit_shell_no_mes(errno, data);
-//}
-
-int	count_pipes(t_cmd_list *list)
-{
-	int			pipes;
-	t_cmd_list	*copy;
-
-	copy = list;
-	pipes = 0;
-	while (copy && copy->next)
-	{
-		copy = copy->next;
-		pipes++;
-	}
-	return (pipes);
-}
+/*
 
 t_pipe	*create_pipes(t_cmd_list *list)
 {

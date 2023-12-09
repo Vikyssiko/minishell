@@ -18,8 +18,8 @@ void	init_data(t_data **data, char **envp)
 	if (!*data)
 		exit(EXIT_FAILURE);
 	(*data)->path = NULL;
-//	(*data)->stdin = 0;
-//	(*data)->stdout = 0;
+	(*data)->in = 0;
+	(*data)->out = 0;
 	(*data)->exit_status = 0;
 	(*data)->list = NULL;
 	(*data)->token_list = NULL;
