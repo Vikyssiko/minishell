@@ -42,11 +42,11 @@ typedef enum e_token_type
 	T_DELIM,
 }	t_token_type;
 
-typedef struct	s_pipe_list
+typedef struct s_pipe_list
 {
 	int					fd[2];
-	struct s_pipe_list		*next;
-	struct s_pipe_list		*prev;
+	struct s_pipe_list	*next;
+	struct s_pipe_list	*prev;
 }	t_pipe_list;
 
 typedef struct s_envir
@@ -232,6 +232,9 @@ void		exit_builtin(t_data *data, t_cmd_list *list);
 void		manage_redir(t_cmd_list *list, t_data *data);
 
 void		exec_pipes(t_data *data);
+void		exec_pipe(t_data *data, t_cmd_list *list);
+void		exec_last_cmd(t_data *data, t_cmd_list *list);
+void		exec_cmd(t_data *data, t_cmd_list *list);
 
 char		*put_str_to_str(char *dest, char *src, t_data *data);
 void		put_to_stderr(char *dest, char *src, t_data *data, int err);
@@ -244,5 +247,13 @@ t_cmd_list	*create_last_node(t_token **start, t_cmd_list *list);
 
 void		read_input_delim(char *name, int stdin, int stdout, int fd);
 void		return_in_out(t_data *data);
+
+void		close_fds(t_pipe_list **first_pipe,
+				t_pipe_list *in, t_pipe_list *out);
+t_pipe_list	*create_pipes(t_cmd_list *list);
+t_cmd_list	*get_last_cmd(t_cmd_list *list);
+t_pipe_list	*get_last_pipe(t_pipe_list *pipes);
+void		redir_input_to_pipe(int fd, t_data *data);
+void		redir_output_to_pipe(int fd, t_data *data);
 
 #endif

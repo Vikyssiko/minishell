@@ -46,17 +46,17 @@ void	cd(t_data *data, t_cmd_list *list)
 	char	*pwd;
 
 	pwd = NULL;
+	pwd = getcwd(pwd, 1);
 	if (!(list->args_array[1]))
 		cd_no_arg(data);
 	else if (chdir(list->args_array[1]) == -1)
 		no_dir_error(errno, list->args_array[1], data);
 	else
 	{
-		pwd = getcwd(pwd, 1);
 		cd_folder(data, data->env_list, pwd);
 		cd_folder(data, data->export_list, pwd);
-		free(pwd);
 	}
+	free(pwd);
 }
 
 void	cd_home(t_data *data, t_envir *env_list)

@@ -16,8 +16,6 @@ void	print_cmd_list(t_cmd_list *list)
 {
 	int	i;
 
-//	while (list && list->next)
-//		list = list->next;
 	while (list)
 	{
 		i = 0;
@@ -36,7 +34,6 @@ void	print_cmd_list(t_cmd_list *list)
 			list->redir_list = list->redir_list->next;
 		}
 		list = list->next;
-//		list = list->prev;
 	}
 }
 
@@ -48,7 +45,6 @@ void	init_list_data(t_data *data)
 
 	head = data->token_list;
 	data->list = create_list(data, data->token_list);
-//	print_cmd_list(data->list);
 	data->token_list = head;
 }
 
@@ -57,7 +53,6 @@ t_cmd_list	*create_node_go_to_next(t_cmd_list **root, t_cmd_list **list,
 {
 	t_cmd_list	*new;
 
-//	tmp = *list;
 	if (*list == NULL)
 	{
 		*list = create_node(&data->token_list, token, *list);
@@ -69,8 +64,6 @@ t_cmd_list	*create_node_go_to_next(t_cmd_list **root, t_cmd_list **list,
 		new = create_node(&data->token_list, token, *list);
 		(*list)->next = new;
 		new->prev = *list;
-//		(*list)->next = create_node(&data->token_list, token, *list);
-//		(*list)->prev = tmp;
 		*list = (*list)->next;
 	}
 	return (*list);
@@ -100,6 +93,5 @@ t_cmd_list	*create_list(t_data *data, t_token *token)
 	new = create_last_node(&data->token_list, list);
 	list->next = new;
 	new->prev = list;
-//	list->next = create_last_node(&data->token_list, list);
 	return (root);
 }
