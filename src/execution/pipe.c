@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 00:42:19 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/08 19:05:57 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:43:28 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	exec_lst_cmd_in_pipe(t_data *data, t_cmd_list *list,
 	}
 	close_fds(&first, NULL, NULL);
 	while (wait(&status) > 0);
+	free_pipe(pipes);
 	data->exit_status = WEXITSTATUS(status);
 	return_in_out(data);
 }

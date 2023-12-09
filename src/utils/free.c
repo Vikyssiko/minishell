@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:48:33 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 20:35:19 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/09 20:48:36 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,19 @@ void	free_list(t_cmd_list **list)
 		}
 		free((*list));
 		(*list) = tmp;
+	}
+}
+
+void	free_pipe(t_pipe_list *pipes)
+
+{
+	t_pipe_list	*tmp;
+
+	while (pipes)
+	{
+		tmp = pipes;
+		pipes = pipes->next;
+		free(tmp);
+
 	}
 }

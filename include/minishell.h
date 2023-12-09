@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/07 21:37:46 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/09 20:43:21 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,5 +255,6 @@ t_cmd_list	*get_last_cmd(t_cmd_list *list);
 t_pipe_list	*get_last_pipe(t_pipe_list *pipes);
 void		redir_input_to_pipe(int fd, t_data *data);
 void		redir_output_to_pipe(int fd, t_data *data);
+void		free_pipe(t_pipe_list *pipes);
 
 #endif

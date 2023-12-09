@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlova <vkozlova@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:33:12 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/09 19:33:12 by vkozlova         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:48:58 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
