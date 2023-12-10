@@ -18,13 +18,15 @@ void	start_loop(t_data *data)
 
 	while (1)
 	{
-//		gl_signal = 0;
+//		rl_clear_signals();
+		gl_signal = 0;
 //		printf("I im in the loop\n");
 		reset_data(data);
 		line = readline(data->input_minishell);
+//		printf("%s\n", line);
 		if (handle_d(data, line))
 			continue ;
-		gl_signal = 0;
+//		gl_signal = 0;
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);

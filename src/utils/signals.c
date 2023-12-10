@@ -41,7 +41,7 @@ void	handle_c(int signo)
 	{
 		write(1, "\n", 1);
 //		gl_signal = SIGINT;
-		wait(NULL);
+		while (wait(NULL) > 0);
 		sig = gl_signal;
 		gl_signal = SIGINT;
 		if (sig == SIGCHLD)
@@ -56,14 +56,13 @@ void	handle_c(int signo)
 	}
 	else if (signo == SIGQUIT)
 	{
-//		printf("I got a SIGQUIT signal\n");
 //		gl_signal = SIGQUIT;
 		wait(NULL);
-		if (gl_signal == SIGCHLD)
-		{
-			write(1, "Quit: 3\n", 8);
-			return ;
-		}
+//		if (gl_signal == SIGCHLD)
+//		{
+//			write(1, "Quit: 3\n", 8);
+//			return ;
+//		}
 //		ft_putstr_fd("exit\n", STDERR_FILENO);
 //		exit(0);
 	}
@@ -82,7 +81,7 @@ int	handle_d(t_data *data, char *line)
 //		rl_redisplay();
 		exit_shell_no_free("exit\n", 0, data);
 	}
-	if (ft_strlen(line) == 0)
+	else if (ft_strlen(line) == 0)
 	{
 		ft_strdel(&line);
 		return (1);

@@ -91,6 +91,7 @@ void	handle_sig_child(int signo)
 		exit(1);
 	}
 //	if (signo == SIGQUIT)
+//		printf("");
 //		gl_signal = SIGQUIT;
 
 }
@@ -98,16 +99,8 @@ void	handle_sig_child(int signo)
 void	read_input_delim(char *name, int stdin, int stdout, int fd)
 {
 	char	*str;
-	struct sigaction	sa;
 
-	sa.sa_handler = handle_sig_child;
-	sa.sa_flags = SA_SIGINFO;
-//	sa.sa_flags = SA_SIGINFO;
-//	sigemptyset(&sa.sa_mask);
-//	rl_catch_signals = 0;
-	sigaction(SIGINT, &sa, NULL);
-//	sigaction(SIGQUIT, &sa, NULL);
-
+	signal(SIGINT, handle_sig_child);
 	write(stdout, "> ", 2);
 	str = get_next_line(stdin);
 	while (str && (ft_strncmp(str, name, ft_strlen(name)) != 0

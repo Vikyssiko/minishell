@@ -25,6 +25,7 @@ void	exec_cmd(t_data *data, t_cmd_list *list)
 //	manage_redir(list, data);
 //	if (gl_signal == SIGINT)
 //		return ;
+//	signal(SIGQUIT, handle_quit);
 	if (is_builtin(list))
 	{
 		call_builtin_func(data, list);
@@ -55,9 +56,8 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list)
 	int	status;
 
 	status = 0;
-//	if (gl_signal == SIGINT)
-//		return ;
-	if (list && ((list->args_array && list->args_array[0])))
+//	signal(SIGQUIT, handle_quit);
+	if (gl_signal != SIGINT && list && ((list->args_array && list->args_array[0])))
 //			|| list->redir_list->redir_token->type == T_DELIM))
 	{
 		pid = fork();
@@ -90,9 +90,6 @@ void	exec_pipes(t_data *data)
 	while (list)
 	{
 		manage_redir(list, data);
-//		printf("here\n");
-		if (gl_signal == SIGINT)
-			return ;
 		list = list->next;
 	}
 	list = data->list;
@@ -101,12 +98,14 @@ void	exec_pipes(t_data *data)
 			|| ft_strcmp(list->value, "cd") == 0
 			|| ft_strcmp(list->value, "exit") == 0))
 	{
+//		if (gl_signal == SIGINT)
+//			return ;
 //		manage_redir(list, data);
 		call_builtin_func(data, data->list);
 		return_in_out(data);
 		return ;
 	}
-	if (list && list->next)
+	if (list && list->next && gl_signal != SIGINT)
 		exec_pipe(data, list);
 	else
 		exec_last_cmd(data, list);
