@@ -69,6 +69,13 @@ void	manage_redir(t_cmd_list *list, t_data *data)
 	redir_list = list->redir_list;
 	while (redir_list)
 	{
+		if (gl_signal == SIGINT)
+		{
+//			gl_signal = 0;
+//			exit(0);
+//			gl_signal = -1;
+			break ;
+		}
 		if (redir_list->redir_token->type == T_RED_OUT)
 			redir_output(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_RED_INP)

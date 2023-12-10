@@ -22,7 +22,9 @@ void	return_in_out(t_data *data)
 
 void	exec_cmd(t_data *data, t_cmd_list *list)
 {
-	manage_redir(list, data);
+//	manage_redir(list, data);
+//	if (gl_signal == SIGINT)
+//		return ;
 	if (is_builtin(list))
 	{
 		call_builtin_func(data, list);
@@ -53,9 +55,10 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list)
 	int	status;
 
 	status = 0;
-	pid = 0;
-	if (list && ((list->args_array && list->args_array[0])
-			|| list->redir_list->redir_token->type == T_DELIM))
+//	if (gl_signal == SIGINT)
+//		return ;
+	if (list && ((list->args_array && list->args_array[0])))
+//			|| list->redir_list->redir_token->type == T_DELIM))
 	{
 		pid = fork();
 		if (pid < 0)
@@ -68,10 +71,10 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list)
 		while (waitpid(-1, &status, 0) > 0);
 		data->exit_status = WEXITSTATUS(status);
 	}
-	else
-		manage_redir(list, data);
-	waitpid(pid, &status, 0);
-	data->exit_status = WEXITSTATUS(status);
+//	else
+//		manage_redir(list, data);
+//	waitpid(pid, &status, 0);
+//	data->exit_status = WEXITSTATUS(status);
 	return_in_out(data);
 }
 
@@ -84,12 +87,21 @@ void	exec_pipes(t_data *data)
 	data->out = dup(1);
 	if (data->in < 0 || data->out < 0)
 		exit_shell_no_mes(errno, data);
+	while (list)
+	{
+		manage_redir(list, data);
+//		printf("here\n");
+		if (gl_signal == SIGINT)
+			return ;
+		list = list->next;
+	}
+	list = data->list;
 	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
 			|| ft_strcmp(list->value, "export") == 0
 			|| ft_strcmp(list->value, "cd") == 0
 			|| ft_strcmp(list->value, "exit") == 0))
 	{
-		manage_redir(list, data);
+//		manage_redir(list, data);
 		call_builtin_func(data, data->list);
 		return_in_out(data);
 		return ;

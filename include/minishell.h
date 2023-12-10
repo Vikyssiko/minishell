@@ -257,4 +257,6 @@ void		redir_input_to_pipe(int fd, t_data *data);
 void		redir_output_to_pipe(int fd, t_data *data);
 void		free_pipe(t_pipe_list *pipes);
 
+int	gl_signal;
+
 #endif

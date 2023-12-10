@@ -18,10 +18,13 @@ void	start_loop(t_data *data)
 
 	while (1)
 	{
+//		gl_signal = 0;
+//		printf("I im in the loop\n");
 		reset_data(data);
 		line = readline(data->input_minishell);
 		if (handle_d(data, line))
 			continue ;
+		gl_signal = 0;
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);
@@ -31,6 +34,8 @@ void	start_loop(t_data *data)
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;
 		init_list_data(data);
+//		printf("I am to execute pipes\n");
 		exec_pipes(data);
+//		printf("I executed pipes\n");
 	}
 }

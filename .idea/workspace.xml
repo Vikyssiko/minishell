@@ -13,15 +13,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae3d9d4-c4c6-45dc-817f-5e809c801db0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/execution/execution.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/execution/pipe_list.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/execution/pipe_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/cd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/execution.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/list_init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/list_init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/redir.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/free.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/signals.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/signals.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils1.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils1.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +155,8 @@
       <workItem from="1702069672075" duration="10689000" />
       <workItem from="1702118611684" duration="13661000" />
       <workItem from="1702139745714" duration="9979000" />
+      <workItem from="1702154554495" duration="5002000" />
+      <workItem from="1702230129803" duration="1308000" />
     </task>
     <servers />
   </component>

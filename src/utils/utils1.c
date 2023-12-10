@@ -83,9 +83,30 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	return (NULL);
 }
 
+void	handle_sig_child(int signo)
+{
+	if (signo == SIGINT)
+	{
+		gl_signal = SIGINT;
+		exit(1);
+	}
+//	if (signo == SIGQUIT)
+//		gl_signal = SIGQUIT;
+
+}
+
 void	read_input_delim(char *name, int stdin, int stdout, int fd)
 {
 	char	*str;
+	struct sigaction	sa;
+
+	sa.sa_handler = handle_sig_child;
+	sa.sa_flags = SA_SIGINFO;
+//	sa.sa_flags = SA_SIGINFO;
+//	sigemptyset(&sa.sa_mask);
+//	rl_catch_signals = 0;
+	sigaction(SIGINT, &sa, NULL);
+//	sigaction(SIGQUIT, &sa, NULL);
 
 	write(stdout, "> ", 2);
 	str = get_next_line(stdin);

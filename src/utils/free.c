@@ -82,7 +82,6 @@ void	free_list(t_cmd_list **list)
 }
 
 void	free_pipe(t_pipe_list *pipes)
-
 {
 	t_pipe_list	*tmp;
 
@@ -91,6 +90,5 @@ void	free_pipe(t_pipe_list *pipes)
 		tmp = pipes;
 		pipes = pipes->next;
 		free(tmp);
-
 	}
 }

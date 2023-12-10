@@ -18,36 +18,68 @@ void	handle_signal(void)
 
 	sa.sa_handler = handle_c;
 	sa.sa_flags = SA_RESTART | SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
+//	sa.sa_flags = SA_SIGINFO;
+//	sigemptyset(&sa.sa_mask);
 	rl_catch_signals = 0;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGTSTP, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGPIPE, &sa, NULL);
+	sigaction(SIGCHLD, &sa, NULL);
 }
 
 void	handle_c(int signo)
 {
-	if (signo == SIGINT)
+	int sig;
+//
+//	sig = gl_signal;
+//	printf("I got a signal\n");
+	if (signo == SIGCHLD)
+	{
+		gl_signal = SIGCHLD;
+	}
+	else if (signo == SIGINT)
 	{
 		write(1, "\n", 1);
+//		gl_signal = SIGINT;
+		wait(NULL);
+		sig = gl_signal;
+		gl_signal = SIGINT;
+		if (sig == SIGCHLD)
+		{
+//			write(1, "\n", 1);
+			return ;
+		}
+//		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (signo == SIGTSTP)
+	else if (signo == SIGQUIT)
 	{
-		rl_replace_line("", 0);
-		rl_redisplay();
+//		printf("I got a SIGQUIT signal\n");
+//		gl_signal = SIGQUIT;
+		wait(NULL);
+		if (gl_signal == SIGCHLD)
+		{
+			write(1, "Quit: 3\n", 8);
+			return ;
+		}
+//		ft_putstr_fd("exit\n", STDERR_FILENO);
+//		exit(0);
 	}
+//	else if (signo == SIGTSTP)
+//	{
+//		rl_replace_line("", 0);
+//		rl_redisplay();
+//	}
 }
 
 int	handle_d(t_data *data, char *line)
 {
 	if (line == NULL)
 	{
-		rl_on_new_line();
-		rl_redisplay();
+//		rl_on_new_line();
+//		rl_redisplay();
 		exit_shell_no_free("exit\n", 0, data);
 	}
 	if (ft_strlen(line) == 0)

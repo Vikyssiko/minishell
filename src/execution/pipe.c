@@ -50,7 +50,7 @@ void	exec_lst_cmd_in_pipe(t_data *data, t_cmd_list *list,
 		exit_shell_no_mes(errno, data);
 	}
 	close_fds(&first, NULL, NULL);
-	while (wait(&status) > 0);
+	while (waitpid(pid, &status, 0) > 0);
 	free_pipe(pipes);
 	data->exit_status = WEXITSTATUS(status);
 	return_in_out(data);
