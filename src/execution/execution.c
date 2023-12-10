@@ -95,6 +95,8 @@ void	exec_last_cmd(t_data *data, t_cmd_list *list)
 		while (waitpid(-1, &status, 0) > 0);
 		data->exit_status = WEXITSTATUS(status);
 	}
+	else
+		manage_redir(list, data);
 	return_in_out(data);
 }
 
@@ -107,11 +109,6 @@ void	exec_pipes(t_data *data)
 	data->out = dup(1);
 	if (data->in < 0 || data->out < 0)
 		exit_shell_no_mes(errno, data);
-//	while (list)
-//	{
-//		manage_redir(list, data);
-//		list = list->next;
-//	}
 	list = data->list;
 	if (list && !(list->next) && (ft_strcmp(list->value, "unset") == 0
 			|| ft_strcmp(list->value, "export") == 0
@@ -124,6 +121,7 @@ void	exec_pipes(t_data *data)
 		return_in_out(data);
 		return ;
 	}
+	printf("signal: %i\n", gl_signal);
 	if (list && list->next && gl_signal != SIGINT)
 		exec_pipe(data, list);
 	else

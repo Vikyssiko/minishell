@@ -21,9 +21,9 @@ void	start_loop(t_data *data)
 		gl_signal = 0;
 		reset_data(data);
 		line = readline(data->input_minishell);
+//		printf("%s\n", line);
 		if (handle_d(data, line))
 			continue ;
-//		gl_signal = 0;
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		data->input_line = trim_input(line);
