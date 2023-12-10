@@ -44,7 +44,7 @@ void	handle_c(int signo)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-//		gl_signal = 0;
+		gl_signal = 0;
 	}
 	else if (signo == SIGQUIT)
 	{
