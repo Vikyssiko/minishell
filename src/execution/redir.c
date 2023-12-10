@@ -24,12 +24,17 @@ void	redir_output(char *name, t_data *data)
 void	redir_input(char *name, t_data *data)
 {
 	int	file;
+	int	exists;
 
+	exists = 1;
 	file = open(name, O_RDONLY, 0777);
 	if (file < 0)
-		put_to_stderr_and_exit("minishell: %s: No such file or directory\n",
+	{
+		put_to_stderr("minishell: %s: No such file or directory\n",
 			name, data, errno);
-	if (dup2(file, STDIN_FILENO) < 0 || close(file) < 0)
+		exists = 0;
+	}
+	if (exists && (dup2(file, STDIN_FILENO) < 0 || close(file) < 0))
 		exit_shell_no_mes(errno, data);
 }
 

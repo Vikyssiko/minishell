@@ -30,26 +30,17 @@ void	handle_signal(void)
 void	handle_c(int signo)
 {
 	int sig;
-//
-//	sig = gl_signal;
-//	printf("I got a signal\n");
+
 	if (signo == SIGCHLD)
-	{
 		gl_signal = SIGCHLD;
-	}
 	else if (signo == SIGINT)
 	{
 		write(1, "\n", 1);
-//		gl_signal = SIGINT;
-		while (wait(NULL) > 0);
+		wait(NULL);
 		sig = gl_signal;
 		gl_signal = SIGINT;
 		if (sig == SIGCHLD)
-		{
-//			write(1, "\n", 1);
 			return ;
-		}
-//		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -66,21 +57,12 @@ void	handle_c(int signo)
 //		ft_putstr_fd("exit\n", STDERR_FILENO);
 //		exit(0);
 	}
-//	else if (signo == SIGTSTP)
-//	{
-//		rl_replace_line("", 0);
-//		rl_redisplay();
-//	}
 }
 
 int	handle_d(t_data *data, char *line)
 {
 	if (line == NULL)
-	{
-//		rl_on_new_line();
-//		rl_redisplay();
 		exit_shell_no_free("exit\n", 0, data);
-	}
 	else if (ft_strlen(line) == 0)
 	{
 		ft_strdel(&line);

@@ -41,7 +41,7 @@ void	put_to_stderr(char *dest, char *src, t_data *data, int err)
 	char	*str;
 
 	str = put_str_to_str(dest, src, data);
-	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(str, data->in);
 	free(str);
 	data->exit_status = err;
 }
