@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-static int	ft_singlewordlen(char const *str, char c)
+int	ft_singlewordlen(char const *str, char c)
 {
 	int	len;
 
@@ -42,7 +42,7 @@ int	ft_singlecountwords(char const *str, char c)
 	return (count);
 }
 
-static void	*free_singlestrs(char **strs)
+void	*free_singlestrs(char **strs)
 {
 	int	i;
 
@@ -83,7 +83,8 @@ char	**ft_singlesplit(char const *str, char c)
 	if (!strs[i])
 		return (free_singlestrs(strs));
 	iterate_str(&str, count, c);
-	strs[++i] = ft_substr(str, 0, ft_strlen(str));
+	if (count == 1)
+		strs[++i] = ft_substr(str, 0, ft_strlen(str));
 	strs[count + 1] = NULL;
 	return (strs);
 }

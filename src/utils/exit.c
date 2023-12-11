@@ -14,6 +14,7 @@
 
 void	exit_shell(char *message, int exit_code, t_data *data)
 {
+	return_in_out(data);
 	ft_putstr_fd(message, STDERR_FILENO);
 	free(message);
 	free_data(data);
@@ -22,6 +23,7 @@ void	exit_shell(char *message, int exit_code, t_data *data)
 
 void	exit_shell_no_free(char *message, int exit_code, t_data *data)
 {
+	return_in_out(data);
 	ft_putstr_fd(message, STDERR_FILENO);
 	free_data(data);
 	exit(exit_code);
@@ -29,6 +31,7 @@ void	exit_shell_no_free(char *message, int exit_code, t_data *data)
 
 void	exit_shell_no_mes(int exit_code, t_data *data)
 {
+	return_in_out(data);
 	free_data(data);
 	exit(exit_code);
 }

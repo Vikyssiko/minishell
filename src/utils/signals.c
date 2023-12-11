@@ -46,23 +46,22 @@ void	handle_c(int signo)
 		gl_signal = 0;
 	}
 	else if (signo == SIGQUIT)
-	{
-//		gl_signal = SIGQUIT;
 		wait(NULL);
-//		if (gl_signal == SIGCHLD)
+}
+//if (gl_signal == SIGCHLD)
 //		{
 //			write(1, "Quit: 3\n", 8);
 //			return ;
 //		}
-//		ft_putstr_fd("exit\n", STDERR_FILENO);
-//		exit(0);
-	}
-}
 
 int	handle_d(t_data *data, char *line)
 {
 	if (line == NULL)
-		exit_shell_no_free("exit\n", 0, data);
+	{
+		ft_putstr_fd("exit\n", STDERR_FILENO);
+		free_data(data);
+		exit(0);
+	}
 	else if (ft_strlen(line) == 0)
 	{
 		ft_strdel(&line);

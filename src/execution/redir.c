@@ -73,6 +73,9 @@ void	delim(char *name, t_data *data, t_cmd_list *list)
 //	if (list->fd_in && close(list->fd_in) < 0)
 //		exit_shell_no_mes(errno, data);
 	status = 0;
+//	fd[1] = open("file", O_RDWR | O_CREAT | O_APPEND, 0777);
+//	if (fd[1])
+//		printf("OPENED\n");
 	pid = fork();
 	if (pid < 0)
 		exit_shell_no_mes(errno, data);
@@ -81,6 +84,7 @@ void	delim(char *name, t_data *data, t_cmd_list *list)
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
 	list->fd_in = fd[0];
+//	printf("I will close fd[1]\n");
 	if (close(fd[1]) < 0)
 		exit_shell_no_mes(errno, data);
 //	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)
