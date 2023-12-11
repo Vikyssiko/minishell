@@ -18,8 +18,7 @@ void	handle_signal(void)
 
 	sa.sa_handler = handle_c;
 	sa.sa_flags = SA_RESTART | SA_SIGINFO;
-//	sa.sa_flags = SA_SIGINFO;
-//	sigemptyset(&sa.sa_mask);
+	sigemptyset(&sa.sa_mask);
 	rl_catch_signals = 0;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGTSTP, &sa, NULL);

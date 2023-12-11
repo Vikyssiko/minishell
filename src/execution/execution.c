@@ -42,8 +42,12 @@ void	redir_output(t_redir *redir, t_data *data)
 {
 	int	file;
 
+	file = 0;
 //	printf("I am in redir output\n");
-	file = open(redir->redir_word->word, O_WRONLY, 0777);
+	if (redir->redir_token->type == T_RED_OUT)
+		file = open(redir->redir_word->word, O_WRONLY | O_TRUNC, 0777);
+	else if (redir->redir_token->type == T_APPEND)
+		file = open(redir->redir_word->word, O_WRONLY | O_APPEND, 0777);
 	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
 		exit_shell_no_mes(errno, data);
 }
@@ -146,7 +150,6 @@ void	exec_pipes(t_data *data)
 		return_in_out(data);
 		return ;
 	}
-//	printf("I am here 2\n");
 	if (list && list->next && gl_signal != SIGINT)
 		exec_pipe(data, list);
 	else
