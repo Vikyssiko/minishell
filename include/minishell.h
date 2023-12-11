@@ -78,6 +78,10 @@ typedef struct s_cmd_list
 	char				*value;
 	char				**args_array;
 	t_redir				*redir_list;
+	t_redir 			*in;
+	t_redir				*out;
+	int					fd_in;
+	int					redir_status;
 	struct s_cmd_list	*next;
 	struct s_cmd_list	*prev;
 }				t_cmd_list;
@@ -229,7 +233,7 @@ void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void		exit_builtin(t_data *data, t_cmd_list *list);
 
-void		manage_redir(t_cmd_list *list, t_data *data);
+int 		manage_redir(t_cmd_list *list, t_data *data);
 
 void		exec_pipes(t_data *data);
 void		exec_pipe(t_data *data, t_cmd_list *list);
@@ -256,6 +260,7 @@ t_pipe_list	*get_last_pipe(t_pipe_list *pipes);
 void		redir_input_to_pipe(int fd, t_data *data);
 void		redir_output_to_pipe(int fd, t_data *data);
 void		free_pipe(t_pipe_list *pipes);
+//void		delim(char *name, t_data *data);
 
 int	gl_signal;
 

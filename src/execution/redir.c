@@ -12,42 +12,57 @@
 
 #include "../../include/minishell.h"
 
-void	redir_output(char *name, t_data *data)
+void	output(t_redir *redir, t_data *data, t_cmd_list *list)
 {
 	int	file;
 
-	file = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
+	file = open(redir->redir_word->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	list->out = redir;
+	if (file < 0)
 		exit_shell_no_mes(errno, data);
+	if (close(file) < 0)
+		exit_shell_no_mes(errno, data);
+//	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
+//		exit_shell_no_mes(errno, data);
 }
 
-void	redir_input(char *name, t_data *data)
+int	input(t_redir *redir, t_data *data, t_cmd_list *list, int delim)
 {
 	int	file;
-	int	exists;
 
-	exists = 1;
-	file = open(name, O_RDONLY, 0777);
+	file = open(redir->redir_word->word, O_RDONLY, 0777);
 	if (file < 0)
 	{
 		put_to_stderr("minishell: %s: No such file or directory\n",
-			name, data, errno);
-		exists = 0;
+			redir->redir_word->word, data, errno);
+		return (0);
 	}
-	if (exists && (dup2(file, STDIN_FILENO) < 0 || close(file) < 0))
-		exit_shell_no_mes(errno, data);
+	else
+	{
+		list->in = redir;
+		if (delim == 1)
+			list->fd_in = -1;
+		if (close(file) < 0)
+			exit_shell_no_mes(errno, data);
+	}
+	return (1);
+//	else if (dup2(file, STDIN_FILENO) < 0 || close(file) < 0)
+//		exit_shell_no_mes(errno, data);
 }
 
-void	append(char *name, t_data *data)
+void	append(t_redir *redir, t_data *data, t_cmd_list *list)
 {
 	int	file;
 
-	file = open(name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
+	file = open(redir->redir_word->word, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	list->out = redir;
+	if (file < 0 || close(file) < 0)
 		exit_shell_no_mes(errno, data);
+//	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
+//		exit_shell_no_mes(errno, data);
 }
 
-void	delim(char *name, t_data *data)
+void	delim(char *name, t_data *data, t_cmd_list *list)
 {
 	int		pid;
 	int		fd[2];
@@ -55,6 +70,8 @@ void	delim(char *name, t_data *data)
 
 	if (pipe(fd) < 0)
 		exit_shell_no_mes(errno, data);
+//	if (list->fd_in && close(list->fd_in) < 0)
+//		exit_shell_no_mes(errno, data);
 	status = 0;
 	pid = fork();
 	if (pid < 0)
@@ -63,27 +80,49 @@ void	delim(char *name, t_data *data)
 		read_input_delim(name, data->in, data->out, fd[1]);
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
-	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)
+	list->fd_in = fd[0];
+	if (close(fd[1]) < 0)
 		exit_shell_no_mes(errno, data);
+//	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)
+//		exit_shell_no_mes(errno, data);
 }
 
-void	manage_redir(t_cmd_list *list, t_data *data)
+int	manage_redir(t_cmd_list *list, t_data *data)
 {
 	t_redir	*redir_list;
+	int		del;
 
+	del = 0;
 	redir_list = list->redir_list;
 	while (redir_list)
 	{
 		if (gl_signal == SIGINT)
 			break ;
-		if (redir_list->redir_token->type == T_RED_OUT)
-			redir_output(redir_list->redir_word->word, data);
-		else if (redir_list->redir_token->type == T_RED_INP)
-			redir_input(redir_list->redir_word->word, data);
-		else if (redir_list->redir_token->type == T_APPEND)
-			append(redir_list->redir_word->word, data);
 		else if (redir_list->redir_token->type == T_DELIM)
-			delim(redir_list->redir_word->word, data);
+			delim(redir_list->redir_word->word, data, list);
 		redir_list = redir_list->next;
 	}
+	redir_list = list->redir_list;
+	while (redir_list)
+	{
+//		if (gl_signal == SIGINT)
+//			break ;
+		if (redir_list->redir_token->type == T_RED_OUT)
+			output(redir_list, data, list);
+		else if (redir_list->redir_token->type == T_RED_INP)
+		{
+			if (input(redir_list, data, list, del) == 0)
+			{
+				list->redir_status = -1;
+				return (0);
+			}
+			del = 0;
+		}
+		else if (redir_list->redir_token->type == T_APPEND)
+			append(redir_list, data, list);
+		else if (redir_list->redir_token->type == T_DELIM)
+			del = 1;
+		redir_list = redir_list->next;
+	}
+	return (1);
 }

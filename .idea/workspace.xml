@@ -16,12 +16,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/execution.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/pipe.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/pipe.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/redir.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minishell/program_loop.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/minishell/program_loop.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/free.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/signals.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/signals.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils1.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils1.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/node.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/node.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +153,8 @@
       <workItem from="1702139745714" duration="9979000" />
       <workItem from="1702154554495" duration="5002000" />
       <workItem from="1702230129803" duration="1308000" />
+      <workItem from="1702250436359" duration="361000" />
+      <workItem from="1702303219534" duration="649000" />
     </task>
     <servers />
   </component>

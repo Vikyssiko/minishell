@@ -19,6 +19,8 @@ void	exec_first_cmd_in_pipe(t_data *data, t_cmd_list *list,
 
 	if (list && list->prev)
 	{
+		if (list->redir_status == -1)
+			return ;
 		pid = fork();
 		if (pid < 0)
 			exit_shell_no_mes(errno, data);
@@ -70,6 +72,8 @@ void	exec_pipe(t_data *data, t_cmd_list *list)
 		list = list->prev;
 	while (list && list->prev)
 	{
+		if (list->redir_status == -1)
+			list->args_array = NULL;
 		pipes = pipes->prev;
 		if (fork() == 0)
 		{

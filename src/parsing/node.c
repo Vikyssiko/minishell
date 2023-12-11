@@ -20,6 +20,10 @@ t_cmd_list	*init_list(void)
 	if (!list)
 		exit(1);
 	list->args_array = NULL;
+	list->in = NULL;
+	list->out = NULL;
+	list->fd_in = -1;
+	list->redir_status = 1;
 	list->value = NULL;
 	list->prev = NULL;
 	list->next = NULL;
