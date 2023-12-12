@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:36 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/05 22:35:15 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/12 01:14:32 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_data(t_data **data, char **envp)
 	(*data)->input_line = NULL;
 	(*data)->new_env_array = NULL;
 	(*data)->input_minishell = "minishell>> ";
-	(*data)->curr_dir = getcwd(NULL, 0);
 	save_envir((*data), envp);
 	(*data)->env_list = create_env_list((((*data)->env_array)));
 	(*data)->export_list = create_export_list((*data)->env_array);
