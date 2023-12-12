@@ -28,31 +28,26 @@ void	handle_signal(void)
 
 void	handle_c(int signo)
 {
-	int sig;
+	int	sig;
 
 	if (signo == SIGCHLD)
-		gl_signal = SIGCHLD;
+		g_signal = SIGCHLD;
 	else if (signo == SIGINT)
 	{
 		write(1, "\n", 1);
 		wait(NULL);
-		sig = gl_signal;
-		gl_signal = SIGINT;
+		sig = g_signal;
+		g_signal = SIGINT;
 		if (sig == SIGCHLD)
 			return ;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		gl_signal = 0;
+		g_signal = 0;
 	}
 	else if (signo == SIGQUIT)
 		wait(NULL);
 }
-//if (gl_signal == SIGCHLD)
-//		{
-//			write(1, "Quit: 3\n", 8);
-//			return ;
-//		}
 
 int	handle_d(t_data *data, char *line)
 {
@@ -68,4 +63,13 @@ int	handle_d(t_data *data, char *line)
 		return (1);
 	}
 	return (0);
+}
+
+void	handle_sig_child(int signo)
+{
+	if (signo == SIGINT)
+	{
+		g_signal = SIGINT;
+		exit(1);
+	}
 }

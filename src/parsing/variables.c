@@ -15,19 +15,27 @@
 void	add_str_part(char *str, int i, int start, char **result)
 {
 	char	*new_str;
+	char	*dup;
 
 	new_str = malloc(i - start + 1);
 	ft_strlcpy(new_str, &str[start], i - start + 1);
-	*result = ft_strjoin(*result, new_str);
+	dup = ft_strdup(*result);
+	free(*result);
+	*result = ft_strjoin(dup, new_str);
+	free(dup);
 	free(new_str);
 }
 
 void	join_result_with_exit(int exit_status, char **result)
 {
 	char	*exit;
+	char	*dup;
 
 	exit = ft_itoa(exit_status);
-	*result = ft_strjoin(*result, exit);
+	dup = ft_strdup(*result);
+	free(*result);
+	*result = ft_strjoin(dup, exit);
+	free(dup);
 	free(exit);
 }
 
@@ -35,6 +43,7 @@ void	replace_variable(t_data *data, int *i, int *start, char **result)
 {
 	char	*new_str;
 	char	*str;
+	char	*dup;
 
 	str = data->input_line;
 	add_str_part(str, *i, *start, result);
@@ -43,7 +52,10 @@ void	replace_variable(t_data *data, int *i, int *start, char **result)
 		(*i)++;
 	new_str = malloc(*i - *start + 1);
 	ft_strlcpy(new_str, &str[*start], *i - *start + 1);
-	*result = ft_strjoin(*result, find_env_var(data, new_str));
+	dup = ft_strdup(*result);
+	free(*result);
+	*result = ft_strjoin(dup, find_env_var(data, new_str));
+	free(dup);
 	free(new_str);
 	*start = *i;
 }

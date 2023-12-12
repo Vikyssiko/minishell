@@ -22,8 +22,6 @@ void	output(t_redir *redir, t_data *data, t_cmd_list *list)
 		exit_shell_no_mes(errno, data);
 	if (close(file) < 0)
 		exit_shell_no_mes(errno, data);
-//	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
-//		exit_shell_no_mes(errno, data);
 }
 
 int	input(t_redir *redir, t_data *data, t_cmd_list *list, int delim)
@@ -46,8 +44,6 @@ int	input(t_redir *redir, t_data *data, t_cmd_list *list, int delim)
 			exit_shell_no_mes(errno, data);
 	}
 	return (1);
-//	else if (dup2(file, STDIN_FILENO) < 0 || close(file) < 0)
-//		exit_shell_no_mes(errno, data);
 }
 
 void	append(t_redir *redir, t_data *data, t_cmd_list *list)
@@ -58,8 +54,6 @@ void	append(t_redir *redir, t_data *data, t_cmd_list *list)
 	list->out = redir;
 	if (file < 0 || close(file) < 0)
 		exit_shell_no_mes(errno, data);
-//	if (file < 0 || dup2(file, STDOUT_FILENO) < 0 || close(file) < 0)
-//		exit_shell_no_mes(errno, data);
 }
 
 void	delim(char *name, t_data *data, t_cmd_list *list)
@@ -70,12 +64,9 @@ void	delim(char *name, t_data *data, t_cmd_list *list)
 
 	if (pipe(fd) < 0)
 		exit_shell_no_mes(errno, data);
-//	if (list->fd_in && close(list->fd_in) < 0)
-//		exit_shell_no_mes(errno, data);
+	if (list->fd_in != -1 && close(list->fd_in) < 0)
+		exit_shell_no_mes(errno, data);
 	status = 0;
-//	fd[1] = open("file", O_RDWR | O_CREAT | O_APPEND, 0777);
-//	if (fd[1])
-//		printf("OPENED\n");
 	pid = fork();
 	if (pid < 0)
 		exit_shell_no_mes(errno, data);
@@ -84,11 +75,8 @@ void	delim(char *name, t_data *data, t_cmd_list *list)
 	waitpid(pid, &status, 0);
 	data->exit_status = WEXITSTATUS(status);
 	list->fd_in = fd[0];
-//	printf("I will close fd[1]\n");
 	if (close(fd[1]) < 0)
 		exit_shell_no_mes(errno, data);
-//	if (dup2(fd[0], 0) < 0 || close(fd[0]) < 0 || close(fd[1]) < 0)
-//		exit_shell_no_mes(errno, data);
 }
 
 int	manage_redir(t_cmd_list *list, t_data *data)
@@ -98,28 +86,17 @@ int	manage_redir(t_cmd_list *list, t_data *data)
 
 	del = 0;
 	redir_list = list->redir_list;
+	manage_delim(list, data);
 	while (redir_list)
 	{
-		if (gl_signal == SIGINT)
+		if (g_signal == SIGINT)
 			break ;
-		else if (redir_list->redir_token->type == T_DELIM)
-			delim(redir_list->redir_word->word, data, list);
-		redir_list = redir_list->next;
-	}
-	redir_list = list->redir_list;
-	while (redir_list)
-	{
-//		if (gl_signal == SIGINT)
-//			break ;
 		if (redir_list->redir_token->type == T_RED_OUT)
 			output(redir_list, data, list);
 		else if (redir_list->redir_token->type == T_RED_INP)
 		{
 			if (input(redir_list, data, list, del) == 0)
-			{
-				list->redir_status = -1;
-				return (0);
-			}
+				return (set_redir_status(list));
 			del = 0;
 		}
 		else if (redir_list->redir_token->type == T_APPEND)

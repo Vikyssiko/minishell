@@ -34,25 +34,30 @@ int	is_builtin(t_cmd_list *list)
 	return (0);
 }
 
-void	call_builtin_func(t_data *data, t_cmd_list *list)
+int	call_builtin_func(t_data *data, t_cmd_list *list)
 {
-	if (ft_strcmp(list->value, "echo") == 0)
-		echo(list);
-	else if (ft_strcmp(list->value, "cd") == 0)
-		cd(data, list);
-	else if (ft_strcmp(list->value, "pwd") == 0)
-		pwd();
-	else if (ft_strcmp(list->value, "export") == 0)
-		export(&(data->env_list), &(data->export_list), list, data);
-	else if (ft_strcmp(list->value, "unset") == 0)
+	if (is_builtin(list))
 	{
-		unset(&(data->env_list), data, 0);
-		unset(&(data->export_list), data, 1);
+		if (ft_strcmp(list->value, "echo") == 0)
+			echo(list);
+		else if (ft_strcmp(list->value, "cd") == 0)
+			cd(data, list);
+		else if (ft_strcmp(list->value, "pwd") == 0)
+			pwd();
+		else if (ft_strcmp(list->value, "export") == 0)
+			export(&(data->env_list), &(data->export_list), list, data);
+		else if (ft_strcmp(list->value, "unset") == 0)
+		{
+			unset(&(data->env_list), data, 0);
+			unset(&(data->export_list), data, 1);
+		}
+		else if (ft_strcmp(list->value, "env") == 0)
+			env(data);
+		else if (ft_strcmp(list->value, "exit") == 0)
+			exit_builtin(data, list);
+		return (1);
 	}
-	else if (ft_strcmp(list->value, "env") == 0)
-		env(data);
-	else if (ft_strcmp(list->value, "exit") == 0)
-		exit_builtin(data, list);
+	return (0);
 }
 
 void	env(t_data *data)

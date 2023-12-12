@@ -22,7 +22,7 @@ NAME				=	minishell
 RL_PREFIX = $(HOME)/.local/pkg/readline
 RL_CFLAGS = -I $(RL_PREFIX)/include
 RL_LIBS   = -L $(RL_PREFIX)/lib -lreadline -lhistory -lcurses
-VALGRIND  = valgrind --track-fds=yes #--leak-check=full #--show-leak-kinds=all -s --track-origins=yes
+VALGRIND  = valgrind --track-fds=yes --leak-check=full #--show-leak-kinds=all -s --track-origins=yes
 LEAKS	  = leaks --atExit --
 
 # Libraries

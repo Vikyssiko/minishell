@@ -83,19 +83,6 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	return (NULL);
 }
 
-void	handle_sig_child(int signo)
-{
-	if (signo == SIGINT)
-	{
-		gl_signal = SIGINT;
-		exit(1);
-	}
-//	if (signo == SIGQUIT)
-//		printf("");
-//		gl_signal = SIGQUIT;
-
-}
-
 void	read_input_delim(char *name, int stdin, int stdout, int fd)
 {
 	char	*str;
