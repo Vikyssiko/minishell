@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:41:03 by alappas           #+#    #+#             */
-/*   Updated: 2023/12/06 21:28:29 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/12 00:57:18 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char	**new_env_array(t_data *data)
 {
 	t_envir	*env_list;
 	char	**new_env_array;
+	char	*dup;
 	int		i;
 
 	if (!data->env_list)
@@ -120,8 +121,9 @@ char	**new_env_array(t_data *data)
 	env_list = data->env_list;
 	while (env_list != NULL)
 	{
-		new_env_array[i] = ft_strjoin(env_list->var_name, "=");
-		new_env_array[i] = ft_strjoin(new_env_array[i], env_list->var_value);
+		dup = ft_strjoin(env_list->var_name, "=");
+		new_env_array[i] = ft_strjoin(dup, env_list->var_value);
+		free(dup);
 		env_list = env_list->next;
 		i++;
 	}

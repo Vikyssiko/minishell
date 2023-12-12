@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/09 20:43:21 by alappas          ###   ########.fr       */
+/*   Updated: 2023/12/12 01:17:24 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_cmd_list
 	char				*value;
 	char				**args_array;
 	t_redir				*redir_list;
-	t_redir 			*in;
+	t_redir				*in;
 	t_redir				*out;
 	int					fd_in;
 	int					redir_status;
@@ -94,11 +94,8 @@ typedef struct s_data
 	int				exit_status;
 	char			*input_minishell;
 	char			*input_line;
-	char			*curr_dir;
-	char			*exit_str;
 	char			**env_array;
 	char			**new_env_array;
-	char			**cmd_array;
 	char			**path;
 	t_cmd_list		*list;
 	int				in;
