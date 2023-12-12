@@ -213,7 +213,7 @@ void		init_list_data(t_data *data);
 
 /* builtins */
 int			is_builtin(t_cmd_list *list);
-void		call_builtin_func(t_data *data, t_cmd_list *list);
+int			call_builtin_func(t_data *data, t_cmd_list *list);
 void		echo(t_cmd_list *list);
 void		env(t_data *data);
 void		unset(t_envir **env_list, t_data *data, int value);
@@ -230,7 +230,7 @@ void		pwd(void);
 void		cd(t_data *data, t_cmd_list *list);
 void		exit_builtin(t_data *data, t_cmd_list *list);
 
-int 		manage_redir(t_cmd_list *list, t_data *data);
+int			manage_redir(t_cmd_list *list, t_data *data);
 
 void		exec_pipes(t_data *data);
 void		exec_pipe(t_data *data, t_cmd_list *list);
@@ -257,8 +257,15 @@ t_pipe_list	*get_last_pipe(t_pipe_list *pipes);
 void		redir_input_to_pipe(int fd, t_data *data);
 void		redir_output_to_pipe(int fd, t_data *data);
 void		free_pipe(t_pipe_list *pipes);
-//void		delim(char *name, t_data *data);
 
-int	gl_signal;
+void		return_in_out(t_data *data);
+void		redir_input(t_cmd_list *list, t_data *data);
+void		redir_output(t_redir *redir, t_data *data);
+void		redir_input_output(t_cmd_list *list, t_data *data);
+int			set_redir_status(t_cmd_list *list);
+void		manage_delim(t_cmd_list *list, t_data *data);
+void		handle_sig_child(int signo);
+
+int	g_signal;
 
 #endif

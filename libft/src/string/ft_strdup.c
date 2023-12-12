@@ -14,13 +14,20 @@
 
 char	*ft_strdup(const char *s1)
 {
-	size_t	len;
-	char	*dup;
+	int		index;
+	char	*s2;
+	char	*s1_ptr;
 
-	len = ft_strlen(s1) + 1;
-	dup = malloc(sizeof(char) * (len));
-	if (!dup)
+	s1_ptr = (char *)s1;
+	index = 0;
+	s2 = malloc(ft_strlen(s1_ptr) * sizeof(char) + 1);
+	if (!s2)
 		return (NULL);
-	ft_memcpy(dup, s1, len);
-	return (dup);
+	while (s1 && s1[index])
+	{
+		s2[index] = s1[index];
+		index++;
+	}
+	s2[index] = '\0';
+	return (s2);
 }

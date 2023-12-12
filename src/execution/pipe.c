@@ -12,6 +12,27 @@
 
 #include "../../include/minishell.h"
 
+void	manage_delim(t_cmd_list *list, t_data *data)
+{
+	t_redir	*redir_list;
+
+	redir_list = list->redir_list;
+	while (redir_list)
+	{
+		if (g_signal == SIGINT)
+			break ;
+		else if (redir_list->redir_token->type == T_DELIM)
+			delim(redir_list->redir_word->word, data, list);
+		redir_list = redir_list->next;
+	}
+}
+
+int	set_redir_status(t_cmd_list *list)
+{
+	list->redir_status = -1;
+	return (0);
+}
+
 void	exec_first_cmd_in_pipe(t_data *data, t_cmd_list *list,
 			t_pipe_list *first, t_pipe_list *pipes)
 {
@@ -52,7 +73,8 @@ void	exec_lst_cmd_in_pipe(t_data *data, t_cmd_list *list,
 		exit_shell_no_mes(errno, data);
 	}
 	close_fds(&first, NULL, NULL);
-	while (waitpid(pid, &status, 0) > 0);
+	while (waitpid(pid, &status, 0) > 0)
+		continue ;
 	free_pipe(pipes);
 	data->exit_status = WEXITSTATUS(status);
 	return_in_out(data);
@@ -72,8 +94,6 @@ void	exec_pipe(t_data *data, t_cmd_list *list)
 		list = list->prev;
 	while (list && list->prev)
 	{
-		if (list->redir_status == -1)
-			list->args_array = NULL;
 		pipes = pipes->prev;
 		if (fork() == 0)
 		{
