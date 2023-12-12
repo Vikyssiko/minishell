@@ -268,6 +268,7 @@ void		redir_input_output(t_cmd_list *list, t_data *data);
 int			set_redir_status(t_cmd_list *list);
 void		manage_delim(t_cmd_list *list, t_data *data);
 void		handle_sig_child(int signo);
+void		delim(char *name, t_data *data, t_cmd_list *list);
 
 int	g_signal;
 
