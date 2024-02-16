@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 18:53:22 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/02 22:56:14 by alappas          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:23:42 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	start_loop(t_data *data)
 		if ((odd_quote(data->input_line)) || (special_chars(data->input_line))
 			|| (lexical_analysis(data, data->input_line)))
 			continue ;
+		fix_quotes(data);
 		init_list_data(data);
 		exec_pipes(data);
 	}

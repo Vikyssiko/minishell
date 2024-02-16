@@ -6,7 +6,7 @@
 /*   By: alappas <alappas@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:09:35 by vkozlova          #+#    #+#             */
-/*   Updated: 2023/12/12 01:17:24 by alappas          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:22:48 by alappas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <stdint.h>
 # include <limits.h>
 # include <errno.h>
+# include <stdbool.h>
 # include "../libft/include/libft.h"
 
 typedef enum e_token_type
@@ -266,6 +267,8 @@ int			set_redir_status(t_cmd_list *list);
 void		manage_delim(t_cmd_list *list, t_data *data);
 void		handle_sig_child(int signo);
 void		delim(char *name, t_data *data, t_cmd_list *list);
+
+void		fix_quotes(t_data *data);
 
 int	g_signal;
 
