@@ -270,6 +270,6 @@ void		delim(char *name, t_data *data, t_cmd_list *list);
 
 void		fix_quotes(t_data *data);
 
-int	g_signal;
+extern int	g_signal;
 
 #endif

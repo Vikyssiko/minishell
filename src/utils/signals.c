@@ -12,6 +12,8 @@
 
 #include "../../include/minishell.h"
 
+int g_signal;
+
 void	handle_signal(void)
 {
 	struct sigaction	sa;

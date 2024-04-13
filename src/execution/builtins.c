@@ -70,7 +70,7 @@ void	pwd(void)
 	char	*cwd;
 
 	cwd = NULL;
-	cwd = getcwd(cwd, 1);
+	cwd = getcwd(cwd, 100);
 	printf("%s\n", cwd);
 	free(cwd);
 }
