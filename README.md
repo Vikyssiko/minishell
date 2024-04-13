@@ -1,7 +1,7 @@
 # 42 minishell
 Our own version of shell, which works like bash
 
-![visualizer](push_swap.gif)
+![gif](minishell.gif)
 
 The shell:
 * Displays a prompt when waiting for a new command.
