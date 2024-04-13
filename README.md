@@ -33,3 +33,7 @@ The shell:
 ## Launching the program
 
 To launch the program use command `make`. Then execute `./minishell`. Now you can execute the commands like in bash. It is also possible to run minishell inside minishell, which will increase shell level, so you will need to exit as many times as you 'entered'
+
+
+### Compatibility
+The project is done on `MacOS`, so some features may not work properly on `Linux`
